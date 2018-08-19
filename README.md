@@ -1,6 +1,6 @@
 ## React Firebase
 
-Declarative React Bindings for Firebase.
+Declarative React bindings & utils for Firebase.
 
 ### [Firebase Database](modules/database)
 
