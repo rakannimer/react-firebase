@@ -7,6 +7,14 @@ React Firebase Database provides the following components :
 - FirebaseDatabaseProvider
 - FirebaseDataNode
 
+### Install
+
+```sh
+  yarn add @react-firebase/database
+  # or
+  npm i @react-firebase/database
+```
+
 ### Usage
 
 1. Change PROJECT_NAME to your project name and grab your firebase config here :

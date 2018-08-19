@@ -1,4 +1,5 @@
 - [React Firebase Firestore](#react-firebase-firestore)
+    - [Install](#install)
     - [Usage](#usage)
     - [Example](#example)
   - [Reference](#reference)
@@ -12,6 +13,14 @@ React Firestore provides the following components :
 - FirestoreProvider
 - FirestoreCollection
 - FirestoreDocument
+
+### Install
+
+```sh
+  yarn add @react-firebase/firestore
+  # or
+  npm i @react-firebase/firestore
+```
 
 ### Usage
 

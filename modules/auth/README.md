@@ -10,6 +10,14 @@ React Firebase Auth exports the following components :
 - IfFirebaseAuthedAnd
 - IfFirebaseUnAuthed
 
+### Install
+
+```sh
+  yarn add @react-firebase/auth
+  # or
+  npm i @react-firebase/auth
+```
+
 ### Usage
 
 Change PROJECT_NAME to your project name and grab your firebase config here :
