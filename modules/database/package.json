@@ -1,0 +1,44 @@
+{
+  "name": "@react-firebase/database",
+  "version": "0.1.0",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "jsnext:main": "dist/index.esm.js",
+  "umd": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "dev": "parcel src/demo/index.html -d tmp-demo-dir",
+    "build": "rollup -c",
+    "prepublish": "npm run build",
+    "pub": "yarn build && yarn publish --access public"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.10",
+    "firebase": "^5.3.1",
+    "parcel-bundler": "^1.9.7",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-json-view": "^1.19.1",
+    "rollup": "^0.64.1",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "render-and-add-props": "^0.5.0"
+  },
+  "peerDependencies": {
+    "firebase": ">=4"
+  },
+  "repository": {
+    "url": "https://github.com/rakannimer/react-firebase-database"
+  },
+  "files": [
+    "dist/"
+  ],
+  "author": {
+    "name": "rakannimer",
+    "email": "rakannimer@gmail.com"
+  }
+}

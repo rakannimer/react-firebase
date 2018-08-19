@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "modules/generate-firestore-data"
+		},
+		{
+			"path": "modules/generate-firebase-data"
+		},
+		{
+			"path": "modules/database"
+		},
+		{
+			"path": "modules/firestore"
+		},
+		{
+			"path": "modules/auth"
+		},
+		{
+			"path": "modules/generate-json"
+		},
+		{
+			"path": "./"
+		}
+	],
+	"settings": {}
+}

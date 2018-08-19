@@ -1,0 +1,37 @@
+{
+  "name": "@react-firebase/auth",
+  "version": "0.1.1",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "jsnext:main": "dist/index.esm.js",
+  "umd": "dist/index.umd.js",
+  "license": "GPL-3.0-only",
+  "author": {
+    "name": "rakannimer",
+    "email": "rakannimer@gmail.com"
+  },
+  "scripts": {
+    "dev": "parcel src/demo/index.html -d tmp-demo-dir",
+    "build": "rollup -c",
+    "prepublish": "npm run build",
+    "pub": "yarn build && yarn publish --access public"
+  },
+  "devDependencies": {
+    "docz": "^0.9.6",
+    "firebase": "^5.3.1",
+    "parcel-bundler": "^1.9.7",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "rollup": "^0.64.1"
+  },
+  "dependencies": {
+    "render-and-add-props": "^0.2.0"
+  },
+  "peerDependencies": {
+    "firebase": ">=4"
+  },
+  "repository": {
+    "url": "https://github.com/rakannimer/react-firebase-auth-provider"
+  }
+}

@@ -1,0 +1,8 @@
+.vscode
+.rpt2_cache
+dist
+src/test-credentials.ts
+node_modules
+build
+src/parser
+coverage

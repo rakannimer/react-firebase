@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "react-firebase",
+  "workspaces": [
+    "modules/"
+  ],
+  "repository": {
+    "url": "https://github.com/rakannimer/react-firebase"
+  },
+  "devDependencies": {}
+}

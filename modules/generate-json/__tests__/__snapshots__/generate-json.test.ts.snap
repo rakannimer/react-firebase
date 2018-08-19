@@ -1,0 +1,330 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateJson works with all arguments 1`] = `
+Object {
+  "keys": Array [
+    "prod.users.1yurg.comment_count",
+    "prod.users.1yurg.username",
+    "prod.users.1yurg.is_verified",
+    "prod.users.1yurg.created_at",
+    "prod.posts.b3k7i.post_title",
+    "prod.posts.b3k7i.post_data",
+    "prod.posts.b3k7i.author_id",
+    "prod.posts.b3k7i.created_at",
+    "prod.comments.b3k7i.G_K_tlcya.value",
+    "prod.comments.b3k7i.G_K_tlcya.userID",
+    "staging.users.m7diz.comment_count",
+    "staging.users.m7diz.username",
+    "staging.users.m7diz.is_verified",
+    "staging.users.m7diz.created_at",
+    "staging.posts.g20yx.post_title",
+    "staging.posts.g20yx.post_data",
+    "staging.posts.g20yx.author_id",
+    "staging.posts.g20yx.created_at",
+    "staging.comments.g20yx.G_K_o8fo4.value",
+    "staging.comments.g20yx.G_K_o8fo4.userID",
+    "prod.users.sy6qs.comment_count",
+    "prod.users.sy6qs.username",
+    "prod.users.sy6qs.is_verified",
+    "prod.users.sy6qs.created_at",
+    "prod.posts.gvcl5.post_title",
+    "prod.posts.gvcl5.post_data",
+    "prod.posts.gvcl5.author_id",
+    "prod.posts.gvcl5.created_at",
+    "prod.comments.gvcl5.G_K_706z6.value",
+    "prod.comments.gvcl5.G_K_706z6.userID",
+  ],
+  "tree": Object {
+    "prod": Object {
+      "comments": Object {
+        "b3k7i": Object {
+          "G_K_tlcya": Object {
+            "userID": "1yurg",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "b3k7i": Object {
+          "author_id": "1yurg",
+          "created_at": 174148645,
+          "post_data": "prod.posts.b3k7i.post_data:post_data",
+          "post_title": "deliverables reinvent",
+        },
+      },
+      "users": Object {
+        "1yurg": Object {
+          "comment_count": 14092,
+          "created_at": 31122468391,
+          "is_verified": false,
+          "username": "scalable Car",
+        },
+      },
+    },
+    "staging": Object {
+      "comments": Object {
+        "g20yx": Object {
+          "G_K_o8fo4": Object {
+            "userID": "m7diz",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "g20yx": Object {
+          "author_id": "m7diz",
+          "created_at": 17241057755,
+          "post_data": "staging.posts.g20yx.post_data:post_data",
+          "post_title": "copy convergence",
+        },
+      },
+      "users": Object {
+        "m7diz": Object {
+          "comment_count": 3438,
+          "created_at": 20893304971,
+          "is_verified": false,
+          "username": "Salad incentivize",
+        },
+      },
+    },
+  },
+  "values": Array [
+    14092,
+    "scalable Car",
+    false,
+    31122468391,
+    "deliverables reinvent",
+    "prod.posts.b3k7i.post_data:post_data",
+    "1yurg",
+    174148645,
+    "👍",
+    "1yurg",
+    3438,
+    "Salad incentivize",
+    false,
+    20893304971,
+    "copy convergence",
+    "staging.posts.g20yx.post_data:post_data",
+    "m7diz",
+    17241057755,
+    "👍",
+    "m7diz",
+    52475,
+    "Grocery Home",
+    true,
+    19295395373,
+    "enable Gorgeous Frozen Pants",
+    "prod.posts.gvcl5.post_data:post_data",
+    "sy6qs",
+    14382625758,
+    "👍",
+    "sy6qs",
+  ],
+}
+`;
+
+exports[`generateJson works without keyReducers & without count 1`] = `
+Object {
+  "keys": Array [
+    "G_K_dsy6q.users.G_K_sll5g.comment_count",
+    "G_K_dsy6q.users.G_K_sll5g.username",
+    "G_K_dsy6q.users.G_K_sll5g.is_verified",
+    "G_K_dsy6q.users.G_K_sll5g.created_at",
+    "G_K_dsy6q.posts.G_K_5pn02.post_title",
+    "G_K_dsy6q.posts.G_K_5pn02.post_data",
+    "G_K_dsy6q.posts.G_K_5pn02.author_id",
+    "G_K_dsy6q.posts.G_K_5pn02.created_at",
+    "G_K_dsy6q.comments.G_K_5pn02.G_K_6mami.value",
+    "G_K_dsy6q.comments.G_K_5pn02.G_K_6mami.userID",
+  ],
+  "tree": Object {
+    "G_K_dsy6q": Object {
+      "comments": Object {
+        "G_K_5pn02": Object {
+          "G_K_6mami": Object {
+            "userID": "G_K_sll5g",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "G_K_5pn02": Object {
+          "author_id": "G_K_sll5g",
+          "created_at": 24761311291,
+          "post_data": "G_K_dsy6q.posts.G_K_5pn02.post_data:post_data",
+          "post_title": "Coordinator Multi-channelled",
+        },
+      },
+      "users": Object {
+        "G_K_sll5g": Object {
+          "comment_count": 29122,
+          "created_at": 9213076313,
+          "is_verified": false,
+          "username": "Namibia enable",
+        },
+      },
+    },
+  },
+  "values": Array [
+    29122,
+    "Namibia enable",
+    false,
+    9213076313,
+    "Coordinator Multi-channelled",
+    "G_K_dsy6q.posts.G_K_5pn02.post_data:post_data",
+    "G_K_sll5g",
+    24761311291,
+    "👍",
+    "G_K_sll5g",
+  ],
+}
+`;
+
+exports[`generateJson works without keyReducers 1`] = `
+Object {
+  "keys": Array [
+    "G_K_xewxl.users.G_K_qxb3k.comment_count",
+    "G_K_xewxl.users.G_K_qxb3k.username",
+    "G_K_xewxl.users.G_K_qxb3k.is_verified",
+    "G_K_xewxl.users.G_K_qxb3k.created_at",
+    "G_K_xewxl.posts.G_K_q9jtl.post_title",
+    "G_K_xewxl.posts.G_K_q9jtl.post_data",
+    "G_K_xewxl.posts.G_K_q9jtl.author_id",
+    "G_K_xewxl.posts.G_K_q9jtl.created_at",
+    "G_K_xewxl.comments.G_K_q9jtl.G_K_s520z.value",
+    "G_K_xewxl.comments.G_K_q9jtl.G_K_s520z.userID",
+    "G_K_7dizl.users.G_K_g1ulo.comment_count",
+    "G_K_7dizl.users.G_K_g1ulo.username",
+    "G_K_7dizl.users.G_K_g1ulo.is_verified",
+    "G_K_7dizl.users.G_K_g1ulo.created_at",
+    "G_K_7dizl.posts.G_K_ktda0.post_title",
+    "G_K_7dizl.posts.G_K_ktda0.post_data",
+    "G_K_7dizl.posts.G_K_ktda0.author_id",
+    "G_K_7dizl.posts.G_K_ktda0.created_at",
+    "G_K_7dizl.comments.G_K_ktda0.G_K_ht16w.value",
+    "G_K_7dizl.comments.G_K_ktda0.G_K_ht16w.userID",
+    "G_K_dsy6q.users.G_K_sll5g.comment_count",
+    "G_K_dsy6q.users.G_K_sll5g.username",
+    "G_K_dsy6q.users.G_K_sll5g.is_verified",
+    "G_K_dsy6q.users.G_K_sll5g.created_at",
+    "G_K_dsy6q.posts.G_K_5pn02.post_title",
+    "G_K_dsy6q.posts.G_K_5pn02.post_data",
+    "G_K_dsy6q.posts.G_K_5pn02.author_id",
+    "G_K_dsy6q.posts.G_K_5pn02.created_at",
+    "G_K_dsy6q.comments.G_K_5pn02.G_K_6mami.value",
+    "G_K_dsy6q.comments.G_K_5pn02.G_K_6mami.userID",
+  ],
+  "tree": Object {
+    "G_K_7dizl": Object {
+      "comments": Object {
+        "G_K_ktda0": Object {
+          "G_K_ht16w": Object {
+            "userID": "G_K_g1ulo",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "G_K_ktda0": Object {
+          "author_id": "G_K_g1ulo",
+          "created_at": 24444591021,
+          "post_data": "G_K_7dizl.posts.G_K_ktda0.post_data:post_data",
+          "post_title": "Georgia Industrial",
+        },
+      },
+      "users": Object {
+        "G_K_g1ulo": Object {
+          "comment_count": 66252,
+          "created_at": 17241057755,
+          "is_verified": false,
+          "username": "copy convergence",
+        },
+      },
+    },
+    "G_K_dsy6q": Object {
+      "comments": Object {
+        "G_K_5pn02": Object {
+          "G_K_6mami": Object {
+            "userID": "G_K_sll5g",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "G_K_5pn02": Object {
+          "author_id": "G_K_sll5g",
+          "created_at": 24761311291,
+          "post_data": "G_K_dsy6q.posts.G_K_5pn02.post_data:post_data",
+          "post_title": "Coordinator Multi-channelled",
+        },
+      },
+      "users": Object {
+        "G_K_sll5g": Object {
+          "comment_count": 29122,
+          "created_at": 9213076313,
+          "is_verified": false,
+          "username": "Namibia enable",
+        },
+      },
+    },
+    "G_K_xewxl": Object {
+      "comments": Object {
+        "G_K_q9jtl": Object {
+          "G_K_s520z": Object {
+            "userID": "G_K_qxb3k",
+            "value": "👍",
+          },
+        },
+      },
+      "posts": Object {
+        "G_K_q9jtl": Object {
+          "author_id": "G_K_qxb3k",
+          "created_at": 2335074874,
+          "post_data": "G_K_xewxl.posts.G_K_q9jtl.post_data:post_data",
+          "post_title": "monitor 1080p",
+        },
+      },
+      "users": Object {
+        "G_K_qxb3k": Object {
+          "comment_count": 19871,
+          "created_at": 22291455439,
+          "is_verified": false,
+          "username": "24 hour Jewelery",
+        },
+      },
+    },
+  },
+  "values": Array [
+    19871,
+    "24 hour Jewelery",
+    false,
+    22291455439,
+    "monitor 1080p",
+    "G_K_xewxl.posts.G_K_q9jtl.post_data:post_data",
+    "G_K_qxb3k",
+    2335074874,
+    "👍",
+    "G_K_qxb3k",
+    66252,
+    "copy convergence",
+    false,
+    17241057755,
+    "Georgia Industrial",
+    "G_K_7dizl.posts.G_K_ktda0.post_data:post_data",
+    "G_K_g1ulo",
+    24444591021,
+    "👍",
+    "G_K_g1ulo",
+    29122,
+    "Namibia enable",
+    false,
+    9213076313,
+    "Coordinator Multi-channelled",
+    "G_K_dsy6q.posts.G_K_5pn02.post_data:post_data",
+    "G_K_sll5g",
+    24761311291,
+    "👍",
+    "G_K_sll5g",
+  ],
+}
+`;

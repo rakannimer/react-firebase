@@ -1,0 +1,35 @@
+{
+  "name": "generate-firebase-data",
+  "version": "0.1.1",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "jsnext:main": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "dev": "tsc && (concurrently --kill-others \"tsc --watch\" \"nodemon build/index.js\")",
+    "build": "rollup -c",
+    "prepublish": "yarn build"
+  },
+  "devDependencies": {
+    "@types/lodash.chunk": "^4.2.4",
+    "concurrently": "^3.6.1",
+    "prettier": "^1.14.2",
+    "rollup": "^0.64.1",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "chunk-and-parallelize": "^0.1.1",
+    "firebase-admin": "^6.0.0",
+    "generate-json": "^0.1.1",
+    "lodash.chunk": "^4.2.0"
+  },
+  "files": [
+    "dist/"
+  ],
+  "author": {
+    "name": "rakannimer",
+    "email": "rakannimer@gmail.com"
+  }
+}

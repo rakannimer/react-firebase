@@ -1,0 +1,6 @@
+.rpt2_cache
+.vscode
+build/
+node_modules/
+dist/
+src/test-credentials.ts

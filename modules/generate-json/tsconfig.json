@@ -1,0 +1,14 @@
+{
+  "include": ["./src/"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["dom", "es2017"],
+    "outDir": "./build/",
+    "strict": true,
+    "declaration": true,
+    "removeComments": true,
+    "esModuleInterop": true
+  }
+}
