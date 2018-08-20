@@ -19,6 +19,9 @@
 			"path": "modules/generate-json"
 		},
 		{
+			"path": "modules/tutorial-bookmarking-app"
+		},
+		{
 			"path": "./"
 		}
 	],
