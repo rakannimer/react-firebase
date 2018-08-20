@@ -35,6 +35,8 @@ export type AuthEmission = {
 
 export type FirebaseAuthProviderState = AuthEmission;
 
+export type RenderableChildren = (authState: AuthEmission) => any;
+
 export class FirebaseAuthProvider extends React.PureComponent<
   FirebaseAuthProviderProps,
   FirebaseAuthProviderState
@@ -101,14 +103,16 @@ export class FirebaseAuthProvider extends React.PureComponent<
 
 // export type RenderableFunction<> = () => {}
 
-export const FirebaseAuthConsumer: React.StatelessComponent = ({
-  children
-}) => {
+export const FirebaseAuthConsumer: React.StatelessComponent<{
+  children: RenderableChildren;
+}> = ({ children }) => {
   return e(FirebaseAuthContextConsumer, null, (authState: AuthEmission) =>
     renderAndAddProps(children, authState)
   );
 };
-export const IfFirebaseAuthed: React.StatelessComponent = ({ children }) => {
+export const IfFirebaseAuthed: React.StatelessComponent<{
+  children: RenderableChildren;
+}> = ({ children }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
@@ -123,6 +127,7 @@ export type FilterAuthFunction = (authState: AuthEmission) => boolean;
 
 export const IfFirebaseAuthedAnd: React.StatelessComponent<{
   filter: FilterAuthFunction;
+  children: RenderableChildren;
 }> = ({ children, filter }) => {
   return e(
     FirebaseAuthContextConsumer,
@@ -137,6 +142,7 @@ export const IfFirebaseAuthedAnd: React.StatelessComponent<{
 };
 
 export const IfFirebaseAuthedOr: React.StatelessComponent<{
+  children: RenderableChildren;
   filter: FilterAuthFunction;
 }> = ({ children, filter }) => {
   return e(
@@ -149,7 +155,9 @@ export const IfFirebaseAuthedOr: React.StatelessComponent<{
   );
 };
 
-export const IfFirebaseUnAuthed: React.StatelessComponent = ({ children }) => {
+export const IfFirebaseUnAuthed: React.StatelessComponent<{
+  children: RenderableChildren;
+}> = ({ children }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
