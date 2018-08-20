@@ -1,3 +1,4 @@
+import { InitializeAppArgs } from "./index";
 export const initializeFirebaseApp = ({
   firebase,
   authDomain,
@@ -6,7 +7,7 @@ export const initializeFirebaseApp = ({
   storageBucket,
   messagingSenderId,
   apiKey
-}) => {
+}: InitializeAppArgs) => {
   try {
     firebase.initializeApp({
       apiKey,

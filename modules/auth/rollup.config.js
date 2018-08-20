@@ -1,5 +1,7 @@
+import typescript from "rollup-plugin-typescript2";
+
 export default {
-  input: "src/index.js",
+  input: "src/index.tsx",
   output: [
     {
       file: "dist/index.umd.js",
@@ -15,11 +17,16 @@ export default {
       format: "cjs"
     }
   ],
-  external: ["firebase", "react"]
-  // plugins: [
-  //   typescript({
-  //     typescript: require("typescript"),
-  //     abortOnError: false
-  //   })
-  // ]
+  external: [
+    "react",
+    "firebase",
+    "render-and-add-props",
+    "immer"
+  ],
+  plugins: [
+    typescript({
+      typescript: require("typescript"),
+      abortOnError: false
+    })
+  ]
 };

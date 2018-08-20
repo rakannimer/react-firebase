@@ -1,26 +1,52 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
+import firebase from "firebase";
+import get from "lodash.get";
+
 import { initializeFirebaseApp } from "./initialize-firebase-app";
 const e = React.createElement;
 const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
   user: null
-};
+} as AuthEmission;
 
 const {
   Provider: FirebaseAuthContextProvider,
   Consumer: FirebaseAuthContextConsumer
 } = React.createContext(firebaseAuthProviderDefaultProps);
 
-export class FirebaseAuthProvider extends React.PureComponent {
-  listenToAuth() {
+export interface InitializeAppArgs {
+  authDomain: string;
+  apiKey: string;
+  databaseURL: string;
+  firebase: typeof firebase;
+  projectId: string;
+  messagingSenderId?: string;
+  storageBucket?: string;
+}
+export type FirebaseAuthProviderProps = InitializeAppArgs;
+
+export type AuthEmission = {
+  isSignedIn: boolean;
+  providerId: ("none" | "google.com" | string) | null;
+  user: any;
+};
+
+export type FirebaseAuthProviderState = AuthEmission;
+
+export class FirebaseAuthProvider extends React.PureComponent<
+  FirebaseAuthProviderProps,
+  FirebaseAuthProviderState
+> {
+  stopListeningToAuth?: () => void;
+  listenToAuth = () => {
     const { firebase } = this.props;
     this.stopListeningToAuth = firebase
       .app()
       .auth()
       .onAuthStateChanged(user => {
-        let authEmission = null;
+        let authEmission = null as null | AuthEmission;
         if (user === null) {
           authEmission = {
             isSignedIn: false,
@@ -36,7 +62,7 @@ export class FirebaseAuthProvider extends React.PureComponent {
         } else if (user.providerData && user.providerData[0]) {
           authEmission = {
             isSignedIn: true,
-            providerId: user.providerData[0].providerId,
+            providerId: get(user, "providerData.0.providerId", "unknown"),
             user
           };
         }
@@ -46,8 +72,8 @@ export class FirebaseAuthProvider extends React.PureComponent {
           console.warn("Something unexpected happened with ", user);
         }
       });
-  }
-  constructor(props) {
+  };
+  constructor(props: FirebaseAuthProviderProps) {
     super(props);
     initializeFirebaseApp(Object.assign({}, props));
     this.state = {
@@ -73,27 +99,35 @@ export class FirebaseAuthProvider extends React.PureComponent {
   }
 }
 
-export const FirebaseAuthConsumer = ({ children }) => {
-  return e(FirebaseAuthContextConsumer, null, authState =>
+// export type RenderableFunction<> = () => {}
+
+export const FirebaseAuthConsumer: React.StatelessComponent = ({
+  children
+}) => {
+  return e(FirebaseAuthContextConsumer, null, (authState: AuthEmission) =>
     renderAndAddProps(children, authState)
   );
 };
-export const IfFirebaseAuthed = ({ children }) => {
+export const IfFirebaseAuthed: React.StatelessComponent = ({ children }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
-    authState =>
+    (authState: AuthEmission) =>
       authState.isSignedIn === true
         ? renderAndAddProps(children, authState)
         : null
   );
 };
 
-export const IfFirebaseAuthedAnd = ({ children, filter }) => {
+export type FilterAuthFunction = (authState: AuthEmission) => boolean;
+
+export const IfFirebaseAuthedAnd: React.StatelessComponent<{
+  filter: FilterAuthFunction;
+}> = ({ children, filter }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
-    authState =>
+    (authState: AuthEmission) =>
       authState.isSignedIn === true
         ? filter(authState)
           ? renderAndAddProps(children, authState)
@@ -102,22 +136,24 @@ export const IfFirebaseAuthedAnd = ({ children, filter }) => {
   );
 };
 
-export const IfFirebaseAuthedOr = ({ children, filter }) => {
+export const IfFirebaseAuthedOr: React.StatelessComponent<{
+  filter: FilterAuthFunction;
+}> = ({ children, filter }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
-    authState =>
+    (authState: AuthEmission) =>
       authState.isSignedIn === true || filter(authState)
         ? renderAndAddProps(children, authState)
         : null
   );
 };
 
-export const IfFirebaseUnAuthed = ({ children }) => {
+export const IfFirebaseUnAuthed: React.StatelessComponent = ({ children }) => {
   return e(
     FirebaseAuthContextConsumer,
     null,
-    authState =>
+    (authState: AuthEmission) =>
       authState.isSignedIn === false
         ? renderAndAddProps(children, authState)
         : null

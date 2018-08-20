@@ -1,5 +1,7 @@
 .cache
+.rpt2_cache
 .vscode
+build
 dist
 node_modules
 src/demo/test-credentials.js

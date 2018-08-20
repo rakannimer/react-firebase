@@ -1,0 +1,16 @@
+{
+  "include": ["./src/"],
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es5",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["es2018", "dom"],
+    "outDir": "./build/",
+    "strict": true,
+    "declaration": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
