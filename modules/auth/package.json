@@ -1,6 +1,6 @@
 {
   "name": "@react-firebase/auth",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",

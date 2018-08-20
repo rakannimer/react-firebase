@@ -1,6 +1,7 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import get from "lodash.get";
 
 import { initializeFirebaseApp } from "./initialize-firebase-app";
