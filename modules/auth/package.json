@@ -1,6 +1,6 @@
 {
   "name": "@react-firebase/auth",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -39,5 +39,8 @@
   },
   "repository": {
     "url": "https://github.com/rakannimer/react-firebase-auth-provider"
-  }
+  },
+  "files": [
+    "dist/"
+  ]
 }

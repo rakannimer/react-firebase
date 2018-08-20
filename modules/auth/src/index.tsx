@@ -9,7 +9,7 @@ const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
   user: null,
-  firebase: null
+  firebase: firebase
 } as AuthEmission;
 
 const {
@@ -32,7 +32,7 @@ export type AuthEmission = {
   isSignedIn: boolean;
   providerId: ("none" | "google.com" | string) | null;
   user: any;
-  firebase: typeof firebase | null;
+  firebase: typeof firebase;
 };
 
 export type FirebaseAuthProviderState = AuthEmission;
@@ -84,7 +84,7 @@ export class FirebaseAuthProvider extends React.PureComponent<
     isSignedIn: false,
     providerId: null,
     user: null,
-    firebase: null
+    firebase: firebase
   };
   constructor(props: FirebaseAuthProviderProps) {
     super(props);
