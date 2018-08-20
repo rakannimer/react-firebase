@@ -3,7 +3,6 @@ import { renderAndAddProps } from "render-and-add-props";
 import firebase from "firebase/app";
 import "firebase/auth";
 import get from "lodash.get";
-
 import { initializeFirebaseApp } from "./initialize-firebase-app";
 const e = React.createElement;
 const firebaseAuthProviderDefaultProps = {
@@ -28,17 +27,16 @@ export interface InitializeAppArgs {
   storageBucket?: string;
 }
 export type FirebaseAuthProviderProps = InitializeAppArgs;
-
 export type AuthEmission = {
   isSignedIn: boolean;
   providerId: ("none" | "google.com" | string) | null;
   user: any;
   firebase: typeof firebase;
 };
-
 export type FirebaseAuthProviderState = AuthEmission;
-
-export type RenderableChildren = (authState: AuthEmission) => any;
+export type RenderableChildren =
+  | ((authState: AuthEmission) => any)
+  | React.ReactNode;
 
 export class FirebaseAuthProvider extends React.PureComponent<
   FirebaseAuthProviderProps,
