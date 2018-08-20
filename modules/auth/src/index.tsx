@@ -8,7 +8,8 @@ const e = React.createElement;
 const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
-  user: null
+  user: null,
+  firebase: null
 } as AuthEmission;
 
 const {
@@ -31,6 +32,7 @@ export type AuthEmission = {
   isSignedIn: boolean;
   providerId: ("none" | "google.com" | string) | null;
   user: any;
+  firebase: typeof firebase | null;
 };
 
 export type FirebaseAuthProviderState = AuthEmission;
@@ -53,19 +55,22 @@ export class FirebaseAuthProvider extends React.PureComponent<
           authEmission = {
             isSignedIn: false,
             providerId: "none",
-            user
+            user,
+            firebase
           };
         } else if (user.isAnonymous === true) {
           authEmission = {
             isSignedIn: true,
             providerId: "anonymous",
-            user
+            user,
+            firebase
           };
         } else if (user.providerData && user.providerData[0]) {
           authEmission = {
             isSignedIn: true,
             providerId: get(user, "providerData.0.providerId", "unknown"),
-            user
+            user,
+            firebase
           };
         }
         if (authEmission !== null) {
@@ -75,14 +80,15 @@ export class FirebaseAuthProvider extends React.PureComponent<
         }
       });
   };
+  state = {
+    isSignedIn: false,
+    providerId: null,
+    user: null,
+    firebase: null
+  };
   constructor(props: FirebaseAuthProviderProps) {
     super(props);
     initializeFirebaseApp(Object.assign({}, props));
-    this.state = {
-      isSignedIn: false,
-      providerId: null,
-      user: null
-    };
   }
   componentDidMount() {
     this.listenToAuth();
@@ -166,4 +172,12 @@ export const IfFirebaseUnAuthed: React.StatelessComponent<{
         ? renderAndAddProps(children, authState)
         : null
   );
+};
+
+export const WithFirebase = ({
+  children
+}: {
+  children: RenderableChildren;
+}) => {
+  return <FirebaseAuthContextConsumer>{children}</FirebaseAuthContextConsumer>;
 };
