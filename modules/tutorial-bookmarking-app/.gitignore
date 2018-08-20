@@ -1,3 +1,4 @@
-previous
 node_modules
 dist
+# parcel cache
+.cache
