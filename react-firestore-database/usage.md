@@ -34,7 +34,7 @@ const App = () => {
 
 
 
-If you need to authenticate to access your data, check out `@react-firebase/auth`
+If you need to authenticate to access your data, check out [`@react-firebase/auth`](../react-firebase-auth/)\`\`
 
 ```jsx
 import firebase from "firebase/app";

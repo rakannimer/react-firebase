@@ -8,7 +8,9 @@
 * [React Firebase Auth](react-firebase-auth/README.md)
   * [Setup](react-firebase-auth/setup.md)
   * [Usage](react-firebase-auth/usage.md)
+  * [API](react-firebase-auth/api.md)
 * [React Firestore Database](react-firestore-database/README.md)
   * [Setup](react-firestore-database/setup.md)
   * [Usage](react-firestore-database/usage.md)
+  * [API](react-firestore-database/api.md)
 
