@@ -3,17 +3,9 @@ import { render } from "react-dom";
 import * as firebase from "firebase/app";
 import "firebase/database";
 
-import { credentials } from "./test-credentials";
+import { config } from "./test-credentials";
 import { FirebaseDatabaseNode, FirebaseDatabaseProvider } from "../index";
 
-const config = {
-  apiKey: credentials.apiKey,
-  authDomain: credentials.authDomain,
-  databaseURL: credentials.databaseURL,
-  projectId: credentials.projectId,
-  storageBucket: credentials.storageBucket,
-  messagingSenderId: credentials.messagingSenderId
-};
 import ReactJson from "react-json-view";
 
 const App = () => {
@@ -22,29 +14,17 @@ const App = () => {
       <div>hai</div>
       <FirebaseDatabaseNode path="maximes/" limitToFirst={1}>
         {d => {
-          return d.loadingStatus === "ready" ? (
-            <ReactJson src={d} />
-          ) : (
-            "Loading"
-          );
+          return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
         }}
       </FirebaseDatabaseNode>
       <FirebaseDatabaseNode path="maximes/-L8m-aeCHQO7qtMVvUfM">
         {d => {
-          return d.loadingStatus === "ready" ? (
-            <ReactJson src={d} />
-          ) : (
-            "Loading"
-          );
+          return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
         }}
       </FirebaseDatabaseNode>
       <FirebaseDatabaseNode path="maximes/-L8m-aeCHQO7qtMVvUfMa">
         {d => {
-          return d.loadingStatus === "ready" ? (
-            <ReactJson src={d} />
-          ) : (
-            "Loading"
-          );
+          return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
         }}
       </FirebaseDatabaseNode>
     </FirebaseDatabaseProvider>
