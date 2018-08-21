@@ -1,6 +1,6 @@
 {
   "name": "@react-firebase/database",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -18,7 +18,7 @@
     "firebase": "^5.3.1",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
-    "react": "^16.4.2",
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
     "react-dom": "^16.4.2",
     "react-json-view": "^1.19.1",
     "rollup": "^0.64.1",
@@ -26,6 +26,7 @@
     "typescript": "^3.0.1"
   },
   "dependencies": {
+    "react-powerplug": "^1.0.0-rc.1",
     "render-and-add-props": "^0.5.0"
   },
   "peerDependencies": {

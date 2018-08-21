@@ -1,3 +1,4 @@
+import * as firebase from "firebase";
 export interface FirebaseQuery {
   firebase: any;
   path: string;
@@ -24,7 +25,7 @@ export interface InitializeAppArgs {
 export type FirebaseDatabaseNodeValue = {} | number | boolean | string | null;
 
 export type FirebaseDatabaseProviderState = {
-  firebase: any;
+  firebase: typeof firebase;
   dataTree: {
     [path: string]: {
       isLoading: boolean;

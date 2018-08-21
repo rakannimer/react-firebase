@@ -2,7 +2,7 @@ import { FirebaseQuery } from "./types";
 
 export const getFirebaseQuery = ({
   firebase = null,
-  path = null,
+  path,
   orderByChild = null,
   orderByKey = null,
   orderByValue = null,
@@ -15,7 +15,7 @@ export const getFirebaseQuery = ({
   if (firebase === null) {
     throw new Error("Need to supply firebase argument to getFirebaseQuery");
   }
-  if (path === null) {
+  if (path === null || typeof path === "undefined") {
     throw new Error("Need to supply path argument to getFirebaseQuery");
   }
   let result = firebase.database().ref(path);
