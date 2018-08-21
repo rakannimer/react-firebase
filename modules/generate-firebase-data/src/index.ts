@@ -10,8 +10,7 @@ export type FirebaseCredential = {
   client_id: string;
   auth_uri: string;
   token_uri: string;
-  auth_provider_x509_cert_url: string;
-  clienMimeType_x509_cert_url: string;
+  auth_provider_x509_cert_url?: string;
 };
 
 export type InitializeAppArgs = {
@@ -54,6 +53,11 @@ export const generateFirebaseData = async (
     databaseURL,
     credential
   });
+  const { project_id } = credential;
+  const databaseBrowserURL = `https://console.firebase.google.com/project/${project_id}/database/${project_id}/data/`;
+  console.log(
+    `Adding Data to ${project_id}. You can watch here : ${databaseBrowserURL}`
+  );
   const CHUNK_SIZE = 50;
   const { keys, values } = generateJson({ schema, keyReducers, count });
   const paths = keys.map(key => key.split(".").join("/"));
@@ -72,4 +76,8 @@ export const generateFirebaseData = async (
       .ref()
       .update(firebaseUpdate);
   });
+
+  console.log(
+    `✅ Done. Check your data here https://console.firebase.google.com/project/${project_id}/database/${project_id}/data/`
+  );
 };

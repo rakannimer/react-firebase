@@ -1,6 +1,6 @@
 {
   "name": "generate-firebase-data",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "tsc && (concurrently --kill-others \"tsc --watch\" \"nodemon build/index.js\")",
     "build": "rollup -c",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "test": "tsc && node build/test.js"
   },
   "devDependencies": {
     "@types/lodash.chunk": "^4.2.4",
