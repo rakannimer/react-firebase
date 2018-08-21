@@ -34,7 +34,7 @@ export class FirebaseDatabaseProvider extends React.Component<
           path,
           data: d.val(),
           unsub,
-          isLoading: true
+          isLoading: false
         })
       );
     });
