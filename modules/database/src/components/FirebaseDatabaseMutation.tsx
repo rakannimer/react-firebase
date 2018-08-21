@@ -2,25 +2,14 @@ import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
 
 import { FirebaseDatabaseContextConsumer } from "../Context";
-import { FirebaseQuery, FirebaseDatabaseProviderState } from "../types";
+import { FirebaseDatabaseProviderState } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
-import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseContextConsumerLifeCycle";
 
 export type Nullable<T> = T | null;
 
 export type FirebaseMutationProps = {
   path: string;
   type: "set" | "update" | "push";
-};
-
-export type FirebaseMutationState = {
-  runMutation: Nullable<RunMutation>;
-  isLoading: boolean;
-  result: {
-    path: Nullable<FirebaseMutationProps["path"]>;
-    value: any;
-    type: Nullable<FirebaseMutationProps["type"]>;
-  };
 };
 
 export type FirebaseDatabaseMutationWithContextProps = FirebaseMutationProps &
@@ -36,8 +25,7 @@ export type RunMutation = (
 }>;
 
 export class FirebaseDatabaseMutationWithContext extends React.Component<
-  FirebaseDatabaseMutationWithContextProps,
-  FirebaseMutationState
+  FirebaseDatabaseMutationWithContextProps
 > {
   createMutationRunner = () => {
     const { firebase, path, type } = this.props;

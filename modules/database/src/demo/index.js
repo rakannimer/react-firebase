@@ -5,6 +5,7 @@ import "firebase/database";
 import { config } from "./test-credentials";
 import { FirebaseDatabaseNode, FirebaseDatabaseProvider } from "../index";
 import { FirebaseDatabaseMutation } from "../components/FirebaseDatabaseMutation";
+import { FirebaseDatabaseTransaction } from "../components/FirebaseDatabaseTransaction";
 import ReactJson from "react-json-view";
 
 const App = () => {
@@ -26,6 +27,31 @@ const App = () => {
           return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
         }}
       </FirebaseDatabaseNode>
+      <FirebaseDatabaseTransaction path="user_bookmarks/a/usage_count">
+        {({ runTransaction }) => {
+          return (
+            <div>
+              <button
+                onClick={() => {
+                  runTransaction({
+                    reducer: val => {
+                      if (val === null) {
+                        return 1;
+                      } else {
+                        return val + 1;
+                      }
+                    }
+                  }).then(() => {
+                    console.log("Ran transaction");
+                  });
+                }}
+              >
+                Click me to run transaction
+              </button>
+            </div>
+          );
+        }}
+      </FirebaseDatabaseTransaction>
       <FirebaseDatabaseMutation type="set" path="user_bookmarks/a">
         {({ runMutation }) => {
           return (
