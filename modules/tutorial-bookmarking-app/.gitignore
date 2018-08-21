@@ -1,5 +1,7 @@
-node_modules
-dist
 # parcel cache
 .cache
+.vscode
+
+dist
+node_modules
 src/test-credentials.ts

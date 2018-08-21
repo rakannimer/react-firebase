@@ -14,8 +14,10 @@
     "dev": "parcel src/index.html"
   },
   "dependencies": {
+    "@react-firebase/auth": "^0.1.8",
     "firebase": "^5.4.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-powerplug": "^1.0.0-rc.1"
   }
 }
