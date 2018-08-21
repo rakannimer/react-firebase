@@ -11,7 +11,6 @@ export const actions = {
     state: FirebaseDatabaseProviderState,
     { path, data: newData, unsub, isLoading }: AddPathToDataArgs
   ) => {
-    console.table(state.dataTree);
     const data = Object.assign({}, state.dataTree, {
       [path]: { value: newData, unsub, isLoading }
     });
