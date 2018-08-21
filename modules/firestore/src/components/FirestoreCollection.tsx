@@ -6,10 +6,6 @@ import { FirestoreQuery } from "../types";
 import { FirestoreCollectionContextConsumerLifeCycle } from "./FirestoreCollectionContextConsumerWithLifecycle";
 
 export class FirestoreCollection extends React.Component<FirestoreQuery> {
-  constructor(props: FirestoreQuery) {
-    super(props);
-    this.state = {};
-  }
   render() {
     const { children, path } = this.props;
     if (path === null) {
@@ -29,9 +25,8 @@ export class FirestoreCollection extends React.Component<FirestoreQuery> {
               {renderAndAddProps(children, {
                 path,
                 data: context.dataTree[path],
-                loadingStatus: context.dataTree[path]
-                  ? context.dataTree[path].loadingStatus
-                  : "loading"
+                isLoading:
+                  context.dataTree[path] && context.dataTree[path].isLoading
               })}
             </React.Fragment>
           );

@@ -20,8 +20,6 @@ export type FirestoreQuery = {
   endBefore?: OrNull<PrimitiveType | DocumentSnapshot>;
 };
 
-export type FirestoreNodeLoadingStatus = "loading" | "ready" | "error";
-
 export type FirestoreNodeValue = {} | number | boolean | string | null;
 
 export type FirestoreProviderState = {
@@ -29,7 +27,7 @@ export type FirestoreProviderState = {
   firestore: any;
   dataTree: {
     [path: string]: {
-      loadingStatus: FirestoreNodeLoadingStatus;
+      isLoading: boolean;
       value: FirestoreNodeValue[];
       unsub: () => void;
     };

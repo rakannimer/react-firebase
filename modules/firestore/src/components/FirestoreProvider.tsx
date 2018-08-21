@@ -41,7 +41,7 @@ export class FirestoreProvider extends React.Component<
             value: docSnapshot.exists ? docSnapshot.data() : null,
             snapshot,
             unsub,
-            loadingStatus: "ready"
+            isLoading: false
           });
         });
       } else {
@@ -53,7 +53,7 @@ export class FirestoreProvider extends React.Component<
               value: docSnapshot.exists ? docSnapshot.data() : null,
               snapshot: docSnapshot,
               unsub,
-              loadingStatus: "ready"
+              isLoading: false
             });
           });
         });
@@ -66,7 +66,7 @@ export class FirestoreProvider extends React.Component<
           unsub: () => {},
           value: null,
           path,
-          loadingStatus: "error"
+          isLoading: false
         });
       });
     };

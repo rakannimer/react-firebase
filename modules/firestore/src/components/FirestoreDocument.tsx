@@ -29,9 +29,8 @@ export class FirestoreDocument extends React.Component<FirestoreQuery> {
               {renderAndAddProps(children, {
                 path,
                 value: context.dataTree[path] && context.dataTree[path].value,
-                loadingStatus: context.dataTree[path]
-                  ? context.dataTree[path].loadingStatus
-                  : "loading"
+                isLoading:
+                  context.dataTree[path] && context.dataTree[path].isLoading
               })}
             </React.Fragment>
           );

@@ -1,4 +1,4 @@
-import { FirestoreProviderState, FirestoreNodeLoadingStatus } from "./types";
+import { FirestoreProviderState } from "./types";
 import {
   DocumentSnapshot,
   QuerySnapshot,
@@ -12,13 +12,13 @@ export type AddPathToDataArgs = {
   path: string;
   value: any;
   unsub: () => void;
-  loadingStatus?: FirestoreNodeLoadingStatus;
+  isLoading?: boolean;
   snapshot?: DocumentSnapshot | QuerySnapshot | CollectionReference;
 };
 export const actions = {
   addPathToData: (
     state: FirestoreProviderState,
-    { path, value: newData, unsub, loadingStatus, snapshot }: AddPathToDataArgs
+    { path, value: newData, unsub, isLoading, snapshot }: AddPathToDataArgs
   ) => {
     return produce(state as any, newState => {
       const snapshotID = get(snapshot, "id", null);
@@ -30,7 +30,7 @@ export const actions = {
       set(newState, `dataTree.${path}`, {
         value: [...values, newData],
         unsub,
-        loadingStatus
+        isLoading
       });
 
       return newState;

@@ -24,21 +24,64 @@ const App = () => {
               <div>isLoading : {JSON.stringify(state.isLoading)}</div>
               <div>error : {JSON.stringify(state.error)}</div>
               <IfFirebaseAuthed>
-                <div>
-                  <h2>You're signed in 🎉 </h2>
-                  <button
-                    onClick={async () => {
-                      setState({ isLoading: true });
-                      await firebase
-                        .app()
-                        .auth()
-                        .signOut();
-                      setState({ isLoading: false });
-                    }}
-                  >
-                    Sign out
-                  </button>
-                </div>
+                {({ firebase }) => {
+                  return (
+                    <div>
+                      <h2>You're signed in 🎉 </h2>
+                      <button
+                        onClick={async () => {
+                          setState({ isLoading: true });
+                          await firebase
+                            .app()
+                            .auth()
+                            .signOut();
+                          setState({ isLoading: false });
+                        }}
+                      >
+                        Sign out
+                      </button>
+                      <State initial={{ newLinkUrl: "", newLinkMetadata: "" }}>
+                        {({ state, setState }) => {
+                          return (
+                            <div>
+                              <h2>New Link Url</h2>
+                              <input
+                                type="text"
+                                value={state.newLinkUrl}
+                                onChange={ev => {
+                                  setState({ newLinkUrl: ev.target.value });
+                                }}
+                              />
+                              <h2>New Link Metadata</h2>
+                              <input
+                                type="text"
+                                value={state.newLinkMetadata}
+                                onChange={ev => {
+                                  setState({
+                                    newLinkMetadata: ev.target.value
+                                  });
+                                }}
+                              />
+                              <div>
+                                <button
+                                  onClick={() => {
+                                    console.log(state);
+                                    const {
+                                      newLinkUrl,
+                                      newLinkMetadata
+                                    } = state;
+                                  }}
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        }}
+                      </State>
+                    </div>
+                  );
+                }}
               </IfFirebaseAuthed>
               <IfFirebaseUnAuthed>
                 <div>
