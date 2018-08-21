@@ -10,7 +10,6 @@ export type Nullable<T> = T | null;
 
 export type FirebaseMutationProps = {
   path: string;
-  value: any;
   type: "set" | "update" | "push";
 };
 
@@ -19,7 +18,7 @@ export type FirebaseMutationState = {
   isLoading: boolean;
   result: {
     path: Nullable<FirebaseMutationProps["path"]>;
-    value: Nullable<FirebaseMutationProps["value"]>;
+    value: any;
     type: Nullable<FirebaseMutationProps["type"]>;
   };
 };
@@ -27,9 +26,11 @@ export type FirebaseMutationState = {
 export type FirebaseDatabaseMutationWithContextProps = FirebaseMutationProps &
   FirebaseDatabaseProviderState;
 
-export type RunMutation = () => Promise<{
+export type RunMutation = (
+  value: any
+) => Promise<{
   path: FirebaseMutationProps["path"];
-  value: FirebaseMutationProps["value"];
+  value: any;
   type: FirebaseMutationProps["type"];
   key?: Nullable<string>;
 }>;
@@ -38,17 +39,8 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
   FirebaseDatabaseMutationWithContextProps,
   FirebaseMutationState
 > {
-  state = {
-    runMutation: null,
-    isLoading: true,
-    result: {
-      path: null,
-      value: null,
-      type: null
-    }
-  };
   createMutationRunner = () => {
-    const { firebase, path, value, type } = this.props;
+    const { firebase, path, type } = this.props;
     const firebaseRef = firebase
       .app()
       .database()
@@ -56,7 +48,7 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
     let runMutation: RunMutation;
     switch (type) {
       case "push": {
-        runMutation = async () => {
+        runMutation = async value => {
           const key = await firebaseRef.push(value).key;
           return {
             path,
@@ -68,7 +60,7 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
         break;
       }
       case "update": {
-        runMutation = async () => {
+        runMutation = async value => {
           await firebaseRef.update(value);
           return {
             path,
@@ -81,7 +73,7 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
         break;
       }
       case "set": {
-        runMutation = async () => {
+        runMutation = async value => {
           await firebaseRef.set(value);
           return {
             path,
@@ -100,24 +92,9 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
     }
     return runMutation;
   };
-  async componentDidMount() {
-    await this.createMutationRunner();
-  }
-
-  async componentDidUpdate(
-    prevProps: FirebaseDatabaseMutationWithContextProps
-  ) {
-    if (
-      prevProps.path !== this.props.path ||
-      prevProps.value !== this.props.value
-    ) {
-      await this.createMutationRunner();
-    }
-  }
   shouldComponentUpdate(nextProps: FirebaseDatabaseMutationWithContextProps) {
     return (
       nextProps.path !== this.props.path ||
-      nextProps.value !== this.props.value ||
       nextProps.firebase !== this.props.firebase
     );
   }
@@ -132,14 +109,13 @@ export class FirebaseDatabaseMutation extends React.Component<
   FirebaseMutationProps
 > {
   render() {
-    const { children, type, path, value } = this.props;
+    const { children, type, path } = this.props;
     return (
       <FirebaseDatabaseContextConsumer>
         {context => (
           <FirebaseDatabaseMutationWithContext
             type={type}
             path={path}
-            value={value}
             {...context}
             children={children}
           />

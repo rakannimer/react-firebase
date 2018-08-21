@@ -26,20 +26,17 @@ const App = () => {
           return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
         }}
       </FirebaseDatabaseNode>
-      <FirebaseDatabaseMutation
-        type="set"
-        path="user_bookmarks/a"
-        value={{
-          new_data: "Oh hai",
-          updated_at: firebase.database.ServerValue.TIMESTAMP
-        }}
-      >
+      <FirebaseDatabaseMutation type="set" path="user_bookmarks/a">
         {({ runMutation }) => {
           return (
             <div>
               <button
                 onClick={() => {
-                  runMutation().then(() => {
+                  runMutation({
+                    new_data: "Oh hai",
+                    updated_at: firebase.database.ServerValue.TIMESTAMP,
+                    now: Date.now()
+                  }).then(() => {
                     console.log("Ran mutation");
                   });
                 }}
