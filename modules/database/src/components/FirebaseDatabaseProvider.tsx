@@ -26,6 +26,14 @@ export class FirebaseDatabaseProvider extends React.Component<
     const ref = getFirebaseQuery(
       Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
     );
+    this.setState(state =>
+      actions.addPathToData(state, {
+        path,
+        data: null,
+        unsub: () => {},
+        isLoading: true
+      })
+    );
     const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
       if (d === null || typeof d === "undefined") return;
 
