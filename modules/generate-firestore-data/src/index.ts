@@ -1,3 +1,4 @@
+import * as firebase from "firebase-admin";
 import { generateJson } from "generate-json";
 import {
   Firestore,
@@ -14,7 +15,6 @@ export type FirebaseCredential = {
   auth_uri: string;
   token_uri: string;
   auth_provider_x509_cert_url: string;
-  clienMimeType_x509_cert_url: string;
 };
 
 export type InitializeAppArgs = {
@@ -24,11 +24,7 @@ export type InitializeAppArgs = {
 };
 export type InitializeApp = (args: InitializeAppArgs) => void;
 
-export const initializeApp: InitializeApp = ({
-  firebase,
-  databaseURL,
-  credential
-}) => {
+export const initializeApp: InitializeApp = ({ databaseURL, credential }) => {
   try {
     firebase.initializeApp({
       databaseURL,
@@ -71,15 +67,21 @@ const getFirestoreRefFromDottedPath = ({ path, firestore }: any) => {
 
 export const generateFirestoreData = async (
   { schema, keyReducers, count }: GenerateJsonArgs,
-  { databaseURL, credential, firebase }: InitializeAppArgs
+  { databaseURL, credential }: InitializeAppArgs
 ) => {
+  const { project_id } = credential;
+  const databaseBrowserURL = `https://console.firebase.google.com/project/${project_id}/database/firestore/data/`;
+  console.log(
+    `Adding Data to ${project_id}. You can watch here : ${databaseBrowserURL}`
+  );
   initializeApp({
     firebase,
     databaseURL,
     credential
   });
   const { keys, values } = await generateJson({ schema, keyReducers, count });
-  const firestore = new Firestore();
+
+  const firestore = firebase.app().firestore();
   const settings = { timestampsInSnapshots: true };
   firestore.settings(settings);
   const firestoreBatch = firestore.batch();
@@ -96,6 +98,9 @@ export const generateFirestoreData = async (
     }
   }
   await firestoreBatch.commit();
+  console.log(
+    `Added Data to ${project_id}. You can check here : ${databaseBrowserURL}`
+  );
 };
 
 const FIRESTORE_BATCH_LIMIT = 500;
