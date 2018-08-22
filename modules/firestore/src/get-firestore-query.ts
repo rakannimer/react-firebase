@@ -6,7 +6,7 @@ import {
 } from "@google-cloud/firestore";
 
 import { FirestoreQuery } from "./types";
-const getFirestoreRefFromPath = ({ path, firestore }: any) => {
+export const getFirestoreRefFromPath = ({ path, firestore }: any) => {
   let firestoreRef = firestore as
     | Firestore
     | CollectionReference
