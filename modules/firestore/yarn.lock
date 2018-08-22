@@ -237,6 +237,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-dom@^16.0.7":
+  version "16.0.7"
+  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-16.0.7.tgz#54d0f867a76b90597e8432030d297982f25c20ba"
+  dependencies:
+    "@types/node" "*"
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.4.10":
   version "16.4.10"
   resolved "https://registry.npmjs.org/@types/react/-/react-16.4.10.tgz#fb577091034b25a81f829923e7d38258f43e3165"
