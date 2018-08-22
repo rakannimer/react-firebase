@@ -21,7 +21,13 @@ export class FirestoreMutationWithContext extends React.Component<
     switch (type) {
       case "set": {
         const runMutation = async (value: any, options = { merge: true }) => {
-          return await docReference.set(value, options);
+          return await docReference.set(value, options).then(val => ({
+            response: val,
+            path,
+            value,
+            type,
+            key: null
+          }));
         };
         return runMutation;
       }
