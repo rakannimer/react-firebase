@@ -6,6 +6,8 @@ description: React Bindings for Firebase.
 
 Building apps with React & Firebase should be easy. The goal of this project is to offer intuitive declarative APIs to make interacting with Firebase fun and easy.
 
+Check the complete docs 👉 [Here](https://react-firebase.gitbook.io/rf)
+
 ## Modules
 
 * Firebase Realtime Database : [`@react-firebase/database`](react-firebase-realtime-database/)
@@ -44,6 +46,4 @@ yarn add @react-firebase/database
 ```bash
 yarn add @react-firebase/firestore
 ```
-
-
 
