@@ -46,10 +46,14 @@ export const getFirestoreQuery = ({
     throw new Error("Need to supply path argument to getFirestoreQuery");
   }
   // console.log({ path });
-  let ref: CollectionReference | Query = getFirestoreRefFromPath({
+  let ref:
+    | DocumentReference
+    | CollectionReference
+    | Query = getFirestoreRefFromPath({
     path,
     firestore
   });
+
   if (where !== null) {
     ref = ref.where(where.field, where.operator, where.value);
   }
@@ -75,5 +79,5 @@ export const getFirestoreQuery = ({
   if (limit !== null) {
     ref = ref.limit(limit);
   }
-  return ref;
+  return ref as DocumentReference | CollectionReference | Query;
 };
