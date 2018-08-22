@@ -9,14 +9,15 @@ import { FirestoreDocument } from "../components/FirestoreDocument";
 import { FirestoreCollection } from "../components/FirestoreCollection";
 import { FirestoreMutation } from "../components/FirestoreMutation";
 import { FirestoreBatchedWrite } from "../components/FirestoreBatchedWrite";
+import { FirestoreTransaction } from "../components/FirestoreTransaction";
+
 // import { FirebaseDatabaseNode, FirebaseDatabaseProvider } from "../index";
 
 import ReactJson from "react-json-view";
 
-const App = () => {
+const BatchedWriteExamples = () => {
   return (
-    <FirestoreProvider {...config} firebase={firebase}>
-      <div>oh hai</div>
+    <React.Fragment>
       <FirestoreBatchedWrite>
         {({ addMutationToBatch, commit }) => {
           // console.log()
@@ -49,6 +50,48 @@ const App = () => {
           );
         }}
       </FirestoreBatchedWrite>
+    </React.Fragment>
+  );
+};
+
+const TransactionExamples = () => {
+  return (
+    <React.Fragment>
+      <FirestoreTransaction>
+        {({ runTransaction }) => {
+          return (
+            <div>
+              <button
+                onClick={() => {
+                  runTransaction(
+                    async ({ transaction, get, update, fDelete }) => {
+                      const PATH = "user_bookmarks/G_K_5onxu/";
+                      const res = await get({
+                        path: PATH
+                      });
+                      const data = res.data();
+                      update(PATH, {
+                        ...data,
+                        [`Hai-${Date.now()}`]: Date.now()
+                      });
+                      fDelete(`${PATH}`);
+                    }
+                  );
+                }}
+              >
+                runTransaction
+              </button>
+            </div>
+          );
+        }}
+      </FirestoreTransaction>
+    </React.Fragment>
+  );
+};
+
+const MutationExamples = () => {
+  return (
+    <React.Fragment>
       <FirestoreMutation type="set" path="/user_bookmarks/G_K_5onxu">
         {({ runMutation }) => {
           return (
@@ -91,19 +134,42 @@ const App = () => {
           );
         }}
       </FirestoreMutation>
-      <FirestoreDocument path="/user_bookmarks/G_K_5onxu">
+    </React.Fragment>
+  );
+};
+
+const FirestoreDocumentExamples = () => {
+  return (
+    <FirestoreDocument path="/user_bookmarks/G_K_5onxu">
+      {d => {
+        return <ReactJson src={d} />;
+      }}
+    </FirestoreDocument>
+  );
+};
+
+const FirestoreCollectionExamples = () => {
+  return (
+    <React.Fragment>
+      <FirestoreCollection path="/user_bookmarks/" limit={2}>
         {d => {
           return d.isLoading ? "Loading" : <ReactJson src={d} />;
         }}
-      </FirestoreDocument>
-      <div>
-        <h4>oh hai again</h4>
-        <FirestoreCollection path="/user_bookmarks/" limit={2}>
-          {d => {
-            return d.isLoading ? "Loading" : <ReactJson src={d} />;
-          }}
-        </FirestoreCollection>
-      </div>
+      </FirestoreCollection>
+    </React.Fragment>
+  );
+};
+
+const App = () => {
+  return (
+    <FirestoreProvider {...config} firebase={firebase}>
+      <div>oh hai</div>
+
+      {/* <BatchedWriteExamples /> */}
+      <TransactionExamples />
+      <MutationExamples />
+      <FirestoreDocumentExamples />
+      <FirestoreCollectionExamples />
     </FirestoreProvider>
   );
 };

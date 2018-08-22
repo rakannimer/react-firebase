@@ -5,11 +5,19 @@ import { FirestoreContextConsumer } from "../Context";
 import { FirestoreQuery } from "../types";
 import { FirestoreDocumentContextConsumerLifeCycle } from "./FirestoreDocumentContextConsumerWithLifecycle";
 
-export class FirestoreDocument extends React.Component<FirestoreQuery> {
-  constructor(props: FirestoreQuery) {
-    super(props);
-    this.state = {};
+export class FirestoreDocument extends React.Component<
+  FirestoreQuery & {
+    children: (
+      {
+
+      }: {
+        path: string;
+        value: any;
+        isLoading: boolean;
+      }
+    ) => React.ReactNode;
   }
+> {
   render() {
     const { children, path } = this.props;
     if (path === null) {

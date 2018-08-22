@@ -5,8 +5,7 @@ import { FirestoreContextConsumer } from "../Context";
 import { FirestoreProviderState } from "../types";
 import { getFirestoreRefFromPath } from "../get-firestore-query";
 
-export type FirestoreBatchedWriteWithContextProps = FirestoreProviderState &
-  FirestoreBatchedWriteProps;
+export type FirestoreBatchedWriteWithContextProps = FirestoreProviderState;
 export class FirestoreBatchedWriteWithContext extends React.Component<
   FirestoreBatchedWriteWithContextProps
 > {
@@ -23,6 +22,7 @@ export class FirestoreBatchedWriteWithContext extends React.Component<
       type: "add" | "update" | "set" | "delete";
     }) => {
       const ref = getFirestoreRefFromPath({ firestore, path });
+      //@ts-ignore
       batch[type](ref, value);
     };
     const commit = async () => {
@@ -47,23 +47,31 @@ export class FirestoreBatchedWriteWithContext extends React.Component<
   }
 }
 
-export type FirestoreBatchedWriteProps = {
-  type: "set" | "update" | "add";
+export type ChildrenArgs = {
+  addMutationToBatch: (
+    {
+      path,
+      value,
+      type
+    }: {
+      path: string;
+      value: any;
+      type: "add" | "update" | "set" | "delete";
+    }
+  ) => void;
+  commit: () => Promise<void>;
 };
-export class FirestoreBatchedWrite extends React.Component<
-  FirestoreBatchedWriteProps
-> {
+
+export class FirestoreBatchedWrite extends React.Component<{
+  children: ({ addMutationToBatch, commit }: ChildrenArgs) => React.ReactNode;
+}> {
   render() {
-    const { children, type } = this.props;
+    const { children } = this.props;
 
     return (
       <FirestoreContextConsumer>
         {context => (
-          <FirestoreBatchedWriteWithContext
-            type={type}
-            {...context}
-            children={children}
-          />
+          <FirestoreBatchedWriteWithContext {...context} children={children} />
         )}
       </FirestoreContextConsumer>
     );

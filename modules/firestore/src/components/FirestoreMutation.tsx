@@ -12,10 +12,30 @@ import {
 export type FirestoreMutationWithContextProps = FirestoreQuery &
   FirestoreProviderState &
   FirestoreMutationProps;
+
+export type RunMutation = ((
+  value: any,
+  options?: {
+    merge: boolean;
+  }
+) => Promise<{
+  response: FirebaseFirestore.WriteResult;
+  path: string;
+  value: any;
+  type: "set" | "update" | "add";
+  key: null | string;
+}>);
+// | ((value: any) => Promise<{
+//     response: FirebaseFirestore.WriteResult;
+//     path: string;
+//     value: any;
+//     type: "update";
+//     key: null;
+// }>) | ((value: any) => Promise<...>)
 export class FirestoreMutationWithContext extends React.Component<
   FirestoreMutationWithContextProps
 > {
-  createMutationRunner = () => {
+  createMutationRunner = (): RunMutation => {
     const { type, path } = this.props;
     const docReference = getFirestoreQuery(this.props) as DocumentReference;
     switch (type) {
@@ -84,10 +104,10 @@ export class FirestoreMutationWithContext extends React.Component<
 
 export type FirestoreMutationProps = {
   type: "set" | "update" | "add";
+  path: string;
+  children: ({ runMutation }: { runMutation: RunMutation }) => {};
 };
-export class FirestoreMutation extends React.Component<
-  FirestoreQuery & FirestoreMutationProps
-> {
+export class FirestoreMutation extends React.Component<FirestoreMutationProps> {
   render() {
     const { children, path, type } = this.props;
     if (path === null) {

@@ -38,7 +38,7 @@ export const getFirestoreQuery = ({
   endAt = null,
   startAfter = null,
   endBefore = null
-}: FirestoreQuery) => {
+}: FirestoreQuery & { firestore: Firestore | null }) => {
   if (firestore === null) {
     throw new Error("Need to supply firestore argument to getFirestoreQuery");
   }

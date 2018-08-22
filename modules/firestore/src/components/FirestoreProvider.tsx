@@ -11,6 +11,12 @@ import {
   FirestoreProviderState,
   FirestoreProviderProps
 } from "../types";
+import {
+  DocumentReference,
+  CollectionReference,
+  Query,
+  QueryDocumentSnapshot
+} from "@google-cloud/firestore";
 
 export class FirestoreProvider extends React.Component<
   FirestoreProviderProps,
@@ -24,9 +30,6 @@ export class FirestoreProvider extends React.Component<
     if (path === null || path in this.state.dataTree) {
       return;
     }
-    const ref = getFirestoreQuery(
-      Object.assign({}, firestoreQuery, { firestore: this.state.firestore })
-    );
     let onNext = (
       snapshot:
         | FirebaseFirestore.QuerySnapshot
@@ -57,6 +60,7 @@ export class FirestoreProvider extends React.Component<
             });
           });
         });
+        return;
       }
     };
     let onError = (err: Error) => {
@@ -70,6 +74,9 @@ export class FirestoreProvider extends React.Component<
         });
       });
     };
+    const ref = getFirestoreQuery(
+      Object.assign({}, firestoreQuery, { firestore: this.state.firestore })
+    ) as CollectionReference;
     let unsub = ref.onSnapshot(onNext, onError);
   };
   stopListeningTo(path: string) {
