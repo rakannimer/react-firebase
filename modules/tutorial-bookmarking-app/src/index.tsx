@@ -208,7 +208,14 @@ class AuthedPage extends React.Component {
                     const keys = Object.keys(value);
                     const values = Object.values(value);
                     return values.map((val, i) => (
-                      <MenuItem key={keys[i]}>{val.link_description} </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          window.open(val.link_url, "_blank");
+                        }}
+                        key={keys[i]}
+                      >
+                        {val.link_description}{" "}
+                      </MenuItem>
                     ));
                   }}
                 </FirebaseDatabaseNode>

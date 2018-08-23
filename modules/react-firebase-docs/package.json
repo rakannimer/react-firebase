@@ -1,0 +1,17 @@
+{
+  "name": "react-firebase-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "cd website && yarn build && cp ../now.json build/react-firebase/",
+    "deploy": "yarn build && cd website/build/react-firebase && now && now alias",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
