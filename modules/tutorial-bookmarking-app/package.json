@@ -14,8 +14,13 @@
     "dev": "parcel src/index.html"
   },
   "dependencies": {
+    "@material-ui/core": "^1.5.1",
+    "@material-ui/icons": "^2.0.3",
     "@react-firebase/auth": "^0.1.8",
+    "@react-firebase/database": "^0.2.4",
+    "downshift": "^2.1.5",
     "firebase": "^5.4.0",
+    "match-sorter": "^2.2.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-powerplug": "^1.0.0-rc.1"
