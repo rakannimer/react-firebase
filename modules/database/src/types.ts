@@ -1,6 +1,6 @@
 import * as firebase from "firebase";
 export interface FirebaseQuery {
-  firebase: any;
+  firebase?: any;
   path: string;
   orderByChild?: null | string;
   orderByKey?: null | any;

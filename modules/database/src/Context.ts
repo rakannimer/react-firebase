@@ -1,5 +1,6 @@
 import * as React from "react";
-import * as firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/database";
 import { FirebaseDatabaseProviderState, FirebaseQuery } from "./types";
 
 export const firebaseDatabaseDefaultContext = {
