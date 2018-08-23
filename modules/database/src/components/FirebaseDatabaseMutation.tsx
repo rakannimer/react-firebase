@@ -10,6 +10,7 @@ export type Nullable<T> = T | null;
 export type FirebaseMutationProps = {
   path: string;
   type: "set" | "update" | "push";
+  children: ({ runMutation }: { runMutation: RunMutation }) => React.ReactNode;
 };
 
 export type FirebaseDatabaseMutationWithContextProps = FirebaseMutationProps &
