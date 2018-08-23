@@ -1,10 +1,11 @@
 import React from "react";
 import {
-  MenuItem,
   Typography,
   Input,
   InputAdornment,
-  IconButton
+  IconButton,
+  Card,
+  CardContent
 } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
 import Downshift from "downshift";
@@ -21,12 +22,12 @@ export const ClearInput = () => {
 };
 
 export const AutoComplete = ({
-  items = [] as { label: string; value: string }[],
+  items = [] as { link_description: string; link_url: string }[],
   onSelect = (selection: {}) => {}
 }) => {
   return (
     <Downshift
-      itemToString={item => (item ? item.label : "")}
+      itemToString={item => (item ? item.link_description : "")}
       onChange={selection => {
         onSelect(selection);
       }}
@@ -43,7 +44,7 @@ export const AutoComplete = ({
         clearSelection
       }) => {
         return (
-          <div style={{ width: "100%" }}>
+          <div style={{ width: "100%", height: 100 }}>
             <Typography {...getLabelProps()}>Search</Typography>
             <Input
               fullWidth
@@ -69,27 +70,29 @@ export const AutoComplete = ({
 
             <div {...getMenuProps()}>
               {isOpen
-                ? matchSorter(items, inputValue, { keys: ["value"] }).map(
-                    (item, index) => (
-                      <MenuItem
-                        {...getItemProps({
-                          key: item.value,
-                          index,
-                          item,
-                          style: {
-                            backgroundColor:
-                              highlightedIndex === index
-                                ? "lightgray"
-                                : "white",
-                            fontWeight:
-                              selectedItem === item ? "bold" : "normal"
-                          }
-                        })}
-                      >
-                        {item.label}
-                      </MenuItem>
-                    )
-                  )
+                ? matchSorter(items, `${inputValue}`, {
+                    keys: ["link_description"]
+                  }).map((item, index) => (
+                    <Card
+                      {...getItemProps({
+                        key: item.link_url,
+                        index,
+                        item,
+                        style: {
+                          backgroundColor:
+                            highlightedIndex === index ? "lightgray" : "white",
+                          fontWeight: selectedItem === item ? "bold" : "normal"
+                        }
+                      })}
+                    >
+                      <CardContent>
+                        <Typography variant="headline">
+                          {item.link_description}
+                        </Typography>
+                        <Typography component="p">{item.link_url}</Typography>
+                      </CardContent>
+                    </Card>
+                  ))
                 : null}
             </div>
           </div>

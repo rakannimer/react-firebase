@@ -188,9 +188,9 @@
     lodash.get "^4.4.2"
     render-and-add-props "^0.5.0"
 
-"@react-firebase/database@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.npmjs.org/@react-firebase/database/-/database-0.2.5.tgz#28031d9a6352df1f4988220429482c221b9ce45b"
+"@react-firebase/database@0.2.7":
+  version "0.2.7"
+  resolved "https://registry.npmjs.org/@react-firebase/database/-/database-0.2.7.tgz#69f17c3c89729b51671904671d58a8b84ee291b6"
   dependencies:
     render-and-add-props "^0.5.0"
 
@@ -216,6 +216,10 @@
 "@types/lodash@*":
   version "4.14.116"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
+
+"@types/match-sorter@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/@types/match-sorter/-/match-sorter-2.2.0.tgz#f7231ea775ec8401f65153e4f8a37b7b1c06860d"
 
 "@types/node@*":
   version "10.7.1"

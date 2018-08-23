@@ -6,6 +6,7 @@
   "devDependencies": {
     "@types/lodash.get": "^4.4.4",
     "@types/lodash.set": "^4.3.4",
+    "@types/match-sorter": "^2.2.0",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
     "parcel-bundler": "^1.9.7",
@@ -19,7 +20,7 @@
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
     "@react-firebase/auth": "^0.1.8",
-    "@react-firebase/database": "^0.2.5",
+    "@react-firebase/database": "0.2.7",
     "downshift": "^2.1.5",
     "firebase": "^5.4.0",
     "lodash.get": "^4.4.2",
