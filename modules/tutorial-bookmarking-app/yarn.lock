@@ -201,6 +201,22 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
+"@types/lodash.get@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npmjs.org/@types/lodash.get/-/lodash.get-4.4.4.tgz#34b67841594e4ddc8853341d65e971a38cb4e2f0"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.set@^4.3.4":
+  version "4.3.4"
+  resolved "https://registry.npmjs.org/@types/lodash.set/-/lodash.set-4.3.4.tgz#ef11a971c7d3858e74fa6f745b4b69b2256f6c07"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.116"
+  resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
+
 "@types/node@*":
   version "10.7.1"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
@@ -2736,6 +2752,10 @@ lodash.get@^4.4.2:
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.npmjs.org/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"

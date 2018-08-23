@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/lodash.get": "^4.4.4",
+    "@types/lodash.set": "^4.3.4",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
     "parcel-bundler": "^1.9.7",
@@ -20,6 +22,8 @@
     "@react-firebase/database": "^0.2.4",
     "downshift": "^2.1.5",
     "firebase": "^5.4.0",
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
     "match-sorter": "^2.2.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

@@ -5,6 +5,7 @@ import {
   IfFirebaseAuthed,
   IfFirebaseUnAuthed
 } from "@react-firebase/auth";
+import { FirebaseDatabaseMutation } from "@react-firebase/database";
 import { State } from "react-powerplug";
 import firebase from "firebase/app";
 import { Button, MenuItem, TextField, RootRef } from "@material-ui/core";
@@ -140,6 +141,9 @@ const Search = () => {
   return <AutoComplete items={[]} />;
 };
 
+import get from "lodash.get";
+import set from "lodash.set";
+
 class AuthedPage extends React.Component {
   newLinkTextFieldRef = React.createRef();
   newLinkMetaTextFieldRef = React.createRef();
@@ -180,51 +184,66 @@ class AuthedPage extends React.Component {
             </div>
           </RowWithRightAlignedContent>
           <RowWithRightAlignedContent>
-            <form
-              style={{
-                width: "30%",
-                height: 300,
-                maxHeight: 300
-              }}
-              onSubmit={ev => {
-                ev.preventDefault();
-                const newLink =
-                  this.newLinkTextFieldRef.current &&
-                  this.newLinkTextFieldRef.current.value;
-                const newMeta =
-                  this.newLinkMetaTextFieldRef.current &&
-                  this.newLinkMetaTextFieldRef.current.value;
-                console.log({ newLink, newMeta });
-              }}
-            >
-              <div style={{ paddingTop: 20, paddingBottom: 20 }}>
-                <div>
-                  <TextField
-                    label="New Link URL"
-                    inputRef={this.newLinkTextFieldRef}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    label="New Link Metadata"
-                    inputRef={this.newLinkMetaTextFieldRef}
-                  />
-                </div>
-              </div>
-              <Button
-                style={{
-                  width: 50,
-                  height: 50,
-                  alignSelf: "center",
-                  background: "#039BE5",
-                  color: "white"
-                }}
-                variant="fab"
-                type="submit"
-              >
-                +
-              </Button>
-            </form>
+            <FirebaseDatabaseMutation type="push" path="user_bookmarks">
+              {({ runMutation }) => (
+                <form
+                  style={{
+                    width: "30%",
+                    height: 300,
+                    maxHeight: 300
+                  }}
+                  onSubmit={async ev => {
+                    ev.preventDefault();
+                    const newLink = get(
+                      this.newLinkTextFieldRef,
+                      "current.value",
+                      ""
+                    );
+                    const newMeta = get(
+                      this.newLinkMetaTextFieldRef,
+                      "current.value",
+                      ""
+                    );
+                    await runMutation({
+                      link_url: newLink,
+                      link_description: newMeta,
+                      created_at: firebase.database.ServerValue.TIMESTAMP,
+                      updated_at: firebase.database.ServerValue.TIMESTAMP
+                    });
+                    set(this.newLinkTextFieldRef, "current.value", "");
+                    set(this.newLinkMetaTextFieldRef, "current.value", "");
+                  }}
+                >
+                  <div style={{ paddingTop: 20, paddingBottom: 20 }}>
+                    <div>
+                      <TextField
+                        label="New Link URL"
+                        inputRef={this.newLinkTextFieldRef}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        label="New Link Metadata"
+                        inputRef={this.newLinkMetaTextFieldRef}
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    style={{
+                      width: 50,
+                      height: 50,
+                      alignSelf: "center",
+                      background: "#039BE5",
+                      color: "white"
+                    }}
+                    variant="fab"
+                    type="submit"
+                  >
+                    +
+                  </Button>
+                </form>
+              )}
+            </FirebaseDatabaseMutation>
           </RowWithRightAlignedContent>
         </div>
       </>
@@ -254,3 +273,14 @@ const DesignedApp = () => {
 };
 
 render(<DesignedApp />, document.getElementById("root"));
+
+const newLink = get(this.newLinkTextFieldRef, "current.value", "");
+const newMeta = get(this.newLinkMetaTextFieldRef, "current.value", "");
+await runMutation({
+  link_url: newLink,
+  link_description: newMeta,
+  created_at: firebase.database.ServerValue.TIMESTAMP,
+  updated_at: firebase.database.ServerValue.TIMESTAMP
+});
+set(this.newLinkTextFieldRef, "current.value", "");
+set(this.newLinkMetaTextFieldRef, "current.value", "");
