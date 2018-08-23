@@ -273,14 +273,3 @@ const DesignedApp = () => {
 };
 
 render(<DesignedApp />, document.getElementById("root"));
-
-const newLink = get(this.newLinkTextFieldRef, "current.value", "");
-const newMeta = get(this.newLinkMetaTextFieldRef, "current.value", "");
-await runMutation({
-  link_url: newLink,
-  link_description: newMeta,
-  created_at: firebase.database.ServerValue.TIMESTAMP,
-  updated_at: firebase.database.ServerValue.TIMESTAMP
-});
-set(this.newLinkTextFieldRef, "current.value", "");
-set(this.newLinkMetaTextFieldRef, "current.value", "");
