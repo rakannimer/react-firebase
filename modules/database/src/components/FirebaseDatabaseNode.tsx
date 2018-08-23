@@ -6,11 +6,15 @@ import { FirebaseQuery } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
 import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseContextConsumerLifeCycle";
 
-export class FirebaseDatabaseNode extends React.Component<FirebaseQuery> {
-  constructor(props: FirebaseQuery) {
-    super(props);
-    this.state = {};
-  }
+export type FirebaseDatabaseNodeProps = {
+  children?: (
+    { value, path, isLoading }: { value: any; path: string; isLoading: boolean }
+  ) => React.ReactNode;
+} & FirebaseQuery;
+
+export class FirebaseDatabaseNode extends React.Component<
+  FirebaseDatabaseNodeProps
+> {
   render() {
     const { children, path } = this.props;
     return (
