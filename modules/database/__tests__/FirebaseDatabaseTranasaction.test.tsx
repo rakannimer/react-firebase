@@ -5,7 +5,7 @@ import {
   waitForElement,
   getNodeText
 } from "react-testing-library";
-import * as firebase from "firebase";
+import * as firebase from "firebase/app";
 import { State } from "react-powerplug";
 import {
   FirebaseDatabaseProvider,

@@ -17,7 +17,7 @@ import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer
 } from "@react-firebase/auth";
-import firebase from "firebase";
+import * as firebase from "firebase/app";
 import { config } from "./test-credentials";
 const concept = "world";
 
