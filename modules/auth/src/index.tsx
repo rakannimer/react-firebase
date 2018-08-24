@@ -34,9 +34,10 @@ export type AuthEmission = {
   firebase: typeof firebase;
 };
 export type FirebaseAuthProviderState = AuthEmission;
-export type RenderableChildren =
-  | ((authState: AuthEmission) => any)
-  | React.ReactNode;
+
+export type ChildFunction = ((authState: AuthEmission) => any)
+
+export type RenderableChildren =ChildFunction
 
 export class FirebaseAuthProvider extends React.PureComponent<
   FirebaseAuthProviderProps,

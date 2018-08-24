@@ -14,20 +14,25 @@
   "scripts": {
     "dev": "parcel src/demo/index.html -d tmp-demo-dir",
     "build": "rollup -c",
+    "test": "tsc && jest",
     "prepublish": "npm run build",
     "pub": "yarn build && yarn publish --access public"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.1",
     "@types/lodash.get": "^4.4.4",
     "@types/react": "^16.4.11",
     "docz": "^0.9.6",
     "firebase": "^5.4.0",
+    "jest": "^23.5.0",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-testing-library": "^5.0.0",
     "rollup": "^0.64.1",
     "rollup-plugin-typescript2": "^0.16.1",
+    "ts-jest": "^23.1.4",
     "typescript": "^3.0.1"
   },
   "dependencies": {
@@ -42,5 +47,19 @@
   },
   "files": [
     "dist/"
-  ]
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }

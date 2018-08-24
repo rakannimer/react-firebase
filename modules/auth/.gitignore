@@ -7,3 +7,4 @@ node_modules
 src/demo/test-credentials.js
 dist/
 tmp-demo-dir/
+src/demo/test-credentials.ts

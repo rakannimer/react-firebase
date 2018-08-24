@@ -2,7 +2,7 @@
   "private": true,
   "name": "react-firebase",
   "workspaces": [
-    "modules/"
+    "modules/*"
   ],
   "repository": {
     "url": "https://github.com/rakannimer/react-firebase"
