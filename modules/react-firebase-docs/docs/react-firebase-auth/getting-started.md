@@ -1,6 +1,6 @@
 ---
 title: React Firebase Auth
-sidebar_label: Docs
+sidebar_label: Getting Started
 ---
 
 Easily integrate Firebase Authentication in your react\(-native\) app.

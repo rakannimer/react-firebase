@@ -38,15 +38,15 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'react-firebase-auth/docs', label: 'Auth'},
-    {doc: 'react-firebase-realtime-database/docs', label: 'Database'},
-    {doc: 'react-firestore-database/docs', label: 'Firestore'},
+    {doc: 'react-firebase-auth/getting-started', label: 'Auth'},
+    {doc: 'react-firebase-realtime-database/getting-started', label: 'Database'},
+    {doc: 'react-firestore-database/getting-started', label: 'Firestore'},
     {blog: true, label: 'Blog'}
   ],
 
   // // If you have users set above, you add it here:
   // users,
-
+  gaTrackingId: 'UA-124247406-1',
   /* path to images for header/footer */
   headerIcon: 'img/logo.png',
   footerIcon: 'img/logo.png',

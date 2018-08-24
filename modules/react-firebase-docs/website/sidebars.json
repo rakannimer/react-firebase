@@ -1,8 +1,8 @@
 {
   "docs": {
-    "Auth": ["react-firebase-auth/docs", "react-firebase-auth/api"],
-    "Realtime Database": ["react-firebase-realtime-database/docs", "react-firebase-realtime-database/api"],
-    "Firestore": ["react-firestore-database/docs", "react-firestore-database/api"],
+    "Auth": ["react-firebase-auth/getting-started", "react-firebase-auth/api"],
+    "Realtime Database": ["react-firebase-realtime-database/getting-started", "react-firebase-realtime-database/api"],
+    "Firestore": ["react-firestore-database/getting-started", "react-firestore-database/api"],
     "Generate JSON Data": ["generate-json-data"],
     "Generate Firebase Data": ["generate-firebase-data"],
     "Generate Firestore Data": ["generate-firestore-data"]

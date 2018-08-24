@@ -1,6 +1,6 @@
 ---
 title: React Realtime Database
-sidebar_label: Docs
+sidebar_label: Getting Started
 ---
 
 Easily Render Firebase Realtime Database in your react\(-native\) app.
