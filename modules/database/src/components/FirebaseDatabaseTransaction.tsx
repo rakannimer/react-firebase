@@ -9,6 +9,9 @@ export type Nullable<T> = T | null;
 
 export type FirebaseTransactionProps = {
   path: string;
+  children: (
+    { runTransaction }: { runTransaction: RunTransaction }
+  ) => React.ReactNode;
 };
 
 export type FirebaseDatabaseTransactionWithContextProps = FirebaseTransactionProps &
