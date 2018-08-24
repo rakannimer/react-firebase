@@ -1,6 +1,6 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-
+import get from "lodash.get";
 import { FirestoreContextConsumer } from "../Context";
 import { FirestoreQuery } from "../types";
 import { FirestoreCollectionContextConsumerLifeCycle } from "./FirestoreCollectionContextConsumerWithLifecycle";
@@ -36,9 +36,8 @@ export class FirestoreCollection extends React.Component<
               />
               {renderAndAddProps(children, {
                 path,
-                value: context.dataTree[path].value,
-                isLoading:
-                  context.dataTree[path] && context.dataTree[path].isLoading
+                value: get(context, `dataTree[${path}].value`, null),
+                isLoading: get(context, `dataTree[${path}].isLoading`, true)
               })}
             </React.Fragment>
           );

@@ -74,7 +74,7 @@ const TransactionExamples = () => {
                         ...data,
                         [`Hai-${Date.now()}`]: Date.now()
                       });
-                      fDelete(`${PATH}`);
+                      // fDelete(`${PATH}`);
                     }
                   );
                 }}

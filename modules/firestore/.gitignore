@@ -6,3 +6,4 @@ build
 node_modules
 tmp-demo-dir
 src/demo/test-credentials.js
+coverage

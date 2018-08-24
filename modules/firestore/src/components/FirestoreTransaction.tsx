@@ -68,7 +68,6 @@ export class FirestoreTranasactionWithContext extends React.Component<
         };
 
         const fDelete = async (path: string, precondition?: Precondition) => {
-          console.log(`Deleting ${path} `);
           const ref = getFirestoreQuery({
             path,
             firestore
@@ -77,7 +76,7 @@ export class FirestoreTranasactionWithContext extends React.Component<
         };
         return transactionLogic({ transaction, get, update, set, fDelete });
       };
-      firestore.runTransaction(transactionLogicWithHelpers);
+      await firestore.runTransaction(transactionLogicWithHelpers);
     };
     return runTransaction;
   };
