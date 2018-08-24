@@ -2,6 +2,7 @@
 .rpt2_cache
 .vscode
 build
+coverage
 dist
 node_modules
 src/demo/test-credentials.js

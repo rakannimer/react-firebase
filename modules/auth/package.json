@@ -49,6 +49,9 @@
     "dist/"
   ],
   "jest": {
+    "collectCoverageFrom": [
+      "src/*.tsx"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },

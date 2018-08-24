@@ -33,6 +33,7 @@ export const App = () => {
           Sign In with Google
         </button>
         <button
+          data-testid="signin-anon"
           onClick={() => {
             firebase.auth().signInAnonymously();
           }}
