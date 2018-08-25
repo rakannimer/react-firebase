@@ -3,7 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import { config } from "./test-credentials";
 import { FirestoreProvider } from "../";
-import { RenderCollection } from "./RenderCollection";
+import { RenderInfiniteList } from "./RenderInfiniteList";
 import { SetDocument } from "./SetDocument";
 import { UpdateDocument } from "./UpdateDocument";
 import { DeleteDocument } from "./DeleteDocument";
@@ -30,7 +30,7 @@ export const App = () => {
         <SetDocument />
         <UpdateDocument />
         <DeleteDocument />
-        <RenderCollection />
+        <RenderInfiniteList />
         <AddToCollection />
         <BatchedWrite />
       </div>

@@ -1,13 +1,11 @@
 import * as React from "react";
-
 import { FirestoreContextConsumerWithLifeCycleProps } from "../types";
-
 export class FirestoreCollectionContextConsumerLifeCycle extends React.Component<
   FirestoreContextConsumerWithLifeCycleProps
 > {
-  listenToNodeIfNotInContext() {
+  listenToNode() {
     const { dataTree, path, listenTo } = this.props;
-    if (path === null || path in dataTree) {
+    if (path === null) {
       return;
     }
     listenTo(this.props, "collection");
@@ -20,10 +18,28 @@ export class FirestoreCollectionContextConsumerLifeCycle extends React.Component
     stopListeningTo(path);
   }
   componentDidMount() {
-    this.listenToNodeIfNotInContext();
+    this.listenToNode();
   }
+  shouldComponentUpdate(nextProps: FirestoreContextConsumerWithLifeCycleProps) {
+    const propsThatCanChange = [
+      "path",
+      "limit",
+      "startAfter",
+      "startAt",
+      "endAt",
+      "endBefore"
+    ];
+    for (let propName of propsThatCanChange) {
+      //@ts-ignore
+      if (this.props[propName] !== nextProps[propName]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   componentDidUpdate() {
-    this.listenToNodeIfNotInContext();
+    this.listenToNode();
   }
   componentWillUnmount() {
     this.stopListeningToNode();

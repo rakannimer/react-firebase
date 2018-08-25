@@ -22,8 +22,13 @@ export class FirestoreProvider extends React.Component<
     documentOrCollection: "document" | "collection" = "document"
   ) => {
     const { path } = firestoreQuery;
-    if (path === null || path in this.state.dataTree) {
+    if (path === null) {
       return;
+    }
+    if (path in this.state.dataTree) {
+      console.log("Path already in datatree", this.state.dataTree[path]);
+      this.state.dataTree[path].unsub();
+      // this.setState(state => stateReducer(state, { path }, "delete"));
     }
     let onNext = (
       snapshot:
