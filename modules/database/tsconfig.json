@@ -9,6 +9,8 @@
     "outDir": "./build/",
     "strict": true,
     "declaration": true,
-    "removeComments": true
+    "removeComments": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

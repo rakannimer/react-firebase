@@ -1,4 +1,6 @@
 import * as firebase from "firebase/app";
+
+export type GetChildrenIds = () => any;
 export interface FirebaseQuery {
   firebase?: any;
   path: string;

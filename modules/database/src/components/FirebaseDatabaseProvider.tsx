@@ -1,11 +1,9 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-
 import { initializeFirebaseApp } from "../initialize-firebase-app";
 import { FirebaseDatabaseContextProvider } from "../Context";
 import { getFirebaseQuery } from "../get-firebase-query";
-import { actions } from "../actions";
-
+import { stateReducer } from "../actions";
 import {
   FirebaseQuery,
   FirebaseDatabaseProviderState,
@@ -27,23 +25,31 @@ export class FirebaseDatabaseProvider extends React.Component<
       Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
     );
     this.setState(state =>
-      actions.addPathToData(state, {
-        path,
-        data: null,
-        unsub: () => {},
-        isLoading: true
-      })
+      stateReducer(
+        state,
+        {
+          path,
+          data: null,
+          unsub: () => {},
+          isLoading: true
+        },
+        "add"
+      )
     );
     const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
       if (d === null || typeof d === "undefined") return;
 
       this.setState(state =>
-        actions.addPathToData(state, {
-          path,
-          data: d.val(),
-          unsub,
-          isLoading: false
-        })
+        stateReducer(
+          state,
+          {
+            path,
+            data: d.val(),
+            unsub,
+            isLoading: false
+          },
+          "add"
+        )
       );
     });
   };
@@ -52,6 +58,15 @@ export class FirebaseDatabaseProvider extends React.Component<
       return;
     }
     this.state.dataTree[path].unsub();
+    this.setState(state =>
+      stateReducer(
+        state,
+        {
+          path
+        },
+        "delete"
+      )
+    );
   }
   constructor(props: FirebaseDatabaseProviderProps) {
     super(props);
