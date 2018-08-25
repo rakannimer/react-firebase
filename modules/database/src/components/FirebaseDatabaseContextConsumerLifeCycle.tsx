@@ -5,11 +5,8 @@ import { FirebaseDatabaseContextConsumerLifeCycleProps } from "../types";
 export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
   FirebaseDatabaseContextConsumerLifeCycleProps
 > {
-  listenToNodeIfNotInContext() {
+  listenToNode() {
     const { dataTree, path, listenTo } = this.props;
-    if (path in dataTree) {
-      return;
-    }
     listenTo(this.props);
   }
   stopListeningToNode() {
@@ -17,13 +14,35 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     stopListeningTo(path);
   }
   componentDidMount() {
-    this.listenToNodeIfNotInContext();
+    this.listenToNode();
   }
   componentDidUpdate() {
-    this.listenToNodeIfNotInContext();
+    this.listenToNode();
   }
   componentWillUnmount() {
     this.stopListeningToNode();
+  }
+  shouldComponentUpdate(
+    nextProps: FirebaseDatabaseContextConsumerLifeCycleProps
+  ) {
+    const propsThatCanChange = [
+      "path",
+      "orderByChild",
+      "orderByKey",
+      "orderByValue",
+      "limitToFirst",
+      "limitToLast",
+      "startAt",
+      "endAt",
+      "equalTo"
+    ];
+    for (let propName of propsThatCanChange) {
+      //@ts-ignore
+      if (this.props[propName] !== nextProps[propName]) {
+        return true;
+      }
+    }
+    return false;
   }
   render() {
     return null;
