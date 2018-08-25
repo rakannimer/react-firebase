@@ -4,6 +4,12 @@
   "workspaces": [
     "modules/*"
   ],
+  "scripts": {
+    "test:auth": "cd modules/auth && yarn test",
+    "test:database": "cd modules/database && yarn test",
+    "test:firestore": "cd modules/firestore && yarn test",
+    "test": "yarn test:auth && yarn test:database && yarn test:firestore"
+  },
   "repository": {
     "url": "https://github.com/rakannimer/react-firebase"
   },
