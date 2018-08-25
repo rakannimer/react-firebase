@@ -8,6 +8,38 @@ import produce from "immer";
 import set from "lodash.set";
 import get from "lodash.get";
 
+export type Operations = "add" | "delete";
+
+export function stateReducer(
+  state: FirestoreProviderState,
+  addArgs: AddPathToDataArgs,
+  operation: "add"
+): any;
+export function stateReducer(
+  state: FirestoreProviderState,
+  deleteArgs: { path: string },
+  operation: "delete"
+): any;
+export function stateReducer(
+  state: FirestoreProviderState,
+  actionArgs: AddPathToDataArgs | { path: string },
+  operation: Operations
+) {
+  switch (operation) {
+    case "add": {
+      return actions.addPathToData(state, actionArgs as AddPathToDataArgs);
+    }
+    case "delete": {
+      return actions.removePathFromData(state, actionArgs as { path: string });
+    }
+    default: {
+      throw new Error(
+        `Unsupported operation ${operation}. \n Supported state reducer operations are 'add' & 'delete'.`
+      );
+    }
+  }
+}
+
 export type AddPathToDataArgs = {
   path: string;
   value: any;
@@ -40,10 +72,9 @@ export const actions = {
     state: FirestoreProviderState,
     { path }: { path: string }
   ) => {
-    const data = Object.assign({}, state.dataTree, {
-      [path]: undefined
+    return produce(state as any, newState => {
+      set(newState, `dataTree.${path}`, undefined);
+      return newState;
     });
-    const newState = Object.assign({}, state, { dataTree: data });
-    return newState;
   }
 };

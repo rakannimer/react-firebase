@@ -4,19 +4,14 @@ import { renderAndAddProps } from "render-and-add-props";
 import { initializeFirebaseApp } from "../initialize-firebase-app";
 import { FirestoreContextProvider } from "../Context";
 import { getFirestoreQuery } from "../get-firestore-query";
-import { actions } from "../actions";
+import { stateReducer } from "../state-reducer";
 
 import {
   FirestoreQuery,
   FirestoreProviderState,
   FirestoreProviderProps
 } from "../types";
-import {
-  DocumentReference,
-  CollectionReference,
-  Query,
-  QueryDocumentSnapshot
-} from "@google-cloud/firestore";
+import { CollectionReference } from "@google-cloud/firestore";
 
 export class FirestoreProvider extends React.Component<
   FirestoreProviderProps,
@@ -39,25 +34,33 @@ export class FirestoreProvider extends React.Component<
       if (documentOrCollection === "document") {
         let docSnapshot = snapshot as FirebaseFirestore.QueryDocumentSnapshot;
         this.setState(state => {
-          return actions.addPathToData(state, {
-            path,
-            value: docSnapshot.exists ? docSnapshot.data() : null,
-            snapshot,
-            unsub,
-            isLoading: false
-          });
+          return stateReducer(
+            state,
+            {
+              path,
+              value: docSnapshot.exists ? docSnapshot.data() : null,
+              snapshot,
+              unsub,
+              isLoading: false
+            },
+            "add"
+          );
         });
       } else {
         let collectionSnapshot = snapshot as FirebaseFirestore.QuerySnapshot;
         collectionSnapshot.docs.forEach(docSnapshot => {
           this.setState(state => {
-            return actions.addPathToData(state, {
-              path: `${path}`,
-              value: docSnapshot.exists ? docSnapshot.data() : null,
-              snapshot: docSnapshot,
-              unsub,
-              isLoading: false
-            });
+            return stateReducer(
+              state,
+              {
+                path: `${path}`,
+                value: docSnapshot.exists ? docSnapshot.data() : null,
+                snapshot: docSnapshot,
+                unsub,
+                isLoading: false
+              },
+              "add"
+            );
           });
         });
         return;
@@ -66,12 +69,16 @@ export class FirestoreProvider extends React.Component<
     let onError = (err: Error) => {
       this.setState(state => {
         console.error(err);
-        return actions.addPathToData(state, {
-          unsub: () => {},
-          value: null,
-          path,
-          isLoading: false
-        });
+        return stateReducer(
+          state,
+          {
+            unsub: () => {},
+            value: null,
+            path,
+            isLoading: false
+          },
+          "add"
+        );
       });
     };
     const ref = getFirestoreQuery(
@@ -84,7 +91,7 @@ export class FirestoreProvider extends React.Component<
       return;
     }
     this.state.dataTree[path].unsub();
-    this.setState(state => actions.removePathFromData(state, { path }));
+    this.setState(state => stateReducer(state, { path }, "delete"));
   }
   constructor(props: FirestoreProviderProps) {
     super(props);
