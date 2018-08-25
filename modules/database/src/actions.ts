@@ -1,7 +1,6 @@
 import { FirebaseDatabaseProviderState } from "./types";
 import produce from "immer";
 import set from "lodash.set";
-import get from "lodash.get";
 
 export type AddPathToDataArgs = {
   path: string;
