@@ -22,7 +22,7 @@ export type RunMutation = ((
   response: FirebaseFirestore.WriteResult;
   path: string;
   value: any;
-  type: "set" | "update" | "add";
+  type: "set" | "update" | "add" | "delete";
   key: null | string;
 }>);
 // | ((value: any) => Promise<{
@@ -79,6 +79,19 @@ export class FirestoreMutationWithContext extends React.Component<
         };
         return runMutation;
       }
+      case "delete": {
+        const runMutation = async (value: any) => {
+          let docRef = getFirestoreQuery(this.props) as DocumentReference;
+          return await docRef.delete().then(val => ({
+            response: val,
+            path,
+            value,
+            type,
+            key: null
+          }));
+        };
+        return runMutation;
+      }
 
       default: {
         throw new Error(
@@ -103,7 +116,7 @@ export class FirestoreMutationWithContext extends React.Component<
 }
 
 export type FirestoreMutationProps = {
-  type: "set" | "update" | "add";
+  type: "set" | "update" | "add" | "delete";
   path: string;
   children: ({ runMutation }: { runMutation: RunMutation }) => {};
 };

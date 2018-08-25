@@ -10,36 +10,47 @@ import * as firebase from "firebase/app";
 import {
   FirestoreProvider,
   FirestoreDocument,
-  FirestoreMutation
-} from "../src/";
-import { config } from "../src/demo/test-credentials";
+  FirestoreBatchedWrite
+} from "../../src/";
+import { config } from "../../src/demo/test-credentials";
 
 test("FirestoreDocument", async () => {
   const path = "user_bookmarks/test";
   const value = { test: "data" };
   const { getByText, getByTestId } = render(
     <FirestoreProvider firebase={firebase} {...config}>
-      <FirestoreMutation type="set" path={path}>
-        {({ runMutation }) => {
+      <FirestoreBatchedWrite>
+        {({ addMutationToBatch, commit }) => {
+          // console.log()
           return (
             <div>
-              <h2> Mutate state </h2>
+              <h2>Batched write</h2>
               <button
                 data-testid="test-set"
-                onClick={async () => {
-                  const { path, value: val, type, key } = await runMutation(
-                    value
-                  );
-                  expect(path).toEqual(path);
-                  expect(val).toEqual(value);
+                onClick={() => {
+                  addMutationToBatch({
+                    path,
+                    value: { [`a-key`]: "a-value" },
+                    type: "set"
+                  });
                 }}
               >
-                Mutate Set
+                Add to batch
+              </button>
+              <button
+                data-testid="test-commit"
+                onClick={() => {
+                  commit().then(() => {
+                    console.log("Committed");
+                  });
+                }}
+              >
+                Commit batch
               </button>
             </div>
           );
         }}
-      </FirestoreMutation>
+      </FirestoreBatchedWrite>
       <FirestoreDocument path={path}>
         {value => {
           return (
@@ -59,15 +70,14 @@ test("FirestoreDocument", async () => {
   );
   await waitForElement(() => getByTestId("test-set"));
   fireEvent.click(getByTestId("test-set"));
+  fireEvent.click(getByTestId("test-commit"));
   const [testValueEl, testPathEl] = await Promise.all([
     waitForElement(() => getByTestId("test-value")),
     waitForElement(() => getByTestId("test-path")),
     waitForElement(() => getByTestId("test-is-loading"))
   ]);
-  // console.log("VALUE  ", getNodeText(testValueEl));
-  expect(getNodeText(testValueEl)).toMatchInlineSnapshot(
-    `"[{\\"test\\":\\"data\\",\\"__id\\":\\"test\\"}]"`
-  );
+  const [val] = JSON.parse(getNodeText(testValueEl));
+  expect("a-key" in val).toEqual(true);
   expect(getNodeText(testPathEl)).toEqual(path);
   cleanup();
 });

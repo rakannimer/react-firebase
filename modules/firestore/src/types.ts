@@ -23,7 +23,7 @@ export type FirestoreNodeValue = {} | number | boolean | string | null;
 
 export type FirestoreProviderState = {
   firebase: typeof firebase;
-  firestore: Firestore;
+  firestore: firebase.firestore.Firestore;
   dataTree: {
     [path: string]: {
       isLoading: boolean;

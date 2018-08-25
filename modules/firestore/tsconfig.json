@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react",
     "target": "es5",
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["es2018", "dom"],
     "outDir": "./build/",

@@ -76,7 +76,9 @@ export class FirestoreTranasactionWithContext extends React.Component<
         };
         return transactionLogic({ transaction, get, update, set, fDelete });
       };
-      await firestore.runTransaction(transactionLogicWithHelpers);
+      await firestore.runTransaction(
+        transactionLogicWithHelpers as () => Promise<TransactionLogic>
+      );
     };
     return runTransaction;
   };

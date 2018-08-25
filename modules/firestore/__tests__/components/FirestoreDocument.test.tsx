@@ -10,48 +10,36 @@ import * as firebase from "firebase/app";
 import {
   FirestoreProvider,
   FirestoreDocument,
-  FirestoreBatchedWrite
-} from "../src/";
-import { config } from "../src/demo/test-credentials";
+  FirestoreMutation
+} from "../../src/";
+import { config } from "../../src/demo/test-credentials";
 
 test("FirestoreDocument", async () => {
   const path = "user_bookmarks/test";
   const value = { test: "data" };
   const { getByText, getByTestId } = render(
     <FirestoreProvider firebase={firebase} {...config}>
-      <FirestoreBatchedWrite>
-        {({ addMutationToBatch, commit }) => {
-          // console.log()
+      <FirestoreMutation type="set" path={path}>
+        {({ runMutation }) => {
           return (
             <div>
-              <h2>Batched write</h2>
+              <h2> Mutate state </h2>
               <button
                 data-testid="test-set"
-                onClick={() => {
-                  addMutationToBatch({
-                    path,
-                    value: { [`a-key`]: "a-value" },
-                    type: "set"
-                  });
+                onClick={async () => {
+                  const { path, value: val, type, key } = await runMutation(
+                    value
+                  );
+                  expect(path).toEqual(path);
+                  expect(val).toEqual(value);
                 }}
               >
-                Add to batch
-              </button>
-              <button
-                data-testid="test-commit"
-                onClick={() => {
-                  console.log("committing to batch");
-                  commit().then(() => {
-                    console.log("Committed");
-                  });
-                }}
-              >
-                Commit batch
+                Mutate Set
               </button>
             </div>
           );
         }}
-      </FirestoreBatchedWrite>
+      </FirestoreMutation>
       <FirestoreDocument path={path}>
         {value => {
           return (
@@ -71,18 +59,15 @@ test("FirestoreDocument", async () => {
   );
   await waitForElement(() => getByTestId("test-set"));
   fireEvent.click(getByTestId("test-set"));
-  fireEvent.click(getByTestId("test-commit"));
   const [testValueEl, testPathEl] = await Promise.all([
     waitForElement(() => getByTestId("test-value")),
     waitForElement(() => getByTestId("test-path")),
     waitForElement(() => getByTestId("test-is-loading"))
   ]);
   // console.log("VALUE  ", getNodeText(testValueEl));
-  const [val] = JSON.parse(getNodeText(testValueEl));
-  expect("a-key" in val).toEqual(true);
-  // .toMatchInlineSnapshot(
-  //   `"[{\\"a\\":1,\\"test\\":\\"data\\",\\"__id\\":\\"test\\"}]"`
-  // );
+  expect(getNodeText(testValueEl)).toMatchInlineSnapshot(
+    `"[{\\"test\\":\\"data\\",\\"__id\\":\\"test\\"}]"`
+  );
   expect(getNodeText(testPathEl)).toEqual(path);
   cleanup();
 });

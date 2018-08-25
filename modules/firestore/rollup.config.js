@@ -28,7 +28,12 @@ export default {
   plugins: [
     typescript({
       typescript: require("typescript"),
-      abortOnError: false
+      abortOnError: false,
+      tsconfigOverride: {
+        compilerOptions: {
+          module: "ESNext"
+        }
+      }
     })
   ]
 };

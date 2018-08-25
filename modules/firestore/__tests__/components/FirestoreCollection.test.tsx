@@ -7,8 +7,8 @@ import {
   fireEvent
 } from "react-testing-library";
 import * as firebase from "firebase/app";
-import { FirestoreProvider, FirestoreCollection } from "../src/";
-import { config } from "../src/demo/test-credentials";
+import { FirestoreProvider, FirestoreCollection } from "../../src/";
+import { config } from "../../src/demo/test-credentials";
 
 test(
   "FirestoreCollection",
@@ -27,6 +27,24 @@ test(
                 )}
                 {value.path && <div data-testid="test-path">{value.path}</div>}
                 <div data-testid="test-is-loading">{value.isLoading}</div>
+              </div>
+            );
+          }}
+        </FirestoreCollection>
+        <FirestoreCollection
+          path={path}
+          limit={10}
+          startAt={1}
+          orderBy={[{ field: "nowOnCli", type: "asc" }]}
+        >
+          {value => {
+            return (
+              <div>
+                {value.isLoading === false && (
+                  <div>{JSON.stringify(value.value)}</div>
+                )}
+                {value.path && <div>{value.path}</div>}
+                <div>{value.isLoading}</div>
               </div>
             );
           }}

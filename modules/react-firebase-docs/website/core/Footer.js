@@ -34,28 +34,28 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('react-firebase-auth/docs.html', this.props.language)}>
+            <a href={this.docUrl('react-firebase-auth/getting-started.html')}>
               React Firebase Auth
             </a>
-            <a href={this.docUrl('react-firestore-database/docs.html', this.props.language)}>
+            <a href={this.docUrl('react-firestore-database/getting-started.html')}>
               React Firebase Firestore
             </a>
-            <a href={this.docUrl('react-firebase-realtime-database/docs.html', this.props.language)}>
+            <a href={this.docUrl('react-firebase-realtime-database/getting-started.html')}>
               React Firebase Realtime Database
             </a>
-            <a href={this.docUrl('generate-firebase-data', this.props.language)}>Firebase Data Generator</a>
-            <a href={this.docUrl('generate-firestore-data', this.props.language)}>Firestore Data Generator</a>
-            <a href={this.docUrl('generate-json-data', this.props.language)}>JSON Data Generator</a>
+            <a href={this.docUrl('generate-firebase-data')}>Firebase Data Generator</a>
+            <a href={this.docUrl('generate-firestore-data')}>Firestore Data Generator</a>
+            <a href={this.docUrl('generate-json-data')}>JSON Data Generator</a>
           </div>
           <div>
             <h5>APIs</h5>
-            <a href={this.docUrl('react-firebase-auth/api.html', this.props.language)}>
+            <a href={this.docUrl('react-firebase-auth/api.html')}>
               React Firebase Auth
             </a>
-            <a href={this.docUrl('react-firestore-database/api.html', this.props.language)}>
+            <a href={this.docUrl('react-firestore-database/api.html')}>
               React Firebase Firestore
             </a>
-            <a href={this.docUrl('react-firebase-realtime-database/api.html', this.props.language)}>
+            <a href={this.docUrl('react-firebase-realtime-database/api.html')}>
               React Firebase Realtime Database
             </a>
           </div>
