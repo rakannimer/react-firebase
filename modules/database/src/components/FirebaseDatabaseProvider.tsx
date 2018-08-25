@@ -3,7 +3,7 @@ import { renderAndAddProps } from "render-and-add-props";
 import { initializeFirebaseApp } from "../initialize-firebase-app";
 import { FirebaseDatabaseContextProvider } from "../Context";
 import { getFirebaseQuery } from "../get-firebase-query";
-import { stateReducer } from "../actions";
+import { stateReducer } from "../state-reducer";
 import {
   FirebaseQuery,
   FirebaseDatabaseProviderState,
