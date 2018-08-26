@@ -93,4 +93,4 @@ export class AddToCollection extends React.Component<
 
 const App = AddToCollection;
 
-render(<AddToCollection />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));

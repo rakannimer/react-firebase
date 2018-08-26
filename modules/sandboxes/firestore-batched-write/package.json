@@ -1,7 +1,7 @@
 {
-  "name": "firestore-mutation-example",
+  "name": "firestore-batched-write-example",
   "version": "0.1.0",
-  "description": "Firestore Document or Collection Mutation Example",
+  "description": "Firestore Batch Write Example",
   "main": "index.html",
   "repository": "https://github.com/rakannimer/react-firebase/",
   "author": "rakannimer",
