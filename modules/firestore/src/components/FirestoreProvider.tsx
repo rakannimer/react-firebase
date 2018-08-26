@@ -44,6 +44,7 @@ export class FirestoreProvider extends React.Component<
             {
               path,
               value: docSnapshot.exists ? docSnapshot.data() : null,
+              documentOrCollection,
               snapshot,
               unsub,
               isLoading: false
@@ -60,6 +61,7 @@ export class FirestoreProvider extends React.Component<
               {
                 path: `${path}`,
                 value: docSnapshot.exists ? docSnapshot.data() : null,
+                documentOrCollection,
                 snapshot: docSnapshot,
                 unsub,
                 isLoading: false
@@ -78,6 +80,7 @@ export class FirestoreProvider extends React.Component<
           state,
           {
             unsub: () => {},
+            documentOrCollection,
             value: null,
             path,
             isLoading: false

@@ -66,7 +66,7 @@ test("FirestoreDocument", async () => {
   ]);
   // console.log("VALUE  ", getNodeText(testValueEl));
   expect(getNodeText(testValueEl)).toMatchInlineSnapshot(
-    `"[{\\"test\\":\\"data\\",\\"__id\\":\\"test\\"}]"`
+    `"{\\"test\\":\\"data\\",\\"__id\\":\\"test\\"}"`
   );
   expect(getNodeText(testPathEl)).toEqual(path);
   cleanup();

@@ -76,7 +76,7 @@ test("FirestoreDocument", async () => {
     waitForElement(() => getByTestId("test-path")),
     waitForElement(() => getByTestId("test-is-loading"))
   ]);
-  const [val] = JSON.parse(getNodeText(testValueEl));
+  const val = JSON.parse(getNodeText(testValueEl));
   expect("a-key" in val).toEqual(true);
   expect(getNodeText(testPathEl)).toEqual(path);
   cleanup();

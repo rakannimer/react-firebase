@@ -21,8 +21,8 @@ export const SetDocument = () => (
     <div>
       <FirestoreDocument path={testDocPath}>
         {d =>
-          d.value && d.value[0] !== null ? (
-            <pre data-testid="set-document-result">{s(d.value[0])}</pre>
+          d.value ? (
+            <pre data-testid="set-document-result">{s(d.value)}</pre>
           ) : null
         }
       </FirestoreDocument>

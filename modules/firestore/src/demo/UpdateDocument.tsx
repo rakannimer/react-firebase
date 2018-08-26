@@ -18,8 +18,8 @@ export const UpdateDocument = () => (
     <div>
       <FirestoreDocument path={testDocPath}>
         {d =>
-          d.value && d.value[0] !== null && d.value[0].someOther ? (
-            <pre data-testid="update-document-result">{s(d.value[0])}</pre>
+          d.value && d.value.someOther ? (
+            <pre data-testid="update-document-result">{s(d.value)}</pre>
           ) : null
         }
       </FirestoreDocument>

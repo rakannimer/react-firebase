@@ -16,8 +16,8 @@ export const DeleteDocument = () => (
           </button>
           <FirestoreDocument path={testDocPath}>
             {d =>
-              d.value && d.value[0] === null ? (
-                <pre data-testid="delete-document-result">{s(d.value[0])}</pre>
+              d.value ? (
+                <pre data-testid="delete-document-result">{s(d.value)}</pre>
               ) : null
             }
           </FirestoreDocument>

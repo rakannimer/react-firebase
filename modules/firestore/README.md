@@ -69,22 +69,14 @@ const App = () => {
       <div>oh hai</div>
       <FirestoreDocument path="/user_conversations/G_K_1svqs">
         {d => {
-          return d.loadingStatus === "ready" ? (
-            <ReactJson src={d} />
-          ) : (
-            "Loading"
-          );
+          return d.isLoading ? <ReactJson src={d} /> : "Loading";
         }}
       </FirestoreDocument>
       <div>
         <h4>oh hai again</h4>
         <FirestoreCollection path="/user_conversations/" limit={1}>
           {d => {
-            return d.loadingStatus === "ready" ? (
-              <ReactJson src={d} />
-            ) : (
-              "Loading"
-            );
+            return d.isLoading ? <ReactJson src={d} /> : "Loading";
           }}
         </FirestoreCollection>
       </div>

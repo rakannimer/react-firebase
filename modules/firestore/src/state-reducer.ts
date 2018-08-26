@@ -44,26 +44,44 @@ export type AddPathToDataArgs = {
   path: string;
   value: any;
   unsub: () => void;
+  documentOrCollection: "document" | "collection";
   isLoading?: boolean;
   snapshot?: DocumentSnapshot | QuerySnapshot | CollectionReference;
 };
 export const actions = {
   addPathToData: (
     state: FirestoreProviderState,
-    { path, value: newData, unsub, isLoading, snapshot }: AddPathToDataArgs
+    {
+      path,
+      value: newData,
+      unsub,
+      isLoading,
+      documentOrCollection,
+      snapshot
+    }: AddPathToDataArgs
   ) => {
     return produce(state as any, newState => {
       const snapshotID = get(snapshot, "id", null);
       set(newState, "__id", snapshotID);
       set(newData, "__id", snapshotID);
-      const values = get(state, `dataTree.${path}.value`, []).filter(
-        (el: any) => el && el.__id !== snapshotID
-      );
-      set(newState, `dataTree.${path}`, {
-        value: [...values, newData],
-        unsub,
-        isLoading
-      });
+
+      if (documentOrCollection === "document") {
+        set(newState, `dataTree.${path}`, {
+          value: newData,
+          unsub,
+          isLoading
+        });
+      } else {
+        // collection
+        const values = get(state, `dataTree.${path}.value`, []).filter(
+          (el: any) => el && el.__id !== snapshotID
+        );
+        set(newState, `dataTree.${path}`, {
+          value: [...values, newData],
+          unsub,
+          isLoading
+        });
+      }
 
       return newState;
     });

@@ -52,41 +52,6 @@ test(
 );
 
 test(
-  "delete-document",
-  async () => {
-    await before();
-    const { getByTestId } = render(<App />);
-    fireEvent.click(getByTestId("delete-document"));
-    await waitForElement(() => getByTestId("delete-document-result"), {
-      timeout: 10000
-    });
-    expect(
-      JSON.parse(getNodeText(getByTestId("delete-document-result")))
-    ).toEqual(null);
-    await after();
-  },
-  10000
-);
-
-test(
-  "add-document",
-  async () => {
-    await before();
-    const { getByTestId } = render(<App />);
-    fireEvent.click(getByTestId("add-document"));
-    await waitForElement(() => getByTestId("add-document-result"), {
-      timeout: 10000
-    });
-    const docID = JSON.parse(
-      getNodeText(getByTestId("add-document-result"))
-    )[0];
-    expect(docID.length).toEqual(20);
-    await after(`${testCollectionPath}/${docID}`);
-  },
-  10000
-);
-
-test(
   "set-document",
   async () => {
     // Initialize

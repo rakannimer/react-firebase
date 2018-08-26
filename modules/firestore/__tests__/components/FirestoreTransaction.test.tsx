@@ -53,10 +53,9 @@ test(
             return (
               <div>
                 {value.value &&
-                  value.value[0] !== null &&
-                  value.value[0].a && (
+                  value.value.a && (
                     <div data-testid="test-value">
-                      {JSON.stringify(value.value[0].a)}
+                      {JSON.stringify(value.value.a)}
                     </div>
                   )}
                 {value.path && <div data-testid="test-path">{value.path}</div>}
