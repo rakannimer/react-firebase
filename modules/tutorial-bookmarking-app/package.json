@@ -1,7 +1,7 @@
 {
   "name": "tutorial-bookmarking-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.html",
   "license": "MIT",
   "devDependencies": {
     "@types/lodash.get": "^4.4.4",
