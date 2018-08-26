@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "parcel src/demo/index.html -d tmp-demo-dir",
     "build": "rollup -c",
-    "prepublish": "yarn build",
+    "prepublish": "yarn build && yarn test",
     "test": "yarn tsc && yarn jest --browser --coverage",
     "pub": "yarn build && yarn publish"
   },

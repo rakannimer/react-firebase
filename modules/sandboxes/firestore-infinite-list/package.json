@@ -1,7 +1,7 @@
 {
-  "name": "firestore-batched-write-example",
+  "name": "firestore-infinite-list",
   "version": "0.1.0",
-  "description": "Firestore Batch Write Example",
+  "description": "Firestore Infinite List Example",
   "main": "index.html",
   "repository": "https://github.com/rakannimer/react-firebase/",
   "author": "rakannimer",
@@ -11,7 +11,7 @@
     "start": "parcel index.html"
   },
   "dependencies": {
-    "@react-firebase/firestore": "^0.3.0",
+    "@react-firebase/firestore": "^0.2.9",
     "firebase": "^5.4.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"

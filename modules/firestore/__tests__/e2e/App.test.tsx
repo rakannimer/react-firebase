@@ -7,7 +7,6 @@ import {
 } from "react-testing-library";
 import {
   App,
-  testCollectionPath,
   testDocPath,
   testDocValue,
   testDocUpdate

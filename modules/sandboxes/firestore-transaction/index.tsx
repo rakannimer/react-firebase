@@ -4,8 +4,6 @@ import firebase from "firebase/app";
 import {
   FirestoreProvider,
   FirestoreDocument,
-  FirestoreMutation,
-  FirestoreBatchedWrite,
   FirestoreTransaction
 } from "@react-firebase/firestore";
 import { config } from "./config";
@@ -33,6 +31,7 @@ const App = () => (
                       path
                     });
                     const data = res.data();
+                    if (typeof data === "undefined") return;
                     await update(path, {
                       ...data,
                       a: isNaN(parseInt(data.a, 10)) ? 1 : data.a + 1
@@ -47,18 +46,17 @@ const App = () => (
         }}
       </FirestoreTransaction>
       <FirestoreDocument path={`${path}`}>
-        {value => {
+        {d => {
           return (
             <div>
-              {value.value &&
-                value.value[0] !== null &&
-                value.value[0].a && (
+              {d.value &&
+                d.value.a && (
                   <div data-testid="test-value">
-                    {JSON.stringify(value.value[0].a)}
+                    {JSON.stringify(d.value.a)}
                   </div>
                 )}
-              {value.path && <div data-testid="test-path">{value.path}</div>}
-              <div data-testid="test-is-loading">{value.isLoading}</div>
+              {d.path && <div data-testid="test-path">{d.path}</div>}
+              <div data-testid="test-is-loading">{d.isLoading}</div>
             </div>
           );
         }}

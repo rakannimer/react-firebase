@@ -4,7 +4,6 @@ import firebase from "firebase/app";
 import {
   FirestoreProvider,
   FirestoreDocument,
-  FirestoreMutation,
   FirestoreBatchedWrite
 } from "@react-firebase/firestore";
 import { config } from "./config";
@@ -31,7 +30,7 @@ const App = () => (
                   addMutationToBatch({
                     path,
                     value: { [`a-value-${Date.now()}`]: Date.now() },
-                    type: "update"
+                    type: "set"
                   });
                 }}
               >
@@ -55,7 +54,7 @@ const App = () => (
         {value => {
           return (
             <div>
-              {value.value && <pre>{s(value.value)}</pre>}
+              {<pre>{s(value)}</pre>}
               {value.path && <div data-testid="test-path">{value.path}</div>}
               <div data-testid="test-is-loading">{value.isLoading}</div>
             </div>

@@ -123,9 +123,9 @@
   version "1.1.1"
   resolved "https://registry.npmjs.org/@nodelib/fs.stat/-/fs.stat-1.1.1.tgz#53f349bb986ab273d601175aa1b25a655ab90ee3"
 
-"@react-firebase/firestore@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/@react-firebase/firestore/-/firestore-0.3.0.tgz#b1c9b22430aaa5d72c8bed12036f029796849ff1"
+"@react-firebase/firestore@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.npmjs.org/@react-firebase/firestore/-/firestore-0.2.9.tgz#12fd7b4972754083c3f2789f1631ce20bc62105d"
   dependencies:
     immer "^1.5.0"
     lodash.get "^4.4.2"

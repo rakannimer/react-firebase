@@ -18,15 +18,10 @@ export const RenderInfiniteList = () => (
                 <button
                   onClick={() => {
                     console.log(state.page);
-                    setState(
-                      {
-                        page: state.page + 1,
-                        pageLength: state.pageLength
-                      },
-                      () => {
-                        console.log(state.page);
-                      }
-                    );
+                    setState({
+                      page: state.page + 1,
+                      pageLength: state.pageLength
+                    });
                   }}
                 >
                   Load More
