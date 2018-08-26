@@ -1,6 +1,6 @@
 ---
 sidebar_label: Sandboxes
-title: Sandboxe for every use-case
+title: Sandbox for every use-case
 ---
 
 - [Sandboxes](#sandboxes)
@@ -24,58 +24,56 @@ title: Sandboxe for every use-case
 
 #### Anonymous/Google Auth
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-auth)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-auth)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-auth" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 ### Realtime Database
 
 #### Infinite List
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 #### Mutation
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-mutation)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-mutation)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-mutation" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 #### Transaction
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ### Firestore
 
 #### Add To Collection
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 #### Batched Write
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 #### Collection
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 
 #### Infinite List
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list)
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 
 #### Mutation
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-mutation-example)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-mutation-example)
+
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-mutation-example" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 
 
 #### Transaction
 
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-transaction)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-transaction)
+
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-transaction" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
