@@ -1,6 +1,9 @@
 {
 	"folders": [
 		{
+			"path": "modules/sandboxes"
+		},
+		{
 			"path": "modules/database"
 		},
 		{
@@ -11,9 +14,6 @@
 		},
 		{
 			"path": "modules/auth"
-		},
-		{
-			"path": "modules/react-window-firebase"
 		},
 		{
 			"path": "modules/generate-json"
