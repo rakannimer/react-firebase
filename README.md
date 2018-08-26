@@ -31,12 +31,12 @@ Check the complete docs 👉 [Here](https://react-firebase-js.com)
 
 ## Modules
 
-* Firebase Realtime Database : [`@react-firebase/database`](react-firebase-realtime-database/)
-* Firestore Database : [`@react-firebase/firestore`](react-firestore-database/)
-* Firebase Auth : [`@react-firebase/auth`](react-firebase-auth/)
-* Firebase Data Generator: [`generate-firebase-data`](generate-firebase-data/)
-* Firestore Data Generator: [`generate-firestore-data`](react-firestore-database/)
-* Linked JSON Data Generator: [`generate-data`](generate-json-data/)
+* Firebase Realtime Database : `@react-firebase/database`
+* Firestore Database : `@react-firebase/firestore`
+* Firebase Auth : `@react-firebase/auth`
+* Firebase Data Generator: `generate-firebase-data`
+* Firestore Data Generator: `generate-firestore-data`
+* Linked JSON Data Generator: `generate-data`
 
 ## Sandboxes 
 
