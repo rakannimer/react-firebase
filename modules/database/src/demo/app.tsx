@@ -16,7 +16,7 @@ export const FirebaseDatabaseList = () => (
         <FirebaseDatabaseNode
           path="user_bookmarks/"
           limitToFirst={state.limit}
-          orderByValue={"created_at"}
+          orderByValue={"created_on"}
         >
           {d => {
             return (

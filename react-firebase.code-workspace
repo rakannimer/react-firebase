@@ -1,13 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "modules/generate-firestore-data"
-		},
-		{
-			"path": "modules/generate-firebase-data"
-		},
-		{
 			"path": "modules/database"
+		},
+		{
+			"path": "modules/react-firebase-docs"
 		},
 		{
 			"path": "modules/firestore"
@@ -16,7 +13,16 @@
 			"path": "modules/auth"
 		},
 		{
+			"path": "modules/react-window-firebase"
+		},
+		{
 			"path": "modules/generate-json"
+		},
+		{
+			"path": "modules/generate-firestore-data"
+		},
+		{
+			"path": "modules/generate-firebase-data"
 		},
 		{
 			"path": "modules/tutorial-bookmarking-app"

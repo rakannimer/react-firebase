@@ -14,7 +14,7 @@ import { generateFirebaseData } from "./index";
             }
           }
         },
-        count: 5
+        count: 25
       },
       {
         databaseURL: credentials.databaseURL,
@@ -27,6 +27,7 @@ import { generateFirebaseData } from "./index";
   if (require.main === module) {
     (async () => {
       await main();
+      process.exit(0);
     })();
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@react-firebase/database",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -49,6 +49,13 @@
     "name": "rakannimer",
     "email": "rakannimer@gmail.com"
   },
+  "keywords": [
+    "react",
+    "firebase",
+    "react-firebase",
+    "firebase-realtime-database",
+    "realtime-database"
+  ],
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

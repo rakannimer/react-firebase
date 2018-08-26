@@ -1,6 +1,6 @@
 {
   "name": "@react-firebase/auth",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -64,5 +64,12 @@
       "json",
       "node"
     ]
-  }
+  },
+  "keywords": [
+    "react",
+    "firebase",
+    "auth",
+    "react-firebase-auth",
+    "firebase-auth"
+  ]
 }

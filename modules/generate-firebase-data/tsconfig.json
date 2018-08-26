@@ -2,6 +2,7 @@
   "include": ["./src/"],
   "compilerOptions": {
     "target": "esnext",
+    "skipLibCheck": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["es2018"],
