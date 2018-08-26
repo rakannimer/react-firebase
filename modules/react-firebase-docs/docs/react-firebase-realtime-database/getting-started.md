@@ -88,8 +88,6 @@ const App = () => {
 }
 ```
 
-
-
 If you need to authenticate to access your data, check out `@react-firebase/auth`
 
 ## Firebase Database Node
@@ -133,118 +131,12 @@ FirebaseDatabaseTransaction needs 2 props:
 
 ## Firebase Transaction Example
 
-```jsx
-<FirebaseDatabaseTransaction path="user_bookmarks/a/usage_count">
-  {({ runTransaction }) => {
-    return (
-      <div>
-        <button
-          onClick={() => {
-            runTransaction({
-              reducer: val => {
-                if (val === null) {
-                  return 1;
-                } else {
-                  return val + 1;
-                }
-              }
-            }).then(() => {
-              console.log("Ran transaction");
-            });
-          }}
-        >
-          Click me to run transaction
-        </button>
-      </div>
-    );
-  }}
-</FirebaseDatabaseTransaction>;
-
-```
-
+<iframe src="https://codesandbox.io/embed/lyz4ow9r09" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
  
 
 ## Complete Example
 
-```javascript
-import firebase from "firebase/app";
-import "firebase/database";
-import {
-  FirebaseDatabaseProvider,
-  FirebaseDataNode
-} from "react-firebase-database";
-import ReactJson from "react-json-view";
-
-const MyApp = () => {
-  return (
-    <FirebaseDatabaseProvider {...config} firebase={firebase}>
-      <div>hai</div>
-      <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={1}>
-        {d => {
-          return d.isLoading === true ? "Loading" : <ReactJson src={d} />;
-        }}
-      </FirebaseDatabaseNode>
-      <FirebaseDatabaseNode path="user_bookmarks/a">
-        {d => {
-          return <ReactJson src={d} />;
-        }}
-      </FirebaseDatabaseNode>
-      <FirebaseDatabaseMutation
-        type="set"
-        path="user_bookmarks/a"
-        value={{
-          new_data: "Oh hai",
-          updated_at: firebase.database.ServerValue.TIMESTAMP
-        }}
-      >
-        {({ runMutation }) => {
-          return (
-            <div>
-              <button
-                onClick={() => {
-                  runMutation({
-                    newData: `Hi ${Date.now()}`, 
-                    updated_at: firebase.database.ServerValue.TIMESTAMP 
-                  }).then(() => {
-                    console.log("Ran mutation");
-                  });
-                }}
-              >
-                Click me to run mutation
-              </button>
-            </div>
-          );
-        }}
-      </FirebaseDatabaseMutation>
-      <FirebaseDatabaseTransaction path="user_bookmarks/a/usage_count">
-        {({ runTransaction }) => {
-          return (
-            <div>
-              <button
-                onClick={() => {
-                  runTransaction({
-                    reducer: val => {
-                      if (val === null) {
-                        return 1;
-                      } else {
-                        return val + 1;
-                      }
-                    }
-                  }).then(() => {
-                    console.log("Ran transaction");
-                  });
-                }}
-              >
-                Click me to run transaction
-              </button>
-            </div>
-          );
-        }}
-      </FirebaseDatabaseTransaction>
-    </FirebaseDatabaseProvider>
-  );
-};
-```
+<iframe src="https://codesandbox.io/embed/6l8j4yk2xn" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 
 
