@@ -1,5 +1,5 @@
 {
-  "name": "firestore-example",
+  "name": "firestore-mutation-example",
   "version": "0.1.0",
   "description": "Firestore Document or Collection Mutation Example",
   "main": "index.html",
@@ -8,7 +8,7 @@
   "license": "GPL-3.0",
   "private": false,
   "scripts": {
-    "start": "parcel index.html --open"
+    "start": "parcel index.html"
   },
   "dependencies": {
     "@react-firebase/firestore": "^0.2.9",
