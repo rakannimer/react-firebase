@@ -83,10 +83,12 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
+            <Button href={docUrl('try-it-out.html', language)}>Try it out</Button>
+          </PromoSection>
+          <PromoSection>
             <Button href={docUrl('react-firebase-auth/getting-started.html', language)}>Auth</Button>
             <Button href={docUrl('react-firebase-realtime-database/getting-started.html', language)}>Realtime Database</Button>
             <Button href={docUrl('react-firestore-database/getting-started.html', language)}>Firestore</Button>
-            
           </PromoSection>
         </div>
       </SplashContainer>

@@ -5,7 +5,8 @@
     "Firestore": ["react-firestore-database/getting-started", "react-firestore-database/api"],
     "Generate JSON Data": ["generate-json-data"],
     "Generate Firebase Data": ["generate-firebase-data"],
-    "Generate Firestore Data": ["generate-firestore-data"]
+    "Generate Firestore Data": ["generate-firestore-data"],
+    "Try it out": ["try-it-out"]
   },
   "guides": {
     "First Category": ["doc1", "doc2"]
