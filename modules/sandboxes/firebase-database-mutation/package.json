@@ -1,0 +1,23 @@
+{
+  "name": "firebase-database-mutation-example",
+  "version": "0.1.0",
+  "description": "Firestore Database Mutation Example",
+  "main": "index.html",
+  "repository": "https://github.com/rakannimer/react-firebase/",
+  "author": "rakannimer",
+  "license": "GPL-3.0",
+  "private": false,
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "dependencies": {
+    "@react-firebase/database": "^0.2.13",
+    "firebase": "^5.4.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.9.7",
+    "prettier": "^1.14.2"
+  }
+}
