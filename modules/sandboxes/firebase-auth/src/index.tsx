@@ -8,7 +8,7 @@ import {
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd
 } from "@react-firebase/auth";
-import { config } from "./config";
+import { config } from "../config";
 
 export const App = () => {
   return (
