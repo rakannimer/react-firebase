@@ -8,7 +8,7 @@
   "license": "GPL-3.0",
   "private": false,
   "scripts": {
-    "start": "parcel index.html --open"
+    "start": "parcel index.html"
   },
   "dependencies": {
     "@react-firebase/firestore": "^0.2.9",
@@ -17,6 +17,7 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2"
   }
 }
