@@ -1,0 +1,22 @@
+{
+  "name": "firestore-example",
+  "version": "0.1.0",
+  "description": "Firestore Document or Collection Mutation Example",
+  "main": "index.html",
+  "repository": "https://github.com/rakannimer/react-firebase/",
+  "author": "rakannimer",
+  "license": "GPL-3.0",
+  "private": false,
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "dependencies": {
+    "@react-firebase/firestore": "^0.2.9",
+    "firebase": "^5.4.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.2"
+  }
+}
