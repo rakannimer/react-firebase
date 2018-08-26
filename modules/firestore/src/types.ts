@@ -1,5 +1,5 @@
 import { DocumentSnapshot, Firestore } from "@google-cloud/firestore";
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
 export type OrNull<T> = T | null;
 
 export type PrimitiveType = number | boolean | string;
