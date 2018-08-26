@@ -5,7 +5,7 @@ import {
   FirestoreCollection,
   FirestoreProvider
 } from "@react-firebase/firestore";
-import { config } from "./config";
+import { config } from "../config";
 const s = (a: any) => JSON.stringify(a, null, 2);
 
 export type InfiniteListState = {

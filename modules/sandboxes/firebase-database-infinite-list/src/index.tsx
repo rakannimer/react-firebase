@@ -3,10 +3,9 @@ import { render } from "react-dom";
 import firebase from "firebase/app";
 import {
   FirebaseDatabaseProvider,
-  FirebaseDatabaseNode,
-  FirebaseDatabaseMutation
+  FirebaseDatabaseNode
 } from "@react-firebase/database";
-import { config } from "./config";
+import { config } from "../config";
 
 const styles = {
   fontFamily: "sans-serif"

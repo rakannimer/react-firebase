@@ -6,7 +6,7 @@ import {
   FirebaseDatabaseNode,
   FirebaseDatabaseTransaction
 } from "@react-firebase/database";
-import { config } from "./config";
+import { config } from "../config";
 
 const styles = {
   fontFamily: "sans-serif"

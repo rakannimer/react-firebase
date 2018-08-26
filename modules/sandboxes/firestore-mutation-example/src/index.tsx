@@ -6,7 +6,7 @@ import {
   FirestoreDocument,
   FirestoreMutation
 } from "@react-firebase/firestore";
-import { config } from "./config";
+import { config } from "../config";
 
 const styles = {
   fontFamily: "sans-serif"
