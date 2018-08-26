@@ -37,7 +37,6 @@ yarn add @react-firebase/database # or npm i @react-firebase/database
 ```
 
 
-
 Change `PROJECT_NAME` to your project name and grab your firebase config here : 
 
 `https://console.firebase.google.com/project/PROJECT_NAME/settings/general/`
@@ -99,24 +98,7 @@ Check [API](api.md) for a list of supported props.
 
 ## Read data from Firebase example
 
-```jsx
-<React.Fragment>
-  <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={2}>
-    {d => {
-      return <pre>{JSON.stringify(d, null, 2)}</pre>;
-    }}
-  </FirebaseDatabaseNode>
-  <FirebaseDatabaseNode path="maximes/-L8m-aeCHQO7qtMVvUfMa">
-    {d => {
-      return d.isLoading === true ? (
-        "Loading"
-      ) : (
-        <pre>{JSON.stringify(d, null, 2)}</pre>
-      );
-    }}
-  </FirebaseDatabaseNode>
-</React.Fragment>
-```
+<iframe src="https://codesandbox.io/embed/3vkm9l312p" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ## Firebase Database Mutation
 
@@ -135,31 +117,7 @@ FirebaseDatabaseMutation needs 3 props :
 
 ## Write data to Firebase example
 
-```jsx
-<FirebaseDatabaseMutation
-  type="update"
-  path="user_bookmarks/a"
->
-  {({ runMutation }) => {
-    return (
-      <div>
-        <button
-          onClick={() => {
-            runMutation({
-              new_data: `Oh hai again ${Date.now()}`,
-              updated_at: firebase.database.ServerValue.TIMESTAMP
-            }).then(() => {
-              console.log("Ran mutation");
-            });
-          }}
-        >
-          Click me to run mutation
-        </button>
-      </div>
-    );
-  }}
-</FirebaseDatabaseMutation>
-```
+<iframe src="https://codesandbox.io/embed/5v2w2n5r9p" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ## Firebase Database Transaction
 
