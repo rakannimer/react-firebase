@@ -1,6 +1,5 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-import firebase from "react-native-firebase";
 import get from "lodash.get";
 import {
   AuthEmission,
@@ -13,7 +12,7 @@ const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
   user: null,
-  firebase: firebase
+  firebase: {}
 } as AuthEmission;
 
 const {
@@ -66,7 +65,7 @@ export class FirebaseAuthProvider extends React.PureComponent<
     isSignedIn: false,
     providerId: null,
     user: null,
-    firebase: firebase
+    firebase: {}
   };
   componentDidMount() {
     this.listenToAuth();

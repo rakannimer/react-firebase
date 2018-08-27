@@ -1,14 +1,18 @@
-import firebase from "react-native-firebase";
-
 export interface InitializeAppArgs {
-  firebase: typeof firebase;
+  firebase: any;
+  authDomain?: string;
+  apiKey?: string;
+  databaseURL?: string;
+  projectId?: string;
+  messagingSenderId?: string;
+  storageBucket?: string;
 }
 export type FirebaseAuthProviderProps = InitializeAppArgs;
 export type AuthEmission = {
   isSignedIn: boolean;
   providerId: ("none" | "google.com" | string) | null;
   user: any;
-  firebase: typeof firebase;
+  firebase: any;
 };
 export type FirebaseAuthProviderState = AuthEmission;
 
