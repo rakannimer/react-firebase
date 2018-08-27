@@ -429,16 +429,16 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@react-firebase/auth@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/@react-firebase/auth/-/auth-0.2.0.tgz#f8c1ae8505f6e609e397ebf1fe6737b8724b2b90"
+"@react-firebase/auth@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.npmjs.org/@react-firebase/auth/-/auth-0.2.4.tgz#80187f71a5aa43d37051d0fe675e275f036ef903"
   dependencies:
     lodash.get "^4.4.2"
     render-and-add-props "^0.5.0"
 
-"@react-firebase/database@^0.2.13":
-  version "0.2.13"
-  resolved "https://registry.npmjs.org/@react-firebase/database/-/database-0.2.13.tgz#7d869cedc983f38beaf201157f55dcbdb4f33839"
+"@react-firebase/database@^0.2.14":
+  version "0.2.14"
+  resolved "https://registry.npmjs.org/@react-firebase/database/-/database-0.2.14.tgz#1ab2078648aa45d9fe323a358860cc804451919f"
   dependencies:
     immer "^1.5.0"
     lodash.set "^4.3.2"

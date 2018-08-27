@@ -12,6 +12,10 @@ import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer
 } from "@react-firebase/auth";
+import {
+  FirebaseDatabaseProvider,
+  FirebaseDatabaseNode
+} from "@react-firebase/database";
 export default class App extends React.Component {
   constructor() {
     super();
@@ -28,6 +32,19 @@ export default class App extends React.Component {
     return (
       <FirebaseAuthProvider firebase={firebase}>
         <ScrollView style={{ marginTop: 50 }}>
+          <FirebaseDatabaseProvider firebase={firebase}>
+            <FirebaseDatabaseNode path={"user_bookmarks"} limitToFirst={1}>
+              {value => {
+                return (
+                  <View>
+                    <Text>Value {JSON.stringify(value.value, null, 2)}</Text>
+                    <Text>Path {JSON.stringify(value.path)}</Text>
+                    <Text>isLoading {JSON.stringify(value.isLoading)}</Text>
+                  </View>
+                );
+              }}
+            </FirebaseDatabaseNode>
+          </FirebaseDatabaseProvider>
           <View style={styles.container}>
             <TouchableHighlight
               onPress={async () => {

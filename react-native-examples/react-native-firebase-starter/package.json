@@ -22,8 +22,8 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@react-firebase/auth": "^0.2.0",
-    "@react-firebase/database": "^0.2.13",
+    "@react-firebase/auth": "^0.2.4",
+    "@react-firebase/database": "^0.2.14",
     "@react-firebase/firestore": "^0.3.0",
     "fbjs": "^0.8.17",
     "react": "^16.3.2",
