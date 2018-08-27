@@ -7,6 +7,7 @@ import {
   fireEvent
 } from "react-testing-library";
 import * as firebase from "firebase/app";
+import "firebase/firestore";
 import {
   FirestoreProvider,
   FirestoreDocument,
