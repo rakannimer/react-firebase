@@ -28,6 +28,9 @@
 			"path": "modules/tutorial-bookmarking-app"
 		},
 		{
+			"path": "react-native-examples/ReactNativeAuthDatabaseExample/"
+		},
+		{
 			"path": "./"
 		}
 	],
