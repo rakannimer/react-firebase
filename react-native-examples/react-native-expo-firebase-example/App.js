@@ -8,13 +8,18 @@ import {
 } from "react-native";
 
 import firebase from "firebase/app";
-import 'firebase/auth'
+import "firebase/auth";
+import "firebase/database";
 // const firebase = {};
 import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer
 } from "@react-firebase/auth";
-import {config} from './test-credentials'
+import {
+  FirebaseDatabaseProvider,
+  FirebaseDatabaseNode
+} from "@react-firebase/database";
+import { config } from "./test-credentials";
 export default class App extends React.Component {
   constructor() {
     super();
@@ -31,12 +36,23 @@ export default class App extends React.Component {
     return (
       <FirebaseAuthProvider firebase={firebase} {...config}>
         <ScrollView style={{ marginTop: 50 }}>
+          <FirebaseDatabaseProvider firebase={firebase} {...config}>
+            <FirebaseDatabaseNode path={"user_bookmarks"} limitToFirst={1}>
+              {value => {
+                return (
+                  <View>
+                    <Text>Value {JSON.stringify(value.value, null, 2)}</Text>
+                    <Text>Path {JSON.stringify(value.path)}</Text>
+                    <Text>isLoading {JSON.stringify(value.isLoading)}</Text>
+                  </View>
+                );
+              }}
+            </FirebaseDatabaseNode>
+          </FirebaseDatabaseProvider>
           <View style={styles.container}>
             <TouchableHighlight
               onPress={async () => {
-                const data = await firebase
-                  .auth()
-                  .signInAnonymously();
+                const data = await firebase.auth().signInAnonymously();
                 console.warn(data);
               }}
             >

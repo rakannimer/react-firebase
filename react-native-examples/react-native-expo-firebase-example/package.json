@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "jest-expo": "~27.0.0",
+    "prettier": "^1.14.2",
     "react-native-scripts": "1.14.0",
     "react-test-renderer": "16.3.1"
   },
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@react-firebase/auth": "^0.2.2",
+    "@react-firebase/database": "^0.2.13",
     "expo": "^27.0.1",
     "firebase": "^5.4.1",
     "react": "16.3.1",
