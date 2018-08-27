@@ -1,10 +1,8 @@
-import firebase from "firebase/app";
-
 export interface InitializeAppArgs {
   authDomain: string;
   apiKey: string;
   databaseURL: string;
-  firebase: typeof firebase;
+  firebase: any;
   projectId: string;
   messagingSenderId?: string;
   storageBucket?: string;
@@ -14,7 +12,7 @@ export type AuthEmission = {
   isSignedIn: boolean;
   providerId: ("none" | "google.com" | string) | null;
   user: any;
-  firebase: typeof firebase;
+  firebase: any;
 };
 export type FirebaseAuthProviderState = AuthEmission;
 

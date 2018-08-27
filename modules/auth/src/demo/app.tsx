@@ -1,5 +1,4 @@
 import * as React from "react";
-import { render } from "react-dom";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
@@ -9,7 +8,7 @@ import {
   FirebaseAuthConsumer,
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd
-} from "../web-entrypoint";
+} from "../";
 
 const config = {
   apiKey: testConfig.apiKey,

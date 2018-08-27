@@ -1,7 +1,5 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-import firebase from "firebase/app";
-import "firebase/auth";
 import get from "lodash.get";
 import { initializeFirebaseApp } from "./initialize-firebase-app";
 import {
@@ -15,7 +13,7 @@ const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
   user: null,
-  firebase: firebase
+  firebase: {}
 } as AuthEmission;
 
 const {
@@ -33,7 +31,7 @@ export class FirebaseAuthProvider extends React.PureComponent<
     this.stopListeningToAuth = firebase
       .app()
       .auth()
-      .onAuthStateChanged(user => {
+      .onAuthStateChanged((user: any) => {
         let authEmission = null as null | AuthEmission;
         if (user === null) {
           authEmission = {
@@ -68,7 +66,7 @@ export class FirebaseAuthProvider extends React.PureComponent<
     isSignedIn: false,
     providerId: null,
     user: null,
-    firebase: firebase
+    firebase: {}
   };
   constructor(props: FirebaseAuthProviderProps) {
     super(props);
