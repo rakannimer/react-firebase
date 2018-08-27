@@ -70,7 +70,9 @@ export class FirebaseAuthProvider extends React.PureComponent<
   };
   constructor(props: FirebaseAuthProviderProps) {
     super(props);
-    initializeFirebaseApp(Object.assign({}, props));
+    if (props.apiKey) {
+      initializeFirebaseApp(Object.assign({}, props));
+    }
   }
   componentDidMount() {
     this.listenToAuth();
