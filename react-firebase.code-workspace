@@ -28,7 +28,7 @@
 			"path": "modules/tutorial-bookmarking-app"
 		},
 		{
-			"path": "react-native-examples/ReactNativeAuthDatabaseExample/"
+			"path": "react-native-examples/react-native-firebase-starter/"
 		},
 		{
 			"path": "./"

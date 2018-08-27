@@ -1,0 +1,33 @@
+{
+  "name": "reactfirebaseexample",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "babel-jest": "^23.4.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "fs-extra": "^6.0.1",
+    "jest": "^23.4.0",
+    "prettier": "^1.14.2",
+    "react-test-renderer": "^16.4.1",
+    "replace-in-file": "^3.4.0"
+  },
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "rename": "node ./bin/rename.js",
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "@react-firebase/auth": "^0.2.0",
+    "@react-firebase/database": "^0.2.13",
+    "@react-firebase/firestore": "^0.3.0",
+    "fbjs": "^0.8.17",
+    "react": "^16.3.2",
+    "react-native": "^0.55.3",
+    "react-native-firebase": "^4.3.6"
+  }
+}
