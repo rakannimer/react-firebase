@@ -1,5 +1,4 @@
-import { DocumentSnapshot, Firestore } from "@google-cloud/firestore";
-import * as firebase from "firebase/app";
+import { DocumentSnapshot } from "@google-cloud/firestore";
 export type OrNull<T> = T | null;
 
 export type PrimitiveType = number | boolean | string;
@@ -22,7 +21,7 @@ export type FirestoreQuery = {
 export type FirestoreNodeValue = {} | number | boolean | string | null;
 
 export type FirestoreProviderState = {
-  firebase: typeof firebase;
+  firebase: any;
   firestore: firebase.firestore.Firestore;
   dataTree: {
     [path: string]: {

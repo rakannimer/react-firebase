@@ -103,7 +103,9 @@ export class FirestoreProvider extends React.Component<
   }
   constructor(props: FirestoreProviderProps) {
     super(props);
-    initializeFirebaseApp(props);
+    if (props.apiKey) {
+      initializeFirebaseApp(props);
+    }
     const firestore = props.firebase.firestore();
     const settings = { timestampsInSnapshots: true };
     firestore.settings(settings);
