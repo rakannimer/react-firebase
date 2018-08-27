@@ -34,7 +34,7 @@ export default [
         format: "esm"
       },
       {
-        file: "dist/native.cjs.js",
+        file: "dist/native.js",
         format: "cjs"
       }
     ],

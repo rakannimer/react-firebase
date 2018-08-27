@@ -1,10 +1,9 @@
 {
   "name": "@react-firebase/auth",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
-  "react-native": "dist/native.cjs.js",
   "umd": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "license": "GPL-3.0-only",
