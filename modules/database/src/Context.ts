@@ -1,13 +1,11 @@
 import * as React from "react";
-import * as firebase from "firebase/app";
-import "firebase/database";
 import { FirebaseDatabaseProviderState, FirebaseQuery } from "./types";
 
 export const firebaseDatabaseDefaultContext = {
-  listenTo: ({  }: FirebaseQuery) => {},
+  listenTo: ({ path }: FirebaseQuery) => {},
   stopListeningTo: (path: string) => {},
   dataTree: {},
-  firebase
+  firebase: {}
 } as FirebaseDatabaseProviderState;
 
 export const {

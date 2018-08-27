@@ -79,7 +79,9 @@ export class FirebaseDatabaseProvider extends React.Component<
       listenTo: this.listenTo.bind(this),
       stopListeningTo: this.stopListeningTo.bind(this)
     };
-    initializeFirebaseApp(this.props);
+    if (this.props.apiKey) {
+      initializeFirebaseApp(this.props);
+    }
   }
   componentWillUnmount() {
     const { dataTree } = this.state;

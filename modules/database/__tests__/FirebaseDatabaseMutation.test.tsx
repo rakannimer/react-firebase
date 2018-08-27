@@ -6,6 +6,7 @@ import {
   getNodeText
 } from "react-testing-library";
 import * as firebase from "firebase/app";
+import "firebase/database";
 import { State } from "react-powerplug";
 import {
   FirebaseDatabaseProvider,

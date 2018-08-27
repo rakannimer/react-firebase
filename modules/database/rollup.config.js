@@ -6,7 +6,7 @@ export default {
     {
       file: "dist/index.umd.js",
       format: "umd",
-      name: "ReactGoogleCharts"
+      name: "ReactFirebaseDatabase"
     },
     {
       file: "dist/index.esm.js",
@@ -17,7 +17,7 @@ export default {
       format: "cjs"
     }
   ],
-  external: ["react-load-script", "react"],
+  external: ["render-and-add-props", "react"],
   plugins: [
     typescript({
       typescript: require("typescript"),

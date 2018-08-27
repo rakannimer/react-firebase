@@ -1,5 +1,3 @@
-import * as firebase from "firebase/app";
-
 export type GetChildrenIds = () => any;
 export interface FirebaseQuery {
   firebase?: any;
@@ -27,7 +25,7 @@ export interface InitializeAppArgs {
 export type FirebaseDatabaseNodeValue = {} | number | boolean | string | null;
 
 export type FirebaseDatabaseProviderState = {
-  firebase: typeof firebase;
+  firebase: any;
   dataTree: {
     [path: string]: {
       isLoading: boolean;

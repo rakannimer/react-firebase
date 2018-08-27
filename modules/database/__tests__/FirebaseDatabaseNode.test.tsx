@@ -1,6 +1,7 @@
 import * as React from "react";
 import { render } from "react-testing-library";
 import * as firebase from "firebase/app";
+import "firebase/database";
 import { FirebaseDatabaseProvider, FirebaseDatabaseNode } from "../src/";
 import { config } from "../src/demo/test-credentials";
 
