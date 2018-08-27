@@ -9,7 +9,7 @@ import {
   FirebaseAuthConsumer,
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd
-} from "..";
+} from "../web-entrypoint";
 
 const config = {
   apiKey: testConfig.apiKey,

@@ -4,7 +4,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import get from "lodash.get";
 import { initializeFirebaseApp } from "./initialize-firebase-app";
-const e = React.createElement;
+import {
+  AuthEmission,
+  FirebaseAuthProviderProps,
+  FirebaseAuthProviderState,
+  RenderableChildren
+} from "./types";
+
 const firebaseAuthProviderDefaultProps = {
   isSignedIn: false,
   providerId: null,
@@ -16,28 +22,6 @@ const {
   Provider: FirebaseAuthContextProvider,
   Consumer: FirebaseAuthContextConsumer
 } = React.createContext(firebaseAuthProviderDefaultProps);
-
-export interface InitializeAppArgs {
-  authDomain: string;
-  apiKey: string;
-  databaseURL: string;
-  firebase: typeof firebase;
-  projectId: string;
-  messagingSenderId?: string;
-  storageBucket?: string;
-}
-export type FirebaseAuthProviderProps = InitializeAppArgs;
-export type AuthEmission = {
-  isSignedIn: boolean;
-  providerId: ("none" | "google.com" | string) | null;
-  user: any;
-  firebase: typeof firebase;
-};
-export type FirebaseAuthProviderState = AuthEmission;
-
-export type ChildFunction = ((authState: AuthEmission) => any)
-
-export type RenderableChildren =ChildFunction
 
 export class FirebaseAuthProvider extends React.PureComponent<
   FirebaseAuthProviderProps,
@@ -76,7 +60,7 @@ export class FirebaseAuthProvider extends React.PureComponent<
         if (authEmission !== null) {
           this.setState(() => authEmission);
         } else {
-          console.warn("Something unexpected happened with ", user);
+          console.error("Something unexpected happened with ", user);
         }
       });
   };
@@ -99,10 +83,10 @@ export class FirebaseAuthProvider extends React.PureComponent<
   }
   render() {
     const { children } = this.props;
-    return e(
-      FirebaseAuthContextProvider,
-      { value: this.state },
-      renderAndAddProps(children, {})
+    return (
+      <FirebaseAuthContextProvider value={this.state}>
+        {renderAndAddProps(children, {})}
+      </FirebaseAuthContextProvider>
     );
   }
 }
@@ -112,20 +96,23 @@ export class FirebaseAuthProvider extends React.PureComponent<
 export const FirebaseAuthConsumer: React.StatelessComponent<{
   children: RenderableChildren;
 }> = ({ children }) => {
-  return e(FirebaseAuthContextConsumer, null, (authState: AuthEmission) =>
-    renderAndAddProps(children, authState)
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) => renderAndAddProps(children, authState)}
+    </FirebaseAuthContextConsumer>
   );
 };
 export const IfFirebaseAuthed: React.StatelessComponent<{
   children: RenderableChildren;
 }> = ({ children }) => {
-  return e(
-    FirebaseAuthContextConsumer,
-    null,
-    (authState: AuthEmission) =>
-      authState.isSignedIn === true
-        ? renderAndAddProps(children, authState)
-        : null
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) =>
+        authState.isSignedIn === true
+          ? renderAndAddProps(children, authState)
+          : null
+      }
+    </FirebaseAuthContextConsumer>
   );
 };
 
@@ -135,15 +122,16 @@ export const IfFirebaseAuthedAnd: React.StatelessComponent<{
   filter: FilterAuthFunction;
   children: RenderableChildren;
 }> = ({ children, filter }) => {
-  return e(
-    FirebaseAuthContextConsumer,
-    null,
-    (authState: AuthEmission) =>
-      authState.isSignedIn === true
-        ? filter(authState)
-          ? renderAndAddProps(children, authState)
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) =>
+        authState.isSignedIn === true
+          ? filter(authState)
+            ? renderAndAddProps(children, authState)
+            : null
           : null
-        : null
+      }
+    </FirebaseAuthContextConsumer>
   );
 };
 
@@ -151,26 +139,28 @@ export const IfFirebaseAuthedOr: React.StatelessComponent<{
   children: RenderableChildren;
   filter: FilterAuthFunction;
 }> = ({ children, filter }) => {
-  return e(
-    FirebaseAuthContextConsumer,
-    null,
-    (authState: AuthEmission) =>
-      authState.isSignedIn === true || filter(authState)
-        ? renderAndAddProps(children, authState)
-        : null
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) =>
+        authState.isSignedIn === true || filter(authState)
+          ? renderAndAddProps(children, authState)
+          : null
+      }
+    </FirebaseAuthContextConsumer>
   );
 };
 
 export const IfFirebaseUnAuthed: React.StatelessComponent<{
   children: RenderableChildren;
 }> = ({ children }) => {
-  return e(
-    FirebaseAuthContextConsumer,
-    null,
-    (authState: AuthEmission) =>
-      authState.isSignedIn === false
-        ? renderAndAddProps(children, authState)
-        : null
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) =>
+        authState.isSignedIn === false
+          ? renderAndAddProps(children, authState)
+          : null
+      }
+    </FirebaseAuthContextConsumer>
   );
 };
 

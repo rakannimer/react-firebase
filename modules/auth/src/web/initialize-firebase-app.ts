@@ -1,4 +1,4 @@
-import { InitializeAppArgs } from "./index";
+import { InitializeAppArgs } from "./types";
 export const initializeFirebaseApp = ({
   firebase,
   authDomain,
