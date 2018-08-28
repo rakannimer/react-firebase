@@ -4,7 +4,6 @@ Building apps with React & Firebase should be easy. The goal of this project is 
 
 Check the complete docs 👉 [Here](https://react-firebase-js.com)
 
-
 - [React Firebase](#react-firebase)
   - [Modules](#modules)
   - [Sandboxes](#sandboxes)
@@ -31,12 +30,12 @@ Check the complete docs 👉 [Here](https://react-firebase-js.com)
 
 ## Modules
 
-* Firebase Realtime Database : `@react-firebase/database`
-* Firestore Database : `@react-firebase/firestore`
-* Firebase Auth : `@react-firebase/auth`
-* Firebase Data Generator: `generate-firebase-data`
-* Firestore Data Generator: `generate-firestore-data`
-* Linked JSON Data Generator: `generate-data`
+* Firebase Realtime Database : [`@react-firebase/database`](https://react-firebase-js.com/docs/react-firebase-realtime-database/getting-started)
+* Firestore Database : [`@react-firebase/firestore`](https://react-firebase-js.com/docs/react-firestore-database/getting-started)
+* Firebase Auth : [`@react-firebase/auth`](https://react-firebase-js.com/docs/react-firebase-auth/getting-started)
+* Firebase Data Generator: [`generate-firebase-data`](https://react-firebase-js.com/docs/generate-firebase-data)
+* Firestore Data Generator: [`generate-firestore-data`](https://react-firebase-js.com/docs/generate-firestore-data)
+* Linked JSON Data Generator: [`generate-data`](https://react-firebase-js.com/docs/generate-json-data)
 
 ## Sandboxes 
 

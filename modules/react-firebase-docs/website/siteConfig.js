@@ -22,7 +22,7 @@
 
 const siteConfig = {
   title: 'React Firebase', // Title for your website.
-  tagline: '🔥 React Firebase 🔥',
+  tagline: 'React and Firebase development made easy.',
   url: 'https://react-firebase-js.com', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:

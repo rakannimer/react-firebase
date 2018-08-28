@@ -1,7 +1,7 @@
 {
-  "name": "firebase-database-infinite-list-example",
+  "name": "firebase-auth-example",
   "version": "0.1.0",
-  "description": "Firebase Database Infinite List Example",
+  "description": "Firebase Auth Example",
   "main": "index.html",
   "repository": "https://github.com/rakannimer/react-firebase/",
   "author": "rakannimer",
