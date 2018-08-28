@@ -1,6 +1,6 @@
 {
   "name": "generate-firestore-data",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -34,5 +34,14 @@
   "author": {
     "name": "rakannimer",
     "email": "rakannimer@gmail.com"
-  }
+  },
+  "keywords": [
+    "firebase",
+    "firestore",
+    "mock",
+    "data",
+    "generate",
+    "json",
+    "schema"
+  ]
 }

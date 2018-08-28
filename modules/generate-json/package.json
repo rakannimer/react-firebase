@@ -1,6 +1,6 @@
 {
   "name": "generate-json",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -52,5 +52,13 @@
       "json",
       "node"
     ]
-  }
+  },
+  "keywords": [
+    "fake-data",
+    "mock",
+    "data",
+    "generate",
+    "json",
+    "schema"
+  ]
 }
