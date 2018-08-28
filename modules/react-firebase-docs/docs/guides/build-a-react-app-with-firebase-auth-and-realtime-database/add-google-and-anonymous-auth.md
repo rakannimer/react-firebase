@@ -1,4 +1,7 @@
-# Adding Google and Anonymous Auth
+---
+title: Add Google and Anonymous Auth
+sidebar_label: Add Google and Anonymous Auth
+---
 
 ## Before you begin : 
 
@@ -9,8 +12,6 @@ That's it. Now we can add the buttons to perform the sign in action.
 
 ## Adding Anonymous Auth
 
-{% tabs %}
-{% tab title="Code" %}
 ```jsx
 import * as React from "react";
 import { render } from "react-dom";
@@ -19,6 +20,8 @@ import {
   FirebaseAuthConsumer
 } from "@react-firebase/auth";
 import firebase from "firebase/app";
+import "firebase/auth";
+
 import { config } from "./test-credentials";
 
 const IDontCareAboutFirebaseAuth = () => {
@@ -79,90 +82,58 @@ const App = () => {
 render(<App />, document.getElementById("root"));
 
 ```
-{% endtab %}
 
-{% tab title="Output" %}
+## Output
 
+![Sign in / Sign out ](assets/react-firebase-tutorial-fig.gif)
 
-![Sign in / Sign out ](../../.gitbook/assets/react-firebase-tutorial-fig.gif)
-{% endtab %}
-{% endtabs %}
 
 ## Cleaning up before we continue
 
 Our component is becoming too big, let's split it up into smaller focused components to make our code more legible and more error-proof
 
-First, let's replace FirebaseAuthConsumer with `IfFirebaseAuthed` and `IfFirebaseUnAuthed`
+Let's replace FirebaseAuthConsumer with `IfFirebaseAuthed` and `IfFirebaseUnAuthed`
 
-{% code-tabs %}
-{% code-tabs-item title="src/index.tsx" %}
 ```jsx
-import * as React from "react";
-import { render } from "react-dom";
-import {
-  FirebaseAuthProvider,
-  IfFirebaseAuthed,
-  IfFirebaseUnAuthed
-} from "@react-firebase/auth";
-import firebase from "firebase/app";
-import { config } from "./test-credentials";
+<div>
+  <IfFirebaseAuthed>
+    {() => (
+      <div>
+        <h2>You're signed in 🎉 </h2>
+        <button
+          onClick={() => {
+            firebase
+              .app()
+              .auth()
+              .signOut();
+          }}
+        >
+          Sign out
+        </button>
+      </div>
+    )}
+  </IfFirebaseAuthed>
+  <IfFirebaseUnAuthed>
+    {({ firebase }) => (
+      <div>
+        <h2>You're not signed in </h2>
+        <button
+          onClick={() => {
+            firebase
+              .app()
+              .auth()
+              .signInAnonymously();
+          }}
+        >
+          Sign in anonymously
+        </button>
+      </div>
+    )}
+  </IfFirebaseUnAuthed>
+</div>
 
-const IDontCareAboutFirebaseAuth = () => {
-  return <div>This part won't react to firebase auth changes</div>;
-};
-
-const App = () => {
-  return (
-    <div>
-      <IDontCareAboutFirebaseAuth />
-      <FirebaseAuthProvider {...config} firebase={firebase}>
-        <div>
-          Hello <div>From Auth Provider Child 1</div>
-          <IfFirebaseAuthed>
-            {() => (
-              <div>
-                <h2>You're signed in 🎉 </h2>
-                <button
-                  onClick={() => {
-                    firebase
-                      .app()
-                      .auth()
-                      .signOut();
-                  }}
-                >
-                  Sign out
-                </button>
-              </div>
-            )}
-          </IfFirebaseAuthed>
-          <IfFirebaseUnAuthed>
-            {({ firebase }) => (
-              <div>
-                <h2>You're not signed in </h2>
-                <button
-                  onClick={() => {
-                    firebase
-                      .app()
-                      .auth()
-                      .signInAnonymously();
-                  }}
-                >
-                  Sign in anonymously
-                </button>
-              </div>
-            )}
-          </IfFirebaseUnAuthed>
-        </div>
-        <div>Another div</div>
-      </FirebaseAuthProvider>
-    </div>
-  );
-};
-
-render(<App />, document.getElementById("root"));
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+
 
 You might not want to do that, it's just a helper component and doesn't add any core functionality.
 
@@ -175,45 +146,9 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 firebase.auth().signInWithPopup(googleAuthProvider);
 ```
 
-Full code below
+To hook it up to our UI we call it on button click.
 
-{% tabs %}
-{% tab title="Code" %}
-```jsx
-import * as React from "react";
-import { render } from "react-dom";
-import {
-  FirebaseAuthProvider,
-  IfFirebaseAuthed,
-  IfFirebaseUnAuthed
-} from "@react-firebase/auth";
-import firebase from "firebase/app";
-import { config } from "./test-credentials";
-
-const IDontCareAboutFirebaseAuth = () => {
-  return <div>This part won't react to firebase auth changes</div>;
-};
-
-const IfAuthed = () => {
-  const signOut = () =>
-    firebase
-      .app()
-      .auth()
-      .signOut();
-  return (
-    <div>
-      <h2>You're signed in 🎉 </h2>
-      <button
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Sign out
-      </button>
-    </div>
-  );
-};
-
+```javascript
 const IfUnAuthed = () => {
   return (
     <div>
@@ -239,31 +174,11 @@ const IfUnAuthed = () => {
     </div>
   );
 };
-const App = () => {
-  return (
-    <div>
-      <IDontCareAboutFirebaseAuth />
-      <FirebaseAuthProvider {...config} firebase={firebase}>
-        <IfFirebaseAuthed>
-          <IfAuthed />
-        </IfFirebaseAuthed>
-        <IfFirebaseUnAuthed>
-          <IfUnAuthed />
-        </IfFirebaseUnAuthed>
-      </FirebaseAuthProvider>
-    </div>
-  );
-};
-
-render(<App />, document.getElementById("root"));
-
 ```
-{% endtab %}
 
-{% tab title="Output" %}
-![Login with google](../../.gitbook/assets/react-firebase-tutorial-auth-2-gif.gif)
-{% endtab %}
-{% endtabs %}
+## Output
+
+![Login with google](assets/react-firebase-tutorial-auth-2-gif.gif)
 
 ## Adding a loading indicator
 
@@ -351,10 +266,9 @@ const App = () => {
 };
 
 ```
-{% endtab %}
 
 {% tab title="Output" %}
-![Adding a loading indicator while authenticating](../../.gitbook/assets/react-firebase-tutorial-auth-3-loading-gif.gif)
+![Adding a loading indicator while authenticating](assets/react-firebase-tutorial-auth-3-loading-gif.gif)
 {% endtab %}
 {% endtabs %}
 

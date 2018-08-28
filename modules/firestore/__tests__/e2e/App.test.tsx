@@ -5,6 +5,7 @@ import {
   fireEvent,
   waitForElement
 } from "react-testing-library";
+import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {
   App,

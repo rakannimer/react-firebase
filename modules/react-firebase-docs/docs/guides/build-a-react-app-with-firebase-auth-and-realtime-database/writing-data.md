@@ -1,11 +1,13 @@
-
-# Writing Data
+---
+title: Writing Data
+sidebar_label: Writing Data
+---
 
 Let's start by adding a way to the user to add data to the their firebase database. 
 
 To do this we will be using the FirebaseDatabaseMutation component from @react-firebase/database.
 
-![User Input UI](../../.gitbook/assets/screen-shot-2018-08-23-at-3.48.18-pm.png)
+![User Input UI](assets/user-input-ui.png)
 
 When a user clicks on the + button we want to push data to user\_bookmarks/
 
@@ -38,8 +40,8 @@ The data should have the following shape :
           set(this.newLinkMetaTextFieldRef, "current.value", "");
       }}
     >
-      <input label="New Link URL" ref={this.newLinkTextFieldRef} />{" "}
-      <input label="New Link Metadata" ref={this.newLinkMetaTextFieldRef} />{" "}
+      <input label="New Link URL" ref={this.newLinkTextFieldRef} />
+      <input label="New Link Metadata" ref={this.newLinkMetaTextFieldRef} />
       <button type="submit"> + </button>
     </form>
   )}

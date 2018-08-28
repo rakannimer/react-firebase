@@ -1,4 +1,7 @@
-# Listen to auth
+---
+title: Listen to auth
+sidebar_label: Listen to auth
+---
 
 Install `@react-firebase/auth`
 
@@ -6,10 +9,9 @@ Install `@react-firebase/auth`
 yarn add @react-firebase/auth # or npm i @react-firebase/auth
 ```
 
-Wrap your app with a FirebaseAuthProvider and a FirebaseAuthConsumer anywhere inside its children tree.
+Wrap your app with a FirebaseAuthProvider and use a FirebaseAuthConsumer anywhere inside its children tree.
 
-{% code-tabs %}
-{% code-tabs-item title="src/index.tsx" %}
+
 ```jsx
 import * as React from "react";
 import { render } from "react-dom";
@@ -50,8 +52,6 @@ const App = () => {
 
 render(<App />, document.getElementById("root"));
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 
 

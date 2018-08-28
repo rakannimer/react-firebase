@@ -1,4 +1,7 @@
-# Implementing the UI
+---
+title: Implementing the UI
+sidebar_label: Implementing the UI
+---
 
 We will be using [@material-ui](https://material-ui.com) to quickly get something decent looking.
 

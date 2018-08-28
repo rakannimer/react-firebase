@@ -6,9 +6,17 @@
     "Generate JSON Data": ["generate-json-data"],
     "Generate Firebase Data": ["generate-firebase-data"],
     "Generate Firestore Data": ["generate-firestore-data"],
-    "Try it out": ["try-it-out"]
+    "Try it out": ["try-it-out"],
+    "Walkthrough": [
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/setup-the-development-environment",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-react-and-react-dom",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-firebase",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/listen-to-auth",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-google-and-anonymous-auth"
+
+    ]
   },
   "guides": {
-    "First Category": ["doc1", "doc2"]
+    "a": ["doc1", "doc2"]
   }
 }

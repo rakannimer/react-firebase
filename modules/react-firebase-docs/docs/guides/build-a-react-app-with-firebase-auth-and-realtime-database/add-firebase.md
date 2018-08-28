@@ -1,4 +1,7 @@
-# Add Firebase
+---
+title: Add Firebase to your app
+sidebar_label: Add Firebase to your app
+---
 
 Install the [firebase](https://www.npmjs.com/package/firebase) JS client.
 
@@ -14,8 +17,6 @@ Change `PROJECT_NAME` to your project name and grab your firebase config here :
 
 Your config file should look something like this : 
 
-{% code-tabs %}
-{% code-tabs-item title="src/test-credentials.ts" %}
 ```javascript
 // Firebase Config
 export const config = {
@@ -28,14 +29,9 @@ export const config = {
   messagingSenderId: "MESSAGING_SENDER_ID"
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-{% hint style="info" %}
 In the example repo this file is located in `src/test-credentials.ts` but you won't be able to find it because it's added to the `.gitignore`
 
 Make sure you do the same if your repository is public.
-{% endhint %}
 
-### Git Commit
 

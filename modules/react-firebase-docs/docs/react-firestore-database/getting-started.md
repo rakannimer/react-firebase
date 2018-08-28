@@ -13,7 +13,10 @@ sidebar_label: Getting Started
   - [Firestore Mutation](#firestore-mutation)
   - [Upsert \(update or insert\) data to Firestore example](#upsert-update-or-insert-data-to-firestore-example)
   - [Batched Writes](#batched-writes)
-  - [Complete Example](#complete-example)
+  - [Sandboxes](#sandboxes)
+      - [Infinite List](#infinite-list)
+      - [Mutation](#mutation)
+      - [Transaction](#transaction)
 
 # Setup
 
@@ -192,86 +195,19 @@ Schedule a mutation with `addMutationToBatch`, and commit your changes with `com
 
 ```
 
-## Complete Example
+## Sandboxes
 
-```jsx
-import firebase from "firebase/app";
-import "firebase/firestore";
-import {
-  FirestoreProvider,
-  FirestoreCollection,
-  FirestoreDocument
-} from "react-firebase-firestore";
-import ReactJson from "react-json-view";
 
-const config = {
-  apiKey: credentials.apiKey,
-  authDomain: credentials.authDomain,
-  databaseURL: credentials.databaseURL,
-  projectId: credentials.projectId,
-  storageBucket: credentials.storageBucket,
-  messagingSenderId: credentials.messagingSenderId
-};
+#### Infinite List
 
-const App = () => {
-  return (
-    <FirestoreProvider {...config} firebase={firebase}>
-      <div>oh hai</div>
-      <FirestoreDocument path="/user_bookmarks/G_K_1svqs">
-        {d => {
-          return d.loadingStatus === "ready" ? (
-            <ReactJson src={d} />
-          ) : (
-            "Loading"
-          );
-        }}
-      </FirestoreDocument>
-      <div>
-        <h4>oh hai again</h4>
-        <FirestoreCollection path="/user_bookmarks/" limit={1}>
-          {d => {
-            return d.isLoading ? (
-              "Loading"
-            ) : (
-              <ReactJson src={d} />
-            );
-          }}
-        </FirestoreCollection>
-        <FirestoreBatchedWrite>
-        {({ addMutationToBatch, commit }) => {
-          return (
-            <div>
-              {" "}
-              <h2>Batched write</h2>{" "}
-              <button
-                onClick={() => {
-                  console.log("adding to batch");
-                  addMutationToBatch({
-                    path: `user_bookmarks/G_K_5onxu/`,
-                    value: { [`a-value-${Date.now()}`]: Date.now() },
-                    type: "update"
-                  });
-                }}
-              >
-                Add to batch
-              </button>
-              <button
-                onClick={() => {
-                  console.log("committing to batch");
-                  commit().then(() => {
-                    console.log("Committed");
-                  });
-                }}
-              >
-                Commit batch
-              </button>
-            </div>
-          );
-        }}
-      </FirestoreBatchedWrite>
-      </div>
-    </FirestoreProvider>
-  );
-};
-```
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+
+#### Mutation
+
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-mutation" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+#### Transaction
+
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
