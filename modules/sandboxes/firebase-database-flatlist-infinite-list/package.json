@@ -1,0 +1,22 @@
+{
+  "name": "parcel-sandbox",
+  "version": "1.0.0",
+  "description": "Simple Parcel Sandbox",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@reach/component-component": "0.1.0",
+    "@react-firebase/database": "0.2.15",
+    "firebase": "5.4.1",
+    "react": "latest",
+    "react-art": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-native-web": "0.8.9"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1"
+  }
+}

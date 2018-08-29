@@ -12,6 +12,7 @@ React Firebase Auth provides the following components :
   - [Get your Firebase config](#get-your-firebase-config)
 - [Usage](#usage)
   - [Import firebase and firebase/auth](#import-firebase-and-firebaseauth)
+  - [Just show me some code](#just-show-me-some-code)
   - [Auth Example](#auth-example)
 
 ## Components
@@ -74,6 +75,30 @@ import "firebase/auth";
 
 Place a `FirebaseAuthProvider` component at the top level of your app. \(anywhere as long as it's above the other Auth components\). 
 Then use any of the other components anywhere in your component tree.
+
+## Just show me some code
+
+`FirebaseAuthProvider`
+```jsx
+<FirebaseAuthProvider>
+  {
+    // my app code
+  }
+</FirebaseAuthProvider>
+```
+
+`FirebaseAuthConsumer`
+```jsx
+<FirebaseAuthConsumer>
+  {({ isSignedIn, user, providerId }) => {
+    return (
+      <pre style={{ height: 300, overflow: "auto" }}>
+        {JSON.stringify({ isSignedIn, user, providerId }, null, 2)}
+      </pre>
+    );
+  }}
+</FirebaseAuthConsumer>
+```
 
 ## Auth Example
 

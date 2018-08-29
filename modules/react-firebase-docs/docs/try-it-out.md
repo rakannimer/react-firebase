@@ -7,7 +7,8 @@ title: Sandbox for every use-case
   - [Auth](#auth)
     - [Anonymous/Google Auth](#anonymousgoogle-auth)
   - [Realtime Database](#realtime-database)
-    - [Infinite List](#infinite-list)
+    - [Infinite List Web](#infinite-list-web)
+    - [Infinite List Native FlatList](#infinite-list-native-flatlist)
     - [Mutation](#mutation)
     - [Transaction](#transaction)
   - [Firestore](#firestore)
@@ -33,10 +34,17 @@ title: Sandbox for every use-case
 
 ### Realtime Database
 
-#### Infinite List
+#### Infinite List Web
 <details>
  <summary>Sandbox</summary>
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</details>
+
+#### Infinite List Native FlatList
+
+<details>
+ <summary>Sandbox</summary>
+<iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-flatlist-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
 
 
