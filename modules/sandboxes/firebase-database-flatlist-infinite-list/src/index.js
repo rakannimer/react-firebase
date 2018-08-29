@@ -30,7 +30,7 @@ const App = () => {
                   <FlatList
                     style={{ height: 200, overflow: "auto" }}
                     data={values}
-                    keyExtractor={v => keys[v.index]}
+                    keyExtractor={(v,i) => keys[i]}
                     renderItem={v => (
                       <View>
                         <Text>{s(v)}</Text>
