@@ -327,7 +327,7 @@ const App = () => {
 {% tab title="Output" %}
 
 
-![](../../.gitbook/assets/react-firebase-tutorial-auth-4-error-handling-gif.gif)
+![](assets/react-firebase-tutorial-auth-4-error-handling-gif.gif)
 {% endtab %}
 {% endtabs %}
 

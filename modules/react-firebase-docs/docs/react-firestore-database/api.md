@@ -26,25 +26,25 @@ sidebar_label: API
 | messagingSenderId | string                                             | no       |         |
 | storageBucket     | string                                             | no       |         |
 | children          | React Node                                         | no       |         |
-| render            | \(\) =&gt; ReactNode                               | no       |         |
+| render            | () => ReactNode                                    | no       |         |
 
 ## [Firestore Setup Reference](https://firebase.google.com/docs/firestore/quickstart)
 
 ## FirestoreCollection
 
-| Name               | Type                                                               | Required | Default   |
-| :----------------- | :----------------------------------------------------------------- | :------- | :-------- |
-| path               | string                                                             | yes      | null      |
-| **where**          | {}                                                                 | no       | null      |
-| **where**.field    | string                                                             | no       | undefined |
-| **where**.operator | "&lt;" \| "&lt;=" \| "==" \| "&gt;" \| "&gt;=" \| "array-contains" | no       | undefined |
-| **where**.value    | any                                                                | no       | undefined |
-| orderBy            | { field: string; type?: "desc" \| "asc" }\[\]                      | no       | null      |
-| limit              | number                                                             | no       | null      |
-| startAt            | PrimitiveType \| PrimitiveType\[\] \| DocumentSnapshot             | no       | null      |
-| endAt              | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
-| startAfter         | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
-| endBefore          | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
+| Name               | Type                                                       | Required | Default   |
+| :----------------- | :--------------------------------------------------------- | :------- | :-------- |
+| path               | `string`                                                   | yes      | null      |
+| **where**          | `{}`                                                       | no       | null      |
+| **where**.field    | `string`                                                   | no       | undefined |
+| **where**.operator | `<` or `<=` or `==` or `>` or `>=` or `array-contains`     | no       | undefined |
+| **where**.value    | `any`                                                      | no       | undefined |
+| orderBy            | `Arr`ay<{ field: string; type?: "desc" or "asc" }>``       | no       | null      |
+| limit              | `number`                                                   | no       | null      |
+| startAt            | `PrimitiveType` or `PrimitiveType[]` or `DocumentSnapshot` | no       | null      |
+| endAt              | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
+| startAfter         | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
+| endBefore          | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
 
 ## [Firestore Query Reference](https://firebase.google.com/docs/firestore/query-data/get-data)
 
@@ -52,29 +52,29 @@ sidebar_label: API
 
 Same props as FirestoreCollection 
 
-| Name               | Type                                                               | Required | Default   |
-| :----------------- | :----------------------------------------------------------------- | :------- | :-------- |
-| path               | string                                                             | yes      | null      |
-| **where**          | {}                                                                 | no       | null      |
-| **where**.field    | string                                                             | no       | undefined |
-| **where**.operator | "&lt;" \| "&lt;=" \| "==" \| "&gt;" \| "&gt;=" \| "array-contains" | no       | undefined |
-| **where**.value    | any                                                                | no       | undefined |
-| orderBy            | { field: string; type?: "desc" \| "asc" }\[\]                      | no       | null      |
-| limit              | number                                                             | no       | null      |
-| startAt            | PrimitiveType \| PrimitiveType\[\] \| DocumentSnapshot             | no       | null      |
-| endAt              | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
-| startAfter         | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
-| endBefore          | PrimitiveType \| DocumentSnapshot                                  | no       | null      |
+| Name               | Type                                                       | Required | Default   |
+| :----------------- | :--------------------------------------------------------- | :------- | :-------- |
+| path               | `string`                                                   | yes      | null      |
+| **where**          | `{}`                                                       | no       | null      |
+| **where**.field    | `string`                                                   | no       | undefined |
+| **where**.operator | `<` or `<=` or `==` or `>` or `>=` or `array-contains`     | no       | undefined |
+| **where**.value    | `any`                                                      | no       | undefined |
+| orderBy            | `{ field: string; type?: "desc" or "asc" }[]`              | no       | null      |
+| limit              | `number`                                                   | no       | null      |
+| startAt            | `PrimitiveType` or `PrimitiveType[]` or `DocumentSnapshot` | no       | null      |
+| endAt              | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
+| startAfter         | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
+| endBefore          | `PrimitiveType` or `DocumentSnapshot`                      | no       | null      |
 
 ## [Firestore Query Reference](https://firebase.google.com/docs/firestore/query-data/get-data)
 
 ## FirestoreMutation Props​ {#firebasedatabasemutation-props}
 
-| Name     | Type                                                                                                  | Required | Default |
-| :------- | :---------------------------------------------------------------------------------------------------- | :------- | :------ |
-| path     | string                                                                                                | yes      | ​       |
-| type     | "set" \| "update" \| "add"                                                                            | yes      | ​       |
-| children | \( { runMutation: \(value:any, options?:any\) =&gt; Promise&lt;{key?:string}&gt; } \) =&gt; ReactNode | yes      | null    |
+| Name     | Type                                                                                  | Required | Default |
+| :------- | :------------------------------------------------------------------------------------ | :------- | :------ |
+| path     | string                                                                                | yes      | ​       |
+| type     | "set" or "update" or "add"                                                            | yes      | ​       |
+| children | ( { runMutation: (value:any, options?:any) => Promise<{key?:string}> } ) => ReactNode | yes      | null    |
 
 ## [​Firestore Write Data Reference​](https://firebase.google.com/docs/firestore/manage-data/add-data) {#firebase-write-data-reference}
 

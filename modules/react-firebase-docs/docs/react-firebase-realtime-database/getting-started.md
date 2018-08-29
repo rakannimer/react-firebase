@@ -3,7 +3,7 @@ title: React Realtime Database
 sidebar_label: Getting Started
 ---
 
-Easily Render Firebase Realtime Database in your react\(-native\) app.
+Easily Render Firebase Realtime Database in your react(-native) app.
 
 
 - [Setup](#setup)
@@ -62,7 +62,7 @@ const config = {
 * FirebaseDatabaseMutation
 * FirebaseDatabaseTransaction
 
-Place a `FirebaseDatabaseProvider` component at the top level of your app \(anywhere as long as it's above the other Realtime Database components\). 
+Place a `FirebaseDatabaseProvider` component at the top level of your app (anywhere as long as it's above the other Realtime Database components). 
 
 ```javascript
 import { FirebaseDatabaseProvider } from '@react-firebase/database'
@@ -97,7 +97,7 @@ Check [API](api.md) for a list of supported props.
 
 ## Firebase Database Mutation
 
-The `FirebaseDatabaseMutation` allows you to render components that run Firebase mutations \(update, set, push\).
+The `FirebaseDatabaseMutation` allows you to render components that run Firebase mutations (update, set, push).
 
 A `setMutation` function that returns a promise is provided to the children function.
 
@@ -107,7 +107,7 @@ FirebaseDatabaseMutation needs 3 props :
 * **operation**: `"update" | "set" | "push"` 
 * **children:** 
 
-  | \(   {     runMutation: \(value:any\) =&gt; Promise&lt;{key?:string}&gt;   } \) =&gt; ReactNode |
+  | (   {     runMutation: (value:any) => Promise<{key?:string}>   } ) => ReactNode |
   | :--- |
 
 <iframe src="https://codesandbox.io/embed/5v2w2n5r9p" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
@@ -121,7 +121,7 @@ FirebaseDatabaseTransaction needs 2 props:
 * **path**: `string`
 * **children:** 
 
-  | \(   {     runTransaction: \({ reducer: \(value:any\)=&gt;any }\) =&gt; Promise&lt;{key?:string}&gt;   } \) =&gt; ReactNode |
+  | (   {     runTransaction: ({ reducer: (value:any)=>any }) => Promise<{key?:string}>   } ) => ReactNode |
   | :--- |
 
 

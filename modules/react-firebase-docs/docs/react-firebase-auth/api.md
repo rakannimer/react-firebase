@@ -41,11 +41,11 @@ sidebar_label: API
 
 ## authState
 
-| Name       | Type                                                         |
-| :--------- | :----------------------------------------------------------- |
-| isSignedIn | boolean                                                      |
-| providerId | 'none' \| 'anonymous' \| 'google.com' \| 'facebook.com' .... |
-| user       | user \| null                                                 |
+| Name       | Type                                                                       |
+| :--------- | :------------------------------------------------------------------------- |
+| isSignedIn | boolean                                                                    |
+| providerId | string enum : `none` or `anonymous` or `google.com` or `facebook.com` .... |
+| user       | `user` or `null`                                                           |
 
 * isSignedIn: boolean
 * providerId: 'none' \| 'anonymous' \| 'google.com' \| 'facebook.com' ....

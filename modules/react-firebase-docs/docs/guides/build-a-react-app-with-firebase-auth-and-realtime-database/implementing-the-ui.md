@@ -14,7 +14,7 @@ The components to be used are :
 * 1x LoginContainer
 * 2x Button 
 
-![](../../.gitbook/assets/screen-shot-2018-08-22-at-2.24.13-pm.png)
+![wireframe-unauthed-breakdown](assets/wireframe-unauthed-breakdown.png)
 
 This is my quick and dirty attempt : 
 
@@ -90,7 +90,7 @@ This page is a bit more complex so I won't inline the code here, but you can che
 
 ### By now we should have something that looks like this : 
 
-![Complete UI with auth without database access](../../.gitbook/assets/react-firebase-tutorial-dumb-ui-gif.gif)
+![Complete UI with auth without database access](assets/react-firebase-tutorial-dumb-ui-gif.gif)
 
 The  autocomplete component is powered by [Downshift](https://github.com/paypal/downshift).
 

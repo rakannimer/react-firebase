@@ -3,7 +3,7 @@ title: React Firebase Auth
 sidebar_label: Getting Started
 ---
 
-Easily integrate Firebase Authentication in your react\(-native\) app.
+Easily integrate Firebase Authentication in your react(-native) app.
 
 React Firebase Auth provides the following components :
 
@@ -73,14 +73,15 @@ import firebase from "firebase/app";
 import "firebase/auth";
 ```
 
-Place a `FirebaseAuthProvider` component at the top level of your app. \(anywhere as long as it's above the other Auth components\). 
+Place a `FirebaseAuthProvider` component at the top level of your app. ( anywhere as long as it's above the other Auth components ). 
 Then use any of the other components anywhere in your component tree.
 
 ## Just show me some code
 
 `FirebaseAuthProvider`
+
 ```jsx
-<FirebaseAuthProvider>
+<FirebaseAuthProvider firebase={firebase} {...config}>
   {
     // my app code
   }
@@ -88,6 +89,7 @@ Then use any of the other components anywhere in your component tree.
 ```
 
 `FirebaseAuthConsumer`
+
 ```jsx
 <FirebaseAuthConsumer>
   {({ isSignedIn, user, providerId }) => {

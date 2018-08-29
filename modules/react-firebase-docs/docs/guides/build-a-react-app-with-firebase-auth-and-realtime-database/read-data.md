@@ -1,4 +1,7 @@
-# Read Data
+---
+title: Read Data
+sidebar_label: Read Data
+---
 
 2 components need to read data the Search component and the History List components
 
@@ -12,7 +15,7 @@ const Search = () => {
 
 We want to connect it to the database at `user_bookmarks/` path.
 
-![What our data looks like.](../../.gitbook/assets/screen-shot-2018-08-23-at-5.27.10-pm.png)
+![What our data looks like.](assets/data-shape-in-firebase.png)
 
 The code we get : 
 
@@ -71,5 +74,5 @@ You can check the full code[ here](https://github.com/rakannimer/react-firebase/
 
 And a gif here : 
 
-![](../../.gitbook/assets/react-firebase-tutorial-result-gif.gif)
+![](assets/react-firebase-tutorial-result-gif.gif)
 

@@ -21,41 +21,45 @@
 // ];
 
 const siteConfig = {
-  title: 'React Firebase', // Title for your website.
-  tagline: 'React and Firebase development made easy.',
-  url: 'https://react-firebase-js.com', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  title: "React Firebase", // Title for your website.
+  tagline: "React and Firebase development made easy.",
+  url: "https://react-firebase-js.com", // Your website URL
+  baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'react-firebase',
-  organizationName: 'react-firebase',
+  projectName: "react-firebase",
+  organizationName: "react-firebase",
+  usePrism: ["jsx"],
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'react-firebase-auth/getting-started', label: 'Auth'},
-    {doc: 'react-firebase-realtime-database/getting-started', label: 'Database'},
-    {doc: 'react-firestore-database/getting-started', label: 'Firestore'},
-    {blog: true, label: 'Blog'}
+    { doc: "react-firebase-auth/getting-started", label: "Auth" },
+    {
+      doc: "react-firebase-realtime-database/getting-started",
+      label: "Database"
+    },
+    { doc: "react-firestore-database/getting-started", label: "Firestore" },
+    { blog: true, label: "Blog" }
   ],
 
   // // If you have users set above, you add it here:
   // users,
-  gaTrackingId: 'UA-124247406-1',
+  gaTrackingId: "UA-124247406-1",
   /* path to images for header/footer */
-  headerIcon: 'img/logo.png',
-  footerIcon: 'img/logo.png',
-  favicon: 'img/logo.png',
+  headerIcon: "img/logo.png",
+  footerIcon: "img/logo.png",
+  favicon: "img/logo.png",
 
   /* Colors for website */
   colors: {
-    primaryColor: '#039BE5',
-    secondaryColor: '#205C3B',
+    primaryColor: "#039BE5",
+    secondaryColor: "#2C384A"
   },
 
   /* Custom fonts for website */
@@ -77,20 +81,20 @@ const siteConfig = {
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'default',
+    theme: "default"
   },
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: ['https://buttons.github.io/buttons.js'],
+  scripts: ["https://buttons.github.io/buttons.js"],
 
   // On page navigation for the current documentation page.
-  onPageNav: 'separate',
+  onPageNav: "separate",
   // No .html extensions for paths.
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/logo.png',
-  twitterImage: 'img/logo.png',
+  ogImage: "img/logo.png",
+  twitterImage: "img/logo.png",
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...

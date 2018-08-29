@@ -1,8 +1,14 @@
 {
   "docs": {
     "Auth": ["react-firebase-auth/getting-started", "react-firebase-auth/api"],
-    "Realtime Database": ["react-firebase-realtime-database/getting-started", "react-firebase-realtime-database/api"],
-    "Firestore": ["react-firestore-database/getting-started", "react-firestore-database/api"],
+    "Realtime Database": [
+      "react-firebase-realtime-database/getting-started",
+      "react-firebase-realtime-database/api"
+    ],
+    "Firestore": [
+      "react-firestore-database/getting-started",
+      "react-firestore-database/api"
+    ],
     "Generate JSON Data": ["generate-json-data"],
     "Generate Firebase Data": ["generate-firebase-data"],
     "Generate Firestore Data": ["generate-firestore-data"],
@@ -12,8 +18,10 @@
       "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-react-and-react-dom",
       "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-firebase",
       "guides/build-a-react-app-with-firebase-auth-and-realtime-database/listen-to-auth",
-      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-google-and-anonymous-auth"
-
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/add-google-and-anonymous-auth",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/implementing-the-ui",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/read-data",
+      "guides/build-a-react-app-with-firebase-auth-and-realtime-database/write-data"
     ]
   },
   "guides": {
