@@ -507,11 +507,15 @@ type commit = () => Promise<void>;
 
 ## Resources
 
-### [React Native Firebase Starter Example](https://react-firebase-js.com/docs/try-it-out)
-
 ### [Editable Sandboxes](https://react-firebase-js.com/docs/try-it-out)
 
 ### [Verbose Tutorial (WIP)](https://react-firebase-js.com/docs/guides/build-a-react-app-with-firebase-auth-and-realtime-database/setup-the-development-environment)
+
+### [Bookmarking App Example](https://github.com/rakannimer/react-firebase/tree/master/modules/tutorial-bookmarking-app)
+
+### [React Native with Expo and Firebase Example](https://github.com/rakannimer/react-firebase/tree/master/react-native-examples/react-native-expo-firebase-example)
+
+### [React Native Firebase Starter Example](https://github.com/rakannimer/react-firebase/tree/master/react-native-examples/react-native-firebase-starter)
 
 ## Related Work
 
@@ -526,3 +530,11 @@ type commit = () => Promise<void>;
 - [The Firebase team for building and maintaining a great product !](https://twitter.com/firebase)
 - [@mwestrate](https://twitter.com/mweststrate)'s for writing [immer](https://github.com/mweststrate/immer) (and [mobx](https://github.com/mobxjs/mobx/), not used in this project, but a great library nonetheless 😀).
 - [The Docusaurus team (This website and blog are built with docusaurus).](https://twitter.com/docusaurus)
+
+Thanks for making it to the end of the article ❤️ !
+
+Here's a couple of additional resources just for you :
+
+- [Generate Connected JSON Data](https://react-firebase-js.com/docs/generate-json-data)
+- [Generate Firebase Database Data](https://react-firebase-js.com/docs/generate-firebase-data)
+- [Generate Firestore Data](https://react-firebase-js.com/docs/generate-firebase-data)
