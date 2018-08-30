@@ -1,6 +1,6 @@
 export {
   FirebaseDatabaseContextConsumerLifeCycle
-} from "./components/FirebaseDatabaseContextConsumerLifecycle";
+} from "./components/FirebaseDatabaseContextConsumerLifeCycle";
 export { FirebaseDatabaseNode } from "./components/FirebaseDatabaseNode";
 export {
   FirebaseDatabaseProvider
