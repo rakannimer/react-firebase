@@ -6,7 +6,7 @@ author: Rakan Nimer
 authorURL: http://twitter.com/rakannimer
 ---
 
-A Composable, Component Based React API over Firebase services.
+A Composable, Component based React API over Firebase services.
 
 ## TLDR;
 
