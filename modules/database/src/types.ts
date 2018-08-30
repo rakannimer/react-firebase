@@ -13,11 +13,11 @@ export interface FirebaseQuery {
 }
 
 export interface InitializeAppArgs {
-  authDomain: string;
-  apiKey: string;
-  databaseURL: string;
+  authDomain?: string;
+  apiKey?: string;
+  databaseURL?: string;
   firebase: any;
-  projectId: string;
+  projectId?: string;
   messagingSenderId?: string;
   storageBucket?: string;
 }
