@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
 import { initializeFirebaseApp } from "../initialize-firebase-app";
-import { FirebaseDatabaseContextProvider } from "../Context";
+import { getContext } from "../Context";
 import { getFirebaseQuery } from "../get-firebase-query";
 import { stateReducer } from "../state-reducer";
 import {
@@ -14,7 +14,7 @@ import {
 export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderProps,
   FirebaseDatabaseProviderState
-> {
+  > {
   listenTo = async (firebaseQuery: FirebaseQuery) => {
     const { path } = firebaseQuery;
 
@@ -29,7 +29,7 @@ export class FirebaseDatabaseProvider extends React.Component<
           {
             path,
             data: null,
-            unsub: () => {},
+            unsub: () => { },
             isLoading: true
           },
           "add"
@@ -91,8 +91,11 @@ export class FirebaseDatabaseProvider extends React.Component<
   }
   render() {
     const { children } = this.props;
+    const { FirebaseDatabaseContextProvider } = getContext();
+    console.warn("yabyabyabayba");
+
     return (
-      <FirebaseDatabaseContextProvider value={this.state}>
+      <FirebaseDatabaseContextProvider value={this.state} {...this.props}>
         {renderAndAddProps(children, {})}
       </FirebaseDatabaseContextProvider>
     );

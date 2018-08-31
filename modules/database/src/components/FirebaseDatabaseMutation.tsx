@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
+import { getContext } from "../Context";
 
-import { FirebaseDatabaseContextConsumer } from "../Context";
 import { FirebaseDatabaseProviderState } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
 
@@ -27,7 +27,7 @@ export type RunMutation = (
 
 export class FirebaseDatabaseMutationWithContext extends React.Component<
   FirebaseDatabaseMutationWithContextProps
-> {
+  > {
   createMutationRunner = () => {
     const { firebase, path, type } = this.props;
     const firebaseRef = firebase
@@ -96,9 +96,10 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
 
 export class FirebaseDatabaseMutation extends React.Component<
   FirebaseMutationProps
-> {
+  > {
   render() {
     const { children, type, path } = this.props;
+    const { FirebaseDatabaseContextConsumer } = getContext();
     return (
       <FirebaseDatabaseContextConsumer>
         {context => (

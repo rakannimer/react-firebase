@@ -27,7 +27,7 @@ export type RunTransaction = (
 
 export class FirebaseDatabaseTransactionWithContext extends React.Component<
   FirebaseDatabaseTransactionWithContextProps
-> {
+  > {
   createTransactionRunner = () => {
     const { firebase, path } = this.props;
     const firebaseRef = firebase
@@ -57,7 +57,7 @@ export class FirebaseDatabaseTransactionWithContext extends React.Component<
 
 export class FirebaseDatabaseTransaction extends React.Component<
   FirebaseTransactionProps
-> {
+  > {
   render() {
     const { children, path } = this.props;
     return (
