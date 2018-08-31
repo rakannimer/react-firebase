@@ -20,7 +20,7 @@ export interface InitializeAppArgs {
   projectId?: string;
   messagingSenderId?: string;
   storageBucket?: string;
-  reactContextFunction?: () => any
+  createContext?: () => any
 }
 
 export type FirebaseDatabaseNodeValue = {} | number | boolean | string | null;

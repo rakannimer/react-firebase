@@ -90,12 +90,10 @@ export class FirebaseDatabaseProvider extends React.Component<
     );
   }
   render() {
-    const { children } = this.props;
+    const { children, createContext } = this.props;
     const { FirebaseDatabaseContextProvider } = getContext();
-    console.warn("yabyabyabayba");
-
     return (
-      <FirebaseDatabaseContextProvider value={this.state} {...this.props}>
+      <FirebaseDatabaseContextProvider value={this.state} createContext={createContext}>
         {renderAndAddProps(children, {})}
       </FirebaseDatabaseContextProvider>
     );

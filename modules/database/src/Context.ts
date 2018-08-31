@@ -1,21 +1,21 @@
 
 import * as React from "react";
 import { FirebaseDatabaseProviderState, FirebaseQuery } from "./types";
-import {memoize} from 'lodash'
+import { memoize } from 'lodash'
 export const firebaseDatabaseDefaultContext = {
-  listenTo: ({ path }) => { },
-  stopListeningTo: (path) => { },
+  listenTo: ({ path }: FirebaseQuery) => { },
+  stopListeningTo: (path: string) => { },
   dataTree: {},
   firebase: {}
-};
+} as FirebaseDatabaseProviderState;
 
 export const getContext = memoize((
-  getReactContexFunction = () => React.createContext(firebaseDatabaseDefaultContext)
+  createContext = () => React.createContext(firebaseDatabaseDefaultContext)
 ) => {
   const {
     Provider: FirebaseDatabaseContextProvider,
     Consumer: FirebaseDatabaseContextConsumer
-  } = getReactContexFunction();
+  } = createContext();
   return {
     FirebaseDatabaseContextProvider,
     FirebaseDatabaseContextConsumer
