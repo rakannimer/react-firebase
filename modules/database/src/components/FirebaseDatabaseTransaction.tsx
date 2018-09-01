@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
 
-import { FirebaseDatabaseContextConsumer } from "../Context";
+import { getContext } from "../Context";
 import { FirebaseDatabaseProviderState } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
 
@@ -27,7 +27,7 @@ export type RunTransaction = (
 
 export class FirebaseDatabaseTransactionWithContext extends React.Component<
   FirebaseDatabaseTransactionWithContextProps
-  > {
+> {
   createTransactionRunner = () => {
     const { firebase, path } = this.props;
     const firebaseRef = firebase
@@ -57,9 +57,10 @@ export class FirebaseDatabaseTransactionWithContext extends React.Component<
 
 export class FirebaseDatabaseTransaction extends React.Component<
   FirebaseTransactionProps
-  > {
+> {
   render() {
     const { children, path } = this.props;
+    const { FirebaseDatabaseContextConsumer } = getContext();
     return (
       <FirebaseDatabaseContextConsumer>
         {context => (
