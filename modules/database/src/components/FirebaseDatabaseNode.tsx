@@ -1,7 +1,6 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-
-import { FirebaseDatabaseContextConsumer } from "../Context";
+import { getContext } from "../Context";
 import { FirebaseQuery } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
 import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseContextConsumerLifeCycle";
@@ -14,9 +13,10 @@ export type FirebaseDatabaseNodeProps = {
 
 export class FirebaseDatabaseNode extends React.Component<
   FirebaseDatabaseNodeProps
-> {
+  > {
   render() {
     const { children, path } = this.props;
+    const { FirebaseDatabaseContextConsumer } = getContext();
     return (
       <FirebaseDatabaseContextConsumer>
         {context => {

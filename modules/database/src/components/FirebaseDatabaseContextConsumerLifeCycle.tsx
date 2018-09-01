@@ -4,9 +4,9 @@ import { FirebaseDatabaseContextConsumerLifeCycleProps } from "../types";
 
 export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
   FirebaseDatabaseContextConsumerLifeCycleProps
-> {
+  > {
   listenToNode() {
-    const { dataTree, path, listenTo } = this.props;
+    const {  listenTo } = this.props;
     listenTo(this.props);
   }
   stopListeningToNode() {
