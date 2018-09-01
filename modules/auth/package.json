@@ -1,6 +1,7 @@
 {
   "name": "@react-firebase/auth",
-  "version": "0.2.5",
+  "description": "Easily integrate Firebase Authentication in your react(or react-native) app.",
+  "version": "0.2.6",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -43,7 +44,7 @@
     "firebase": ">=4"
   },
   "repository": {
-    "url": "https://github.com/rakannimer/react-firebase-auth-provider"
+    "url": "https://github.com/rakannimer/react-firebase"
   },
   "files": [
     "dist/"

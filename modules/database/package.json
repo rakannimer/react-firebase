@@ -1,6 +1,7 @@
 {
   "name": "@react-firebase/database",
-  "version": "0.2.17",
+  "description": "Efficiently Render & mutate Firebase Realtime Database data in your react(or react-native) app.",
+  "version": "0.2.18",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -42,7 +43,7 @@
     "firebase": ">=4"
   },
   "repository": {
-    "url": "https://github.com/rakannimer/react-firebase-database"
+    "url": "https://github.com/rakannimer/react-firebase"
   },
   "files": [
     "dist/"
