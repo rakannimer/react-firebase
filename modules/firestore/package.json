@@ -1,7 +1,7 @@
 {
   "name": "@react-firebase/firestore",
   "description": "Efficiently Render & mutate Firestore data in your react(or react-native) app.",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
