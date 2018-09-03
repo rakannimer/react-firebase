@@ -96,8 +96,6 @@ export class FirebaseDatabaseProvider extends React.Component<
     this.state = {
       firebase: props.firebase,
       dataTree: {},
-      // listenTo: this.registerNode.bind(this),
-      // stopListeningTo: this.removeNode.bind(this),
       registerNode: this.registerNode.bind(this),
       removeNode: this.removeNode.bind(this)
     };
