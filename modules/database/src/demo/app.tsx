@@ -105,9 +105,9 @@ export const MutationExample = () => (
   </div>
 );
 
-export const App = () => {
+export const FirebaseTwoNodesSameLevelSamePath = () => {
   return (
-    <FirebaseDatabaseProvider {...config} firebase={firebase}>
+    <React.Fragment>
       <FirebaseDatabaseNode path="user_bookmarks/a">
         {d => {
           return <ReactJson src={d} />;
@@ -120,11 +120,24 @@ export const App = () => {
           }}
         </FirebaseDatabaseNode>
       </div>
+    </React.Fragment>
+  );
+};
+
+export const App = () => {
+  return (
+    <FirebaseDatabaseProvider {...config} firebase={firebase}>
+      <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={5} keysOnly>
+        {d => {
+          return <ReactJson src={d} />;
+        }}
+      </FirebaseDatabaseNode>
+      {/* <FirebaseTwoNodesSameLevelSamePath />
       <FirebaseDatabaseList />
       <FirebaseDatabaseList />
       <FirebaseDatabaseItem />
       <TransactionExample />
-      <MutationExample />
+      <MutationExample /> */}
     </FirebaseDatabaseProvider>
   );
 };

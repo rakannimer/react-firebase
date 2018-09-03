@@ -22,9 +22,11 @@ const firebaseQueryProperties = [
   "limitToLast",
   "startAt",
   "endAt",
-  "equalTo"
+  "equalTo",
+  "keysOnly"
 ];
 
+const isObject = (value: any) => typeof value === "object" && value !== null;
 export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderProps,
   FirebaseDatabaseProviderState
@@ -33,10 +35,10 @@ export class FirebaseDatabaseProvider extends React.Component<
     (firebaseQuery: FirebaseQuery) => {
       const { path } = firebaseQuery;
       if (path in this.state.dataTree) {
-        console.error(
-          "Re-listening to an already registered node in FirebaseDatabaseProvider. Debug info : ",
-          JSON.stringify({ path, value: this.state.dataTree[path] })
-        );
+        // console.error(
+        //   "Re-listening to an already registered node in FirebaseDatabaseProvider. Debug info : ",
+        //   JSON.stringify({ path, value: this.state.dataTree[path] })
+        // );
         const unsub = get(this.state, `dataTree.${path}.unsub`, () => {});
         unsub();
       } else {
@@ -57,14 +59,19 @@ export class FirebaseDatabaseProvider extends React.Component<
       const ref = getFirebaseQuery(
         Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
       );
+
       const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
         if (d === null || typeof d === "undefined") return;
+        let data = d.val();
+        if (firebaseQuery.keysOnly === true) {
+          data = isObject(data) ? Object.keys(data as any) : [];
+        }
         this.setState(state =>
           stateReducer(
             state,
             {
               path,
-              data: d.val(),
+              data,
               unsub,
               isLoading: false
             },

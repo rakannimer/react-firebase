@@ -10,6 +10,7 @@ export interface FirebaseQuery {
   startAt?: null | number;
   endAt?: null | number;
   equalTo?: null | any;
+  keysOnly?: boolean;
 }
 
 export interface InitializeAppArgs {
