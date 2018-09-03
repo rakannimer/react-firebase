@@ -2,12 +2,19 @@ import * as React from "react";
 import * as firebase from "firebase/app";
 import "firebase/database";
 import { State } from "react-powerplug";
+//@ts-ignore
+import { View, Text, FlatList } from "react-native-web";
+//@ts-ignore
+import Component from "@reach/component-component";
+
 import { config } from "./test-credentials";
 
 import { FirebaseDatabaseNode, FirebaseDatabaseProvider } from "../index";
 import { FirebaseDatabaseMutation } from "../components/FirebaseDatabaseMutation";
 import { FirebaseDatabaseTransaction } from "../components/FirebaseDatabaseTransaction";
 import ReactJson from "react-json-view";
+
+const s = (v: any) => JSON.stringify(v, null, 2);
 
 export const FirebaseDatabaseList = () => (
   <div>
@@ -124,20 +131,60 @@ export const FirebaseTwoNodesSameLevelSamePath = () => {
   );
 };
 
+export const InfiniteList = () => (
+  <View>
+    <Component initialState={{ limit: 5 }}>
+      {(component: any) => (
+        <FirebaseDatabaseNode
+          path="user_bookmarks"
+          limitToFirst={component.state.limit}
+        >
+          {({ value }) => {
+            if (value === null || typeof value === "undefined") return null;
+            const keys = Object.keys(value);
+            const values = Object.values(value);
+            return (
+              <FlatList
+                style={{ height: 200, overflow: "auto" }}
+                data={values}
+                //@ts-ignore
+                keyExtractor={(v, i) => keys[i]}
+                //@ts-ignore
+                renderItem={v => (
+                  <View>
+                    <Text>{s(v)}</Text>
+                  </View>
+                )}
+                onEndReached={() => {
+                  component.setState({ limit: component.state.limit + 1 });
+                }}
+              />
+            );
+          }}
+        </FirebaseDatabaseNode>
+      )}
+    </Component>
+  </View>
+);
+
 export const App = () => {
   return (
-    <FirebaseDatabaseProvider {...config} firebase={firebase}>
-      <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={5} keysOnly>
-        {d => {
-          return <ReactJson src={d} />;
-        }}
-      </FirebaseDatabaseNode>
-      {/* <FirebaseTwoNodesSameLevelSamePath />
-      <FirebaseDatabaseList />
-      <FirebaseDatabaseList />
-      <FirebaseDatabaseItem />
-      <TransactionExample />
-      <MutationExample /> */}
+    <FirebaseDatabaseProvider firebase={firebase} {...config}>
+      <InfiniteList />
+      <InfiniteList />
     </FirebaseDatabaseProvider>
+    // <FirebaseDatabaseProvider {...config} firebase={firebase}>
+    //   <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={5} keysOnly>
+    //     {d => {
+    //       return <ReactJson src={d} />;
+    //     }}
+    //   </FirebaseDatabaseNode>
+    //   {/* <FirebaseTwoNodesSameLevelSamePath />
+    //   <FirebaseDatabaseList />
+    //   <FirebaseDatabaseList />
+    //   <FirebaseDatabaseItem />
+    //   <TransactionExample />
+    //   <MutationExample /> */}
+    // </FirebaseDatabaseProvider>
   );
 };
