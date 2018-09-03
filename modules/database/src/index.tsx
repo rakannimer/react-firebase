@@ -1,6 +1,3 @@
-export {
-  FirebaseDatabaseContextConsumerLifeCycle
-} from "./components/FirebaseDatabaseContextConsumerLifeCycle";
 export { FirebaseDatabaseNode } from "./components/FirebaseDatabaseNode";
 export {
   FirebaseDatabaseProvider

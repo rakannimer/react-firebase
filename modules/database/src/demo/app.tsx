@@ -108,6 +108,19 @@ export const MutationExample = () => (
 export const App = () => {
   return (
     <FirebaseDatabaseProvider {...config} firebase={firebase}>
+      <FirebaseDatabaseNode path="user_bookmarks/a">
+        {d => {
+          return <ReactJson src={d} />;
+        }}
+      </FirebaseDatabaseNode>
+      <div>
+        <FirebaseDatabaseNode path="user_bookmarks/a">
+          {d => {
+            return <ReactJson src={d} />;
+          }}
+        </FirebaseDatabaseNode>
+      </div>
+      <FirebaseDatabaseList />
       <FirebaseDatabaseList />
       <FirebaseDatabaseItem />
       <TransactionExample />

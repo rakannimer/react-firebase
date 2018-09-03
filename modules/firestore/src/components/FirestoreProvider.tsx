@@ -26,7 +26,6 @@ export class FirestoreProvider extends React.Component<
       return;
     }
     if (path in this.state.dataTree) {
-      console.log("Path already in datatree", this.state.dataTree[path]);
       this.state.dataTree[path].unsub();
       // this.setState(state => stateReducer(state, { path }, "delete"));
     }

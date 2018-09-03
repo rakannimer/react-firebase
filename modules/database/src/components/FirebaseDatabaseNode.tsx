@@ -3,7 +3,7 @@ import { renderAndAddProps } from "render-and-add-props";
 import { getContext } from "../Context";
 import { FirebaseQuery } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
-import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseContextConsumerLifeCycle";
+import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseNodeLifeCycle";
 
 export type FirebaseDatabaseNodeProps = {
   children?: (
@@ -13,7 +13,7 @@ export type FirebaseDatabaseNodeProps = {
 
 export class FirebaseDatabaseNode extends React.Component<
   FirebaseDatabaseNodeProps
-  > {
+> {
   render() {
     const { children, path } = this.props;
     const { FirebaseDatabaseContextConsumer } = getContext();

@@ -4,23 +4,18 @@ import { FirebaseDatabaseContextConsumerLifeCycleProps } from "../types";
 
 export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
   FirebaseDatabaseContextConsumerLifeCycleProps
-  > {
-  listenToNode() {
-    const {  listenTo } = this.props;
-    listenTo(this.props);
-  }
-  stopListeningToNode() {
-    const { stopListeningTo, path } = this.props;
-    stopListeningTo(path);
-  }
+> {
   componentDidMount() {
-    this.listenToNode();
+    const { registerNode } = this.props;
+    registerNode(this.props);
   }
   componentDidUpdate() {
-    this.listenToNode();
+    const { registerNode } = this.props;
+    registerNode(this.props);
   }
   componentWillUnmount() {
-    this.stopListeningToNode();
+    const { removeNode, path } = this.props;
+    removeNode(path);
   }
   shouldComponentUpdate(
     nextProps: FirebaseDatabaseContextConsumerLifeCycleProps

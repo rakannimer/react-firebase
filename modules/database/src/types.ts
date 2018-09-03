@@ -20,7 +20,7 @@ export interface InitializeAppArgs {
   projectId?: string;
   messagingSenderId?: string;
   storageBucket?: string;
-  createContext?: () => any
+  createContext?: () => any;
 }
 
 export type FirebaseDatabaseNodeValue = {} | number | boolean | string | null;
@@ -34,8 +34,8 @@ export type FirebaseDatabaseProviderState = {
       unsub: () => void;
     };
   };
-  listenTo: (query: FirebaseQuery) => void;
-  stopListeningTo: (path: string) => void;
+  registerNode: (query: FirebaseQuery) => void;
+  removeNode: (path: string) => void;
 };
 
 export type FirebaseDatabaseContextConsumerLifeCycleProps = {} & FirebaseDatabaseProviderState &

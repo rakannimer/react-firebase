@@ -1,5 +1,7 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
+import get from "lodash.get";
+import memoize from "lodash.memoize";
 import { initializeFirebaseApp } from "../initialize-firebase-app";
 import { getContext } from "../Context";
 import { getFirebaseQuery } from "../get-firebase-query";
@@ -11,56 +13,74 @@ import {
   FirebaseDatabaseProviderProps
 } from "../types";
 
+const firebaseQueryProperties = [
+  "path",
+  "orderByChild",
+  "orderByKey",
+  "orderByValue",
+  "limitToFirst",
+  "limitToLast",
+  "startAt",
+  "endAt",
+  "equalTo"
+];
+
 export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderProps,
   FirebaseDatabaseProviderState
 > {
-  listenTo = async (firebaseQuery: FirebaseQuery) => {
-    const { path } = firebaseQuery;
-
-    if (path in this.state.dataTree) {
-      this.state.dataTree[path].unsub && this.state.dataTree[path].unsub();
-      // return;
-    } else {
-      // Prepare state shape for next update
-      this.setState(state =>
-        stateReducer(
-          state,
-          {
-            path,
-            data: null,
-            unsub: () => {},
-            isLoading: true
-          },
-          "add"
-        )
+  registerNode = memoize(
+    (firebaseQuery: FirebaseQuery) => {
+      const { path } = firebaseQuery;
+      if (path in this.state.dataTree) {
+        console.error(
+          "Re-listening to an already registered node in FirebaseDatabaseProvider. Debug info : ",
+          JSON.stringify({ path, value: this.state.dataTree[path] })
+        );
+        const unsub = get(this.state, `dataTree.${path}.unsub`, () => {});
+        unsub();
+      } else {
+        // Prepare state shape for next update
+        this.setState(state =>
+          stateReducer(
+            state,
+            {
+              path,
+              data: null,
+              unsub: () => {},
+              isLoading: true
+            },
+            "add"
+          )
+        );
+      }
+      const ref = getFirebaseQuery(
+        Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
       );
-    }
-    const ref = getFirebaseQuery(
-      Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
-    );
-    const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
-      if (d === null || typeof d === "undefined") return;
-
-      this.setState(state =>
-        stateReducer(
-          state,
-          {
-            path,
-            data: d.val(),
-            unsub,
-            isLoading: false
-          },
-          "add"
-        )
-      );
-    });
-  };
-  stopListeningTo(path: string) {
+      const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
+        if (d === null || typeof d === "undefined") return;
+        this.setState(state =>
+          stateReducer(
+            state,
+            {
+              path,
+              data: d.val(),
+              unsub,
+              isLoading: false
+            },
+            "add"
+          )
+        );
+      });
+    },
+    query => `${firebaseQueryProperties.map(prop => query[prop]).join("_")}`
+  );
+  removeNode(path: string) {
     if (!(path in this.state.dataTree)) {
       return;
     }
-    this.state.dataTree[path].unsub();
+    const unsub = get(this.state, `dataTree.${path}.unsub`, () => {});
+    unsub();
     this.setState(state =>
       stateReducer(
         state,
@@ -76,8 +96,10 @@ export class FirebaseDatabaseProvider extends React.Component<
     this.state = {
       firebase: props.firebase,
       dataTree: {},
-      listenTo: this.listenTo.bind(this),
-      stopListeningTo: this.stopListeningTo.bind(this)
+      // listenTo: this.registerNode.bind(this),
+      // stopListeningTo: this.removeNode.bind(this),
+      registerNode: this.registerNode.bind(this),
+      removeNode: this.removeNode.bind(this)
     };
     if (this.props.apiKey) {
       initializeFirebaseApp(this.props);
@@ -85,9 +107,10 @@ export class FirebaseDatabaseProvider extends React.Component<
   }
   componentWillUnmount() {
     const { dataTree } = this.state;
-    Object.keys(dataTree).forEach(
-      key => dataTree[key].unsub && dataTree[key].unsub()
-    );
+    Object.keys(dataTree).forEach(key => {
+      const unsub = get(this.state, `dataTree.${key}.unsub`, () => {});
+      unsub();
+    });
   }
   render() {
     const { children, createContext } = this.props;
