@@ -73,7 +73,7 @@ export class FirebaseDatabaseProvider extends React.Component<
         );
       });
     },
-    query => `${firebaseQueryProperties.map(prop => query[prop]).join("_")}`
+    query => firebaseQueryProperties.map(prop => query[prop]).join("_")
   );
   removeNode(path: string) {
     if (!(path in this.state.dataTree)) {
