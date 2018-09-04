@@ -20,14 +20,43 @@ export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderState
 > {
   __isMounted = true;
+  onValue = (
+    d: FirebaseDatabaseNodeValueContainer,
+    {
+      unsub,
+      componentID,
+      query
+    }: {
+      unsub: Function;
+      componentID: any;
+      query: FirebaseQuery;
+    }
+  ) => {
+    if (d === null || typeof d === "undefined") return;
+    let data = d.val();
+    if (query.keysOnly === true) {
+      data = isObject(data) ? Object.keys(data as any) : [];
+    }
+    const { path } = query;
+    this.setStateIfMounted(state =>
+      stateReducer(
+        state,
+        {
+          componentID,
+          path,
+          data,
+          unsub,
+          isLoading: false,
+          query
+        },
+        "add"
+      )
+    );
+  };
   registerNode = memoize(
     (componentID: number, firebaseQuery: FirebaseQuery) => {
       const { path } = firebaseQuery;
       if (componentID in this.state.dataTree) {
-        // console.error(
-        //   "Re-listening to an already registered node in FirebaseDatabaseProvider. Debug info : ",
-        //   JSON.stringify({ path, value: this.state.dataTree[path] })
-        // );
         const unsub = get(
           this.state,
           `dataTree.${componentID}.unsub`,
@@ -51,30 +80,21 @@ export class FirebaseDatabaseProvider extends React.Component<
           )
         );
       }
-      const ref = getFirebaseQuery(
-        Object.assign({}, firebaseQuery, { firebase: this.state.firebase })
-      );
-
+      const ref = getFirebaseQuery({
+        ...firebaseQuery,
+        firebase: this.state.firebase
+      });
+      if (firebaseQuery.once === true) {
+        ref.once("value", (d: FirebaseDatabaseNodeValueContainer) => {
+          this.onValue(d, {
+            unsub: () => {},
+            componentID,
+            query: firebaseQuery
+          });
+        });
+      }
       const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
-        if (d === null || typeof d === "undefined") return;
-        let data = d.val();
-        if (firebaseQuery.keysOnly === true) {
-          data = isObject(data) ? Object.keys(data as any) : [];
-        }
-        this.setStateIfMounted(state =>
-          stateReducer(
-            state,
-            {
-              componentID,
-              path,
-              data,
-              unsub,
-              isLoading: false,
-              query: firebaseQuery
-            },
-            "add"
-          )
-        );
+        this.onValue(d, { unsub, componentID, query: firebaseQuery });
       });
     },
     (componentID: any, query: FirebaseQuery) =>

@@ -140,6 +140,7 @@ export const InfiniteList = () => (
           path="user_bookmarks"
           limitToFirst={component.state.limit}
           keysOnly
+          once
         >
           {({ value }) => {
             if (value === null || typeof value === "undefined") return null;

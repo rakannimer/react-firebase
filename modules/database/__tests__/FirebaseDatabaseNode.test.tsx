@@ -13,18 +13,20 @@ import { config } from "../src/demo/test-credentials";
 test("FirebaseDatabaseNode", async () => {
   const { getByText, getByTestId } = render(
     <FirebaseDatabaseProvider firebase={firebase} {...config}>
-      <FirebaseDatabaseNode path={"user_bookmarks"} limitToFirst={10}>
+      <FirebaseDatabaseNode path={"user_bookmarks"} limitToFirst={2}>
         {value => {
           return (
             <div>
-              <div data-testid="test-value">
-                Value {JSON.stringify(value.value)}{" "}
-              </div>
+              {value.value && (
+                <div data-testid="test-value">
+                  {JSON.stringify(value.value)}
+                </div>
+              )}
               <div data-testid="test-path">
-                Path {JSON.stringify(value.path)}{" "}
+                Path {JSON.stringify(value.path)}
               </div>
               <div data-testid="test-is-loading">
-                isLoading {JSON.stringify(value.isLoading)}{" "}
+                isLoading {JSON.stringify(value.isLoading)}
               </div>
             </div>
           );
@@ -32,11 +34,12 @@ test("FirebaseDatabaseNode", async () => {
       </FirebaseDatabaseNode>
     </FirebaseDatabaseProvider>
   );
-  await Promise.all([
-    getByTestId("test-value"),
-    getByTestId("test-path"),
-    getByTestId("test-is-loading")
-  ]);
+  const valueNode = await waitForElement(() => getByTestId("test-value"));
+  const value = JSON.parse(getNodeText(valueNode));
+  const keys = Object.keys(value);
+  const values = Array.from(Object.keys(value), i => value[keys[i]]);
+  expect(keys.length).toBeGreaterThan(0);
+  expect(values.length).toEqual(keys.length);
   await cleanup();
 });
 

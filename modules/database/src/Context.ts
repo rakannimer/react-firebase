@@ -21,12 +21,13 @@ export type GetContext = (
 
 export const getContext: GetContext = memoize(
   (
-    createContext = () => React.createContext(firebaseDatabaseDefaultContext)
+    createContext = (defaultContext: typeof firebaseDatabaseDefaultContext) =>
+      React.createContext(defaultContext)
   ) => {
     const {
       Provider: FirebaseDatabaseContextProvider,
       Consumer: FirebaseDatabaseContextConsumer
-    } = createContext();
+    } = createContext(firebaseDatabaseDefaultContext);
     return {
       FirebaseDatabaseContextProvider,
       FirebaseDatabaseContextConsumer

@@ -16,7 +16,6 @@ export class FirebaseDatabaseNode extends React.Component<
   FirebaseDatabaseNodeProps
 > {
   __componentID = createID();
-
   render() {
     const { children, path } = this.props;
     const { FirebaseDatabaseContextConsumer } = getContext();
