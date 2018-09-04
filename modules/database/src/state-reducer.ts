@@ -1,29 +1,21 @@
-import { FirebaseDatabaseProviderState } from "./types";
+import { FirebaseDatabaseProviderState, FirebaseQuery } from "./types";
 import produce from "immer";
 import set from "lodash.set";
 
 export type AddPathToDataArgs = {
+  componentID: any;
   path: string;
   data: any;
   unsub: () => void;
   isLoading?: boolean;
+  query: FirebaseQuery;
 };
 
 export type Operations = "add" | "delete";
 
 export function stateReducer(
   state: FirebaseDatabaseProviderState,
-  addArgs: AddPathToDataArgs,
-  operation: "add"
-): any;
-export function stateReducer(
-  state: FirebaseDatabaseProviderState,
-  deleteArgs: { path: string },
-  operation: "delete"
-): any;
-export function stateReducer(
-  state: FirebaseDatabaseProviderState,
-  actionArgs: AddPathToDataArgs | { path: string },
+  actionArgs: AddPathToDataArgs | { componentID: any; query: FirebaseQuery },
   operation: Operations
 ) {
   switch (operation) {
@@ -31,7 +23,7 @@ export function stateReducer(
       return actions.addPathToData(state, actionArgs as AddPathToDataArgs);
     }
     case "delete": {
-      return actions.removePathFromData(state, actionArgs as { path: string });
+      return actions.removePathFromData(state, actionArgs as AddPathToDataArgs);
     }
     default: {
       throw new Error(
@@ -44,10 +36,11 @@ export function stateReducer(
 export const actions = {
   addPathToData: (
     state: FirebaseDatabaseProviderState,
-    { path, data: newData, unsub, isLoading }: AddPathToDataArgs
+    { path, data: newData, unsub, isLoading, componentID }: AddPathToDataArgs
   ) => {
     return produce(state as any, newState => {
-      set(newState, `dataTree.${path}`, {
+      set(newState, `dataTree.${componentID}`, {
+        path,
         value: newData,
         unsub,
         isLoading
@@ -57,12 +50,10 @@ export const actions = {
   },
   removePathFromData: (
     state: FirebaseDatabaseProviderState,
-    { path }: { path: string }
+    { query, componentID }: { query: FirebaseQuery; componentID: any }
   ) => {
-    const data = Object.assign({}, state.dataTree, {
-      [path]: undefined
+    return produce(state as any, (newState: FirebaseDatabaseProviderState) => {
+      set(newState, `dataTree.${componentID}`, undefined);
     });
-    const newState = Object.assign({}, state, { dataTree: data });
-    return newState;
   }
 };

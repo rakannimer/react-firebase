@@ -12,45 +12,40 @@ import {
   FirebaseDatabaseNodeValueContainer,
   FirebaseDatabaseProviderProps
 } from "../types";
-
-const firebaseQueryProperties = [
-  "path",
-  "orderByChild",
-  "orderByKey",
-  "orderByValue",
-  "limitToFirst",
-  "limitToLast",
-  "startAt",
-  "endAt",
-  "equalTo",
-  "keysOnly"
-];
+import { getInternalDataPath } from "../utils";
 
 const isObject = (value: any) => typeof value === "object" && value !== null;
 export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderProps,
   FirebaseDatabaseProviderState
 > {
+  __isMounted = true;
   registerNode = memoize(
-    (firebaseQuery: FirebaseQuery) => {
+    (componentID: number, firebaseQuery: FirebaseQuery) => {
       const { path } = firebaseQuery;
-      if (path in this.state.dataTree) {
+      if (componentID in this.state.dataTree) {
         // console.error(
         //   "Re-listening to an already registered node in FirebaseDatabaseProvider. Debug info : ",
         //   JSON.stringify({ path, value: this.state.dataTree[path] })
         // );
-        const unsub = get(this.state, `dataTree.${path}.unsub`, () => {});
+        const unsub = get(
+          this.state,
+          `dataTree.${componentID}.unsub`,
+          () => {}
+        );
         unsub();
       } else {
         // Prepare state shape for next update
-        this.setState(state =>
+        this.setStateIfMounted(state =>
           stateReducer(
             state,
             {
               path,
+              componentID,
               data: null,
               unsub: () => {},
-              isLoading: true
+              isLoading: true,
+              query: firebaseQuery
             },
             "add"
           )
@@ -66,33 +61,41 @@ export class FirebaseDatabaseProvider extends React.Component<
         if (firebaseQuery.keysOnly === true) {
           data = isObject(data) ? Object.keys(data as any) : [];
         }
-        this.setState(state =>
+        this.setStateIfMounted(state =>
           stateReducer(
             state,
             {
+              componentID,
               path,
               data,
               unsub,
-              isLoading: false
+              isLoading: false,
+              query: firebaseQuery
             },
             "add"
           )
         );
       });
     },
-    query => firebaseQueryProperties.map(prop => query[prop]).join("_")
+    (componentID: any, query: FirebaseQuery) =>
+      getInternalDataPath(componentID, query)
   );
-  removeNode(path: string) {
-    if (!(path in this.state.dataTree)) {
+  removeNode(componentID: any, query: FirebaseQuery) {
+    if (!(componentID in this.state.dataTree)) {
       return;
     }
-    const unsub = get(this.state, `dataTree.${path}.unsub`, () => {});
+    const { path } = query;
+    const unsub = get(this.state, `dataTree.${componentID}.unsub`, () => {});
     unsub();
-    this.setState(state =>
+    this.setStateIfMounted(state =>
       stateReducer(
         state,
         {
-          path
+          path,
+          componentID,
+          query,
+          unsub: () => {},
+          isLoading: false
         },
         "delete"
       )
@@ -110,7 +113,19 @@ export class FirebaseDatabaseProvider extends React.Component<
       initializeFirebaseApp(this.props);
     }
   }
+  setStateIfMounted = (
+    stateReducer: (
+      state: FirebaseDatabaseProviderState
+    ) => FirebaseDatabaseProviderState
+  ) => {
+    if (this.__isMounted === false) return;
+    this.setState(stateReducer);
+  };
+  componentDidMount() {
+    this.__isMounted = true;
+  }
   componentWillUnmount() {
+    this.__isMounted = false;
     const { dataTree } = this.state;
     Object.keys(dataTree).forEach(key => {
       const unsub = get(this.state, `dataTree.${key}.unsub`, () => {});

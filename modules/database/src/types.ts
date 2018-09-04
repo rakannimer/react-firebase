@@ -35,8 +35,8 @@ export type FirebaseDatabaseProviderState = {
       unsub: () => void;
     };
   };
-  registerNode: (query: FirebaseQuery) => void;
-  removeNode: (path: string) => void;
+  registerNode: (componentID: any, query: FirebaseQuery) => void;
+  removeNode: (componentID: any, path: string) => void;
 };
 
 export type FirebaseDatabaseContextConsumerLifeCycleProps = {} & FirebaseDatabaseProviderState &

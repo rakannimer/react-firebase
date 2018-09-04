@@ -1,43 +1,27 @@
 import * as React from "react";
 
 import { FirebaseDatabaseContextConsumerLifeCycleProps } from "../types";
+import { hasFirebaseQueryChanged } from "../utils";
 
 export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
-  FirebaseDatabaseContextConsumerLifeCycleProps
+  FirebaseDatabaseContextConsumerLifeCycleProps & { componentID: any }
 > {
   componentDidMount() {
-    const { registerNode } = this.props;
-    registerNode(this.props);
+    const { registerNode, componentID } = this.props;
+    registerNode(componentID, this.props);
   }
   componentDidUpdate() {
-    const { registerNode } = this.props;
-    registerNode(this.props);
+    const { registerNode, componentID } = this.props;
+    registerNode(componentID, this.props);
   }
   componentWillUnmount() {
-    const { removeNode, path } = this.props;
-    removeNode(path);
+    const { removeNode, path, componentID } = this.props;
+    removeNode(componentID, path);
   }
   shouldComponentUpdate(
     nextProps: FirebaseDatabaseContextConsumerLifeCycleProps
   ) {
-    const propsThatCanChange = [
-      "path",
-      "orderByChild",
-      "orderByKey",
-      "orderByValue",
-      "limitToFirst",
-      "limitToLast",
-      "startAt",
-      "endAt",
-      "equalTo"
-    ];
-    for (let propName of propsThatCanChange) {
-      //@ts-ignore
-      if (this.props[propName] !== nextProps[propName]) {
-        return true;
-      }
-    }
-    return false;
+    return hasFirebaseQueryChanged(this.props, nextProps);
   }
   render() {
     return null;

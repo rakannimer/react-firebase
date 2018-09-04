@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as firebase from "firebase/app";
 import "firebase/database";
-import { State } from "react-powerplug";
+import { Toggle } from "react-powerplug";
 //@ts-ignore
 import { View, Text, FlatList } from "react-native-web";
 //@ts-ignore
@@ -16,10 +16,11 @@ import ReactJson from "react-json-view";
 
 const s = (v: any) => JSON.stringify(v, null, 2);
 
+const StateComponentAsAny = Component as any;
 export const FirebaseDatabaseList = () => (
   <div>
-    <State initial={{ limit: 2 }}>
-      {({ state, setState }) => (
+    <StateComponentAsAny initial={{ limit: 2 }}>
+      {({ state, setState }: any) => (
         <FirebaseDatabaseNode
           path="user_bookmarks/"
           limitToFirst={state.limit}
@@ -44,7 +45,7 @@ export const FirebaseDatabaseList = () => (
           }}
         </FirebaseDatabaseNode>
       )}
-    </State>
+    </StateComponentAsAny>
   </div>
 );
 
@@ -138,6 +139,7 @@ export const InfiniteList = () => (
         <FirebaseDatabaseNode
           path="user_bookmarks"
           limitToFirst={component.state.limit}
+          keysOnly
         >
           {({ value }) => {
             if (value === null || typeof value === "undefined") return null;
@@ -169,22 +171,40 @@ export const InfiniteList = () => (
 
 export const App = () => {
   return (
-    <FirebaseDatabaseProvider firebase={firebase} {...config}>
-      <InfiniteList />
-      <InfiniteList />
-    </FirebaseDatabaseProvider>
-    // <FirebaseDatabaseProvider {...config} firebase={firebase}>
-    //   <FirebaseDatabaseNode path="user_bookmarks/" limitToFirst={5} keysOnly>
-    //     {d => {
-    //       return <ReactJson src={d} />;
-    //     }}
-    //   </FirebaseDatabaseNode>
-    //   {/* <FirebaseTwoNodesSameLevelSamePath />
-    //   <FirebaseDatabaseList />
-    //   <FirebaseDatabaseList />
-    //   <FirebaseDatabaseItem />
-    //   <TransactionExample />
-    //   <MutationExample /> */}
-    // </FirebaseDatabaseProvider>
+    <Toggle initial={true}>
+      {({ on, toggle }) => (
+        <React.Fragment>
+          {on ? (
+            <FirebaseDatabaseProvider firebase={firebase} {...config}>
+              <FirebaseDatabaseItem />
+              <TransactionExample />
+              <MutationExample />
+              <Toggle initial={true}>
+                {({ on, toggle }) => (
+                  <React.Fragment>
+                    <InfiniteList />
+                    {on && (
+                      <FirebaseDatabaseNode
+                        path="user_bookmarks/"
+                        limitToFirst={5}
+                        keysOnly
+                      >
+                        {d => {
+                          return <ReactJson src={d} />;
+                        }}
+                      </FirebaseDatabaseNode>
+                    )}
+                    <button onClick={toggle}>Toggle Node</button>
+                  </React.Fragment>
+                )}
+              </Toggle>
+            </FirebaseDatabaseProvider>
+          ) : (
+            <div> Nothing to se</div>
+          )}
+          <button onClick={toggle}>Toggle Provider</button>
+        </React.Fragment>
+      )}
+    </Toggle>
   );
 };
