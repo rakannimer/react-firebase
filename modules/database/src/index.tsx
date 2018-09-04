@@ -1,4 +1,5 @@
 export { FirebaseDatabaseNode } from "./components/FirebaseDatabaseNode";
+export { FirebaseDatabaseNodes } from "./components/FirebaseDatabaseNodes";
 export {
   FirebaseDatabaseProvider
 } from "./components/FirebaseDatabaseProvider";

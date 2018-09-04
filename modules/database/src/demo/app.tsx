@@ -9,7 +9,11 @@ import Component from "@reach/component-component";
 
 import { config } from "./test-credentials";
 
-import { FirebaseDatabaseNode, FirebaseDatabaseProvider } from "../index";
+import {
+  FirebaseDatabaseNode,
+  FirebaseDatabaseProvider,
+  FirebaseDatabaseNodes
+} from "../index";
 import { FirebaseDatabaseMutation } from "../components/FirebaseDatabaseMutation";
 import { FirebaseDatabaseTransaction } from "../components/FirebaseDatabaseTransaction";
 import ReactJson from "react-json-view";
@@ -177,7 +181,38 @@ export const App = () => {
         <React.Fragment>
           {on ? (
             <FirebaseDatabaseProvider firebase={firebase} {...config}>
-              <FirebaseDatabaseItem />
+              <FirebaseDatabaseNodes
+                nodes={[
+                  {
+                    path: `user_bookmarks/a`,
+                    id: "user_bookmark"
+                  },
+                  {
+                    path: `user_bookmarks/`,
+                    id: "user_bookmarks",
+                    query: {
+                      limitToFirst: 2,
+                      keysOnly: true
+                    }
+                  }
+                ]}
+              >
+                {({ isLoading, value }) => {
+                  const { user_bookmark, user_bookmarks } = value;
+                  return (
+                    <div>
+                      <pre>
+                        {JSON.stringify(
+                          { isLoading, value, user_bookmark, user_bookmarks },
+                          null,
+                          2
+                        )}
+                      </pre>
+                    </div>
+                  );
+                }}
+              </FirebaseDatabaseNodes>
+              {/* <FirebaseDatabaseItem />
               <TransactionExample />
               <MutationExample />
               <Toggle initial={true}>
@@ -198,7 +233,7 @@ export const App = () => {
                     <button onClick={toggle}>Toggle Node</button>
                   </React.Fragment>
                 )}
-              </Toggle>
+              </Toggle> */}
             </FirebaseDatabaseProvider>
           ) : (
             <div> Nothing to se</div>
