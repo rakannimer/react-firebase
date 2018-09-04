@@ -5,21 +5,16 @@ import {
   waitForElement,
   cleanup
 } from "react-testing-library";
-import * as firebase from "firebase/app";
 import "firebase/database";
-import { FirebaseDatabaseProvider, FirebaseDatabaseNode } from "../src/";
-import { config } from "../src/demo/test-credentials";
 
 import {
   getValueAtPath,
   setValueAtPath,
   deleteValueAtPath,
-  IfNotFalsy,
-  s,
-  WithTestId,
   p,
   isBoolean
 } from "../src/test-utils";
+import { NodeExampleBasic } from "../src/test-cases/NodeExampleBasic";
 
 describe("DatabaseNode", () => {
   let testPath = `/__tests__/${Date.now()}/user_bookmarks/testPath`;
@@ -41,33 +36,7 @@ describe("DatabaseNode", () => {
     await cleanup();
   });
   test("FirebaseDatabaseNode", async () => {
-    const { getByTestId } = render(
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <FirebaseDatabaseNode path={testPath}>
-          {value => {
-            return (
-              <div>
-                <IfNotFalsy condition={value.value}>
-                  <WithTestId id={"test-value"}>
-                    <div>{s(value.value)}</div>
-                  </WithTestId>
-                </IfNotFalsy>
-                <IfNotFalsy condition={value.path}>
-                  <WithTestId id={"test-path"}>
-                    <div>{s(value.path)}</div>
-                  </WithTestId>
-                </IfNotFalsy>
-                <IfNotFalsy condition={value.path}>
-                  <WithTestId id={"test-is-loading"}>
-                    <div>{s(value.isLoading)}</div>
-                  </WithTestId>
-                </IfNotFalsy>
-              </div>
-            );
-          }}
-        </FirebaseDatabaseNode>
-      </FirebaseDatabaseProvider>
-    );
+    const { getByTestId } = render(<NodeExampleBasic path={testPath} />);
     const [value, path, isLoading] = await Promise.all([
       waitForElement(() => getByTestId("test-value")).then(getNodeText),
       waitForElement(() => getByTestId("test-path")).then(getNodeText),
@@ -80,29 +49,7 @@ describe("DatabaseNode", () => {
   });
   test("FirebaseDatabaseNode keysOnly", async () => {
     const { getByTestId } = render(
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <FirebaseDatabaseNode path={testPath} keysOnly>
-          {value => {
-            return (
-              <div>
-                <IfNotFalsy condition={value.value}>
-                  <WithTestId id={"test-value"}>
-                    <div>{s(value.value)}</div>
-                  </WithTestId>
-                </IfNotFalsy>
-                <IfNotFalsy condition={value.path}>
-                  <WithTestId id={"test-path"}>
-                    <div>{s(value.path)}</div>
-                  </WithTestId>
-                </IfNotFalsy>
-                <WithTestId id={"test-is-loading"}>
-                  <div>{s(value.isLoading)}</div>
-                </WithTestId>
-              </div>
-            );
-          }}
-        </FirebaseDatabaseNode>
-      </FirebaseDatabaseProvider>
+      <NodeExampleBasic path={testPath} keysOnly />
     );
     const [value, path, isLoading] = await Promise.all([
       waitForElement(() => getByTestId("test-value")).then(getNodeText),
