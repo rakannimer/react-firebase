@@ -3,182 +3,134 @@ import {
   render,
   fireEvent,
   waitForElement,
-  getNodeText
+  getNodeText,
+  cleanup
 } from "react-testing-library";
 import * as firebase from "firebase/app";
 import "firebase/database";
 import { State } from "react-powerplug";
-import {
-  FirebaseDatabaseProvider,
-  FirebaseDatabaseMutation,
-  FirebaseDatabaseNode
-} from "../src/";
+import { FirebaseDatabaseProvider, FirebaseDatabaseMutation } from "../src/";
 import { config } from "../src/demo/test-credentials";
 
 const TEST_TIMEOUT = 10000;
+import {
+  isBoolean,
+  deleteValueAtPath,
+  getValueAtPath,
+  setValueAtPath,
+  IfNotFalsy,
+  WithTestId,
+  s,
+  p
+} from "../src/test-utils";
 
-test(
-  "FirebaseDatabaseMutation push",
-  async () => {
-    const { getByText, getByTestId } = render(
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <State initial={{ pushedKey: "" }}>
-          {({ state, setState }) => (
-            <React.Fragment>
-              <FirebaseDatabaseMutation
-                type="push"
-                path={"TEST_NAMESPACE/user_bookmarks"}
-              >
-                {({ runMutation }) => {
-                  return (
-                    <div>
-                      <button
-                        data-testid="test-push"
-                        onClick={async () => {
-                          const { key } = await runMutation({ TEST: "DATA" });
-                          setState({ pushedKey: key });
-                        }}
-                      >
-                        Push
-                      </button>
-                    </div>
-                  );
-                }}
-              </FirebaseDatabaseMutation>
-              {state.pushedKey !== "" && (
-                <div data-testid="test-push-result">{state.pushedKey}</div>
-              )}
-            </React.Fragment>
-          )}
-        </State>
-      </FirebaseDatabaseProvider>
-    );
-    const pushMutationButton = getByTestId("test-push");
-    await waitForElement(() => pushMutationButton);
-    fireEvent.click(pushMutationButton);
-    await waitForElement(() => getByTestId("test-push-result"));
-    expect(getNodeText(getByTestId("test-push-result")).length).toBe(20);
-  },
-  TEST_TIMEOUT
+const MutationExamplePush = ({ path, value }) => (
+  <FirebaseDatabaseProvider firebase={firebase} {...config}>
+    <State initial={{ pushedKey: "" }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseMutation type="push" path={path}>
+            {({ runMutation }) => {
+              return (
+                <button
+                  data-testid="test-push"
+                  onClick={async () => {
+                    const { key } = await runMutation(value);
+                    setState({ pushedKey: key });
+                  }}
+                >
+                  Push
+                </button>
+              );
+            }}
+          </FirebaseDatabaseMutation>
+
+          <IfNotFalsy condition={state.pushedKey}>
+            <div data-testid="test-push-result">{state.pushedKey}</div>
+          </IfNotFalsy>
+        </React.Fragment>
+      )}
+    </State>
+  </FirebaseDatabaseProvider>
 );
 
-test(
-  "FirebaseDatabaseMutation update",
-  async () => {
-    const testData = { TEST: "DATA" };
-    const path = "TEST_NAMESPACE/user_bookmarks/1";
+const MutationExampleUpdate = ({ path, value }) => (
+  <FirebaseDatabaseProvider firebase={firebase} {...config}>
+    <State initial={{ hasUpdated: false }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseMutation type="update" path={path}>
+            {({ runMutation }) => {
+              return (
+                <button
+                  data-testid="test-push"
+                  onClick={async () => {
+                    const { key } = await runMutation(value);
+                    setState({ hasUpdated: true });
+                  }}
+                >
+                  Push
+                </button>
+              );
+            }}
+          </FirebaseDatabaseMutation>
 
-    const { getByText, getByTestId } = render(
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <FirebaseDatabaseNode path={path}>
-          {({ value }) => (
-            <div data-testid="test-update-result">{JSON.stringify(value)}</div>
-          )}
-        </FirebaseDatabaseNode>
-        <State initial={{ value: "" }}>
-          {({ state, setState }) => (
-            <React.Fragment>
-              <FirebaseDatabaseMutation type="update" path={path}>
-                {({ runMutation }) => {
-                  return (
-                    <div>
-                      <button
-                        data-testid="test-update"
-                        onClick={async () => {
-                          const { value } = await runMutation(testData);
-                          setState({ value });
-                        }}
-                      >
-                        Update
-                      </button>
-                    </div>
-                  );
-                }}
-              </FirebaseDatabaseMutation>
-
-              <div data-testid="test-update-result">
-                {JSON.stringify(state.value)}
-              </div>
-            </React.Fragment>
-          )}
-        </State>
-      </FirebaseDatabaseProvider>
-    );
-    const dbRef = firebase
-      .app()
-      .database()
-      .ref("TEST_NAMESPACE/user_bookmarks/1");
-    await dbRef.set(null);
-    // await dbRef.once("value");
-    const initialValue = (await dbRef.once("value")).val();
-    expect(initialValue).toBe(null);
-    const pushMutationButton = getByTestId("test-update");
-    await waitForElement(() => pushMutationButton);
-    fireEvent.click(pushMutationButton);
-    await waitForElement(() => getByTestId("test-update-result"));
-    expect(getNodeText(getByTestId("test-update-result"))).toEqual(
-      JSON.stringify(testData)
-    );
-    await dbRef.set(null);
-  },
-  TEST_TIMEOUT
+          <IfNotFalsy condition={state.hasUpdated}>
+            <div data-testid="test-push-result">{s(state.hasUpdated)}</div>
+          </IfNotFalsy>
+        </React.Fragment>
+      )}
+    </State>
+  </FirebaseDatabaseProvider>
 );
 
-test(
-  "FirebaseDatabaseMutation set",
-  async () => {
-    const testData = { TEST: "DATA" };
-    const { getByText, getByTestId } = render(
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <State initial={{ value: "" }}>
-          {({ state, setState }) => (
-            <React.Fragment>
-              <FirebaseDatabaseMutation
-                type="set"
-                path={"TEST_NAMESPACE/user_bookmarks/2"}
-              >
-                {({ runMutation }) => {
-                  return (
-                    <div>
-                      <button
-                        data-testid="test-update"
-                        onClick={async () => {
-                          const { value } = await runMutation(testData);
-                          setState({ value });
-                        }}
-                      >
-                        Update
-                      </button>
-                    </div>
-                  );
-                }}
-              </FirebaseDatabaseMutation>
-              {state.value !== "" && (
-                <div data-testid="test-update-result">
-                  {JSON.stringify(state.value)}
-                </div>
-              )}
-            </React.Fragment>
-          )}
-        </State>
-      </FirebaseDatabaseProvider>
-    );
-    const dbRef = firebase
-      .app()
-      .database()
-      .ref("TEST_NAMESPACE/user_bookmarks/1");
-    await dbRef.set(null);
-    // await dbRef.once("value");
-    const initialValue = (await dbRef.once("value")).val();
-    expect(initialValue).toBe(null);
-    const pushMutationButton = getByTestId("test-update");
-    await waitForElement(() => pushMutationButton);
-    fireEvent.click(pushMutationButton);
-    await waitForElement(() => getByTestId("test-update-result"));
-    expect(getNodeText(getByTestId("test-update-result"))).toEqual(
-      JSON.stringify(testData)
-    );
-    await dbRef.set(null);
-  },
-  TEST_TIMEOUT
-);
+describe("FirebaseDatabaseMutation", () => {
+  let testPath = `/__tests__/${Date.now()}/user_bookmarks/testPath`;
+  let testPathValue = {
+    ohHai: "Mark"
+  };
+  beforeAll(async () => {
+    await deleteValueAtPath(testPath);
+    const val = await getValueAtPath(testPath);
+    expect(val).toBeNull();
+    await setValueAtPath(testPath, testPathValue);
+  });
+  afterAll(async () => {
+    await deleteValueAtPath(testPath);
+    const val = await getValueAtPath(testPath);
+    expect(val).toBeNull();
+  });
+  afterEach(async () => {
+    await cleanup();
+  });
+  test(
+    "push",
+    async () => {
+      const { getByTestId } = render(
+        <MutationExamplePush path={testPath} value={testPathValue} />
+      );
+      const pushMutationButton = getByTestId("test-push");
+      await waitForElement(() => pushMutationButton);
+      fireEvent.click(pushMutationButton);
+      await waitForElement(() => getByTestId("test-push-result"));
+      expect(getNodeText(getByTestId("test-push-result")).length).toBe(20);
+    },
+    TEST_TIMEOUT
+  );
+  test(
+    "update",
+    async () => {
+      const { getByTestId } = render(
+        <MutationExampleUpdate path={testPath} value={testPathValue} />
+      );
+      const pushMutationButton = getByTestId("test-push");
+      await waitForElement(() => pushMutationButton);
+      fireEvent.click(pushMutationButton);
+      await waitForElement(() => getByTestId("test-push-result"));
+      expect(isBoolean(p(getNodeText(getByTestId("test-push-result"))))).toBe(
+        true
+      );
+    },
+    TEST_TIMEOUT
+  );
+});
