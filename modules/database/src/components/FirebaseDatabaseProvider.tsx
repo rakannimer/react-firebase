@@ -34,25 +34,50 @@ export class FirebaseDatabaseProvider extends React.Component<
   ) => {
     if (d === null || typeof d === "undefined") return;
     let data = d.val();
-    if (query.keysOnly === true) {
+    if (query.keysOnly === true && !query.isList) {
       data = isObject(data) ? Object.keys(data as any) : [];
     }
-    const { path } = query;
-    this.setStateIfMounted(state =>
-      stateReducer(
-        state,
-        {
-          componentID,
-          path,
-          data,
-          unsub,
-          isLoading: false,
-          query
-        },
-        "add"
-      )
-    );
+    const { path, isList } = query;
+    if (isList) {
+      // @ts-ignore
+      const key = d.key;
+      this.setStateIfMounted(state =>
+        stateReducer(
+          state,
+          {
+            componentID,
+            path,
+            data: {
+              key,
+              data
+            },
+            unsub,
+            isLoading: false,
+            query
+          },
+          "add-to-list"
+        )
+      );
+    } else {
+      this.setStateIfMounted(state =>
+        stateReducer(
+          state,
+          {
+            componentID,
+            path,
+            data,
+            unsub,
+            isLoading: false,
+            query
+          },
+          "add"
+        )
+      );
+    }
   };
+  // private onChildAdded = d => {
+  //   console.log("child added", d);
+  // };
   registerNode = memoize(
     (componentID: number, firebaseQuery: FirebaseQuery) => {
       const { path } = firebaseQuery;
@@ -84,6 +109,14 @@ export class FirebaseDatabaseProvider extends React.Component<
         ...firebaseQuery,
         firebase: this.state.firebase
       });
+
+      if (firebaseQuery.isList === true) {
+        ref.on("child_added", (d: FirebaseDatabaseNodeValueContainer) => {
+          this.onValue(d, { unsub, componentID, query: firebaseQuery });
+        });
+        return;
+      }
+
       if (firebaseQuery.once === true) {
         ref.once("value", (d: FirebaseDatabaseNodeValueContainer) => {
           this.onValue(d, {
@@ -92,6 +125,7 @@ export class FirebaseDatabaseProvider extends React.Component<
             query: firebaseQuery
           });
         });
+        return;
       }
       const unsub = ref.on("value", (d: FirebaseDatabaseNodeValueContainer) => {
         this.onValue(d, { unsub, componentID, query: firebaseQuery });
