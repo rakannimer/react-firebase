@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as firebase from "firebase/app";
 import "firebase/database";
-import { Toggle } from "react-powerplug";
+import { Toggle, State } from "react-powerplug";
 //@ts-ignore
 import { View, Text, FlatList } from "react-native-web";
 //@ts-ignore
@@ -17,230 +17,183 @@ import {
 import { FirebaseDatabaseMutation } from "../components/FirebaseDatabaseMutation";
 import { FirebaseDatabaseTransaction } from "../components/FirebaseDatabaseTransaction";
 import ReactJson from "react-json-view";
+import { renderAndAddProps } from "render-and-add-props";
 
 const s = (v: any) => JSON.stringify(v, null, 2);
 
-const StateComponentAsAny = Component as any;
-export const FirebaseDatabaseList = () => (
-  <div>
-    <StateComponentAsAny initial={{ limit: 2 }}>
-      {({ state, setState }: any) => (
-        <FirebaseDatabaseNode
-          path="user_bookmarks/"
-          limitToFirst={state.limit}
-          orderByValue={"created_on"}
-        >
-          {d => {
-            return (
-              <>
-                <pre>Path {d.path}</pre>
-                <pre style={{ height: 300, overflow: "auto" }}>
-                  Value {JSON.stringify(d.value, null, 2)}
-                </pre>
-                <button
-                  onClick={() => {
-                    setState({ limit: state.limit + 1 });
-                  }}
-                >
-                  Load more
-                </button>
-              </>
-            );
-          }}
-        </FirebaseDatabaseNode>
-      )}
-    </StateComponentAsAny>
-  </div>
-);
+// export const PostIDs = ({ children }) => {
+//   return (
+//     <FirebaseDatabaseNode path="posts" isList keysOnly limitToFirst={2}>
+//       <IfDefined>{children}</IfDefined>
+//     </FirebaseDatabaseNode>
+//   );
+// };
 
-export const FirebaseDatabaseItem = () => (
-  <div>
-    <FirebaseDatabaseNode path="user_bookmarks/a">
-      {d => {
-        return <ReactJson src={d} />;
-      }}
-    </FirebaseDatabaseNode>
-  </div>
-);
+export type RunSideEffectProps = {
+  sideEffect: () => void;
+  children?: any;
+};
+export const RunSideEffect: React.StatelessComponent<RunSideEffectProps> = ({
+  sideEffect,
+  children
+}: RunSideEffectProps) => {
+  sideEffect();
+  return children ? children : null;
+};
 
-export const TransactionExample = () => (
-  <FirebaseDatabaseTransaction path="user_bookmarks/a/usage_count">
-    {({ runTransaction }) => {
-      return (
-        <div>
-          <button
-            onClick={() => {
-              runTransaction({
-                reducer: val => {
-                  if (val === null) {
-                    return 1;
-                  } else {
-                    return val + 1;
-                  }
-                }
-              }).then(() => {
-                console.log("Ran transaction");
-              });
-            }}
-          >
-            Click me to run transaction
-          </button>
-        </div>
-      );
-    }}
-  </FirebaseDatabaseTransaction>
-);
+export type PreloaderProps = {
+  dataMap: Map<string, any>;
+  onChange: (dataMap: PreloaderProps["dataMap"]) => void;
+};
 
-export const MutationExample = () => (
-  <div>
-    <FirebaseDatabaseMutation type="set" path="user_bookmarks/a">
-      {({ runMutation }) => {
-        return (
-          <div>
-            <button
-              onClick={() => {
-                runMutation({
-                  new_data: "Oh hai",
-                  updated_at: firebase.database.ServerValue.TIMESTAMP,
-                  now: Date.now()
-                }).then(() => {
-                  console.log("Ran mutation");
-                });
-              }}
-            >
-              Click me to run mutation
-            </button>
-          </div>
-        );
-      }}
-    </FirebaseDatabaseMutation>
-  </div>
-);
+export type FirebaseChildRenderProps = {
+  value: any;
+};
 
-export const FirebaseTwoNodesSameLevelSamePath = () => {
+export type FirebaseKeysChildRenderProps = {
+  value: string[];
+};
+
+export type FirebaseListChildRenderProps = {
+  value: Array<{ key: string; data: any }>;
+};
+
+const DataNode = ({ path = "", render = (val: any) => null }) => {
   return (
-    <React.Fragment>
-      <FirebaseDatabaseNode path="user_bookmarks/a">
-        {d => {
-          return <ReactJson src={d} />;
-        }}
-      </FirebaseDatabaseNode>
-      <div>
-        <FirebaseDatabaseNode path="user_bookmarks/a">
-          {d => {
-            return <ReactJson src={d} />;
-          }}
-        </FirebaseDatabaseNode>
-      </div>
-    </React.Fragment>
+    <FirebaseDatabaseNode path={path}>
+      <IfDefined>
+        {({ value }: FirebaseChildRenderProps) => render(value)}
+      </IfDefined>
+    </FirebaseDatabaseNode>
   );
 };
 
-export const InfiniteList = () => (
-  <View>
-    <Component initialState={{ limit: 5 }}>
-      {(component: any) => (
-        <FirebaseDatabaseNode
-          path="user_bookmarks"
-          limitToFirst={component.state.limit}
-          keysOnly
-          once
-        >
-          {({ value }) => {
-            if (value === null || typeof value === "undefined") return null;
-            const keys = Object.keys(value);
-            const values = Object.values(value);
-            return (
-              <FlatList
-                style={{ height: 200, overflow: "auto" }}
-                data={values}
-                //@ts-ignore
-                keyExtractor={(v, i) => keys[i]}
-                //@ts-ignore
-                renderItem={v => (
-                  <View>
-                    <Text>{s(v)}</Text>
-                  </View>
-                )}
-                onEndReached={() => {
-                  component.setState({ limit: component.state.limit + 1 });
-                }}
-              />
-            );
-          }}
-        </FirebaseDatabaseNode>
-      )}
-    </Component>
-  </View>
-);
+export const IfDefined = ({ value, children }: { value: any; children: any }) =>
+  value ? renderAndAddProps(children, { value }) : null;
+export const Preloader: React.StatelessComponent = () => {
+  return (
+    <FirebaseDatabaseNode path="posts" isList keysOnly limitToFirst={2}>
+      <IfDefined>
+        {({ value: postIDs }: FirebaseKeysChildRenderProps) => (
+          <React.Fragment>
+            {postIDs.map(postID => (
+              <React.Fragment key={postID}>
+                <FirebaseDatabaseNode path={`posts/${postID}`}>
+                  <IfDefined>
+                    {({ value: { author_id } }: FirebaseChildRenderProps) => {
+                      return (
+                        <React.Fragment>
+                          <DataNode path={`users/${author_id}`} />
+
+                          <FirebaseDatabaseNode
+                            path={`comments/${postID}`}
+                            isList
+                            limitToFirst={2}
+                          >
+                            <IfDefined>
+                              {({
+                                value: comments
+                              }: FirebaseListChildRenderProps) =>
+                                comments.map(({ data: com, key }) => (
+                                  <React.Fragment key={key}>
+                                    <FirebaseDatabaseNode
+                                      path={`users/${com.userID}`}
+                                    >
+                                      {({ value }) => null}
+                                    </FirebaseDatabaseNode>
+                                  </React.Fragment>
+                                ))
+                              }
+                            </IfDefined>
+                          </FirebaseDatabaseNode>
+                        </React.Fragment>
+                      );
+                    }}
+                  </IfDefined>
+                </FirebaseDatabaseNode>
+              </React.Fragment>
+            ))}
+          </React.Fragment>
+        )}
+      </IfDefined>
+    </FirebaseDatabaseNode>
+  );
+};
+
+// export const App2 = () => {
+//   return (
+//     <FirebaseDatabaseProvider firebase={firebase} {...config}>
+//       <Preloader />
+//       <div id="posts" hidden>
+//         <h2>Posts</h2>
+//         <FirebaseDatabaseNode path="posts" isList keysOnly limitToFirst={2}>
+//           {({ value }) => (
+//             <div>
+//               <h2>Post IDs</h2>
+//               <pre>{s(value)}</pre>
+//               {value &&
+//                 value.map(postKey => (
+//                   <div key={postKey}>
+//                     <pre>Post ID : {s(postKey)}</pre>
+//                     <FirebaseDatabaseNode path={`posts/${postKey}`}>
+//                       {({ value }) =>
+//                         value && (
+//                           <div>
+//                             <FirebaseDatabaseNode
+//                               path={`users/${value.author_id}`}
+//                             >
+//                               {({ value: author }) =>
+//                                 author && (
+//                                   <div>
+//                                     <h3>Author :</h3>
+//                                     <pre> {s(author)}</pre>
+//                                   </div>
+//                                 )
+//                               }
+//                             </FirebaseDatabaseNode>
+//                             <h2>Post :</h2>
+//                             <pre>{s(value)}</pre>
+//                             <h3>Comments </h3>
+//                             <FirebaseDatabaseNode
+//                               path={`comments/${postKey}`}
+//                               isList
+//                               limitToFirst={2}
+//                             >
+//                               {({ value }) =>
+//                                 value &&
+//                                 value.map(({ key, data: { data, userID } }) => (
+//                                   <React.Fragment key={key}>
+//                                     <pre>{s({ key, data, userID })}</pre>
+//                                     <h5>Comment : {data}</h5>
+//                                     <h5>Comment AuthorID : {userID}</h5>
+//                                     <h5>Comment Author </h5>
+//                                     <FirebaseDatabaseNode
+//                                       path={`users/${userID}`}
+//                                     >
+//                                       {({ value }) => (
+//                                         <div>
+//                                           <pre>{s(value)}</pre>
+//                                         </div>
+//                                       )}
+//                                     </FirebaseDatabaseNode>
+//                                   </React.Fragment>
+//                                 ))
+//                               }
+//                             </FirebaseDatabaseNode>
+//                           </div>
+//                         )
+//                       }
+//                     </FirebaseDatabaseNode>
+//                   </div>
+//                 ))}
+//             </div>
+//           )}
+//         </FirebaseDatabaseNode>
+//       </div>
+//     </FirebaseDatabaseProvider>
+//   );
+// };
 
 export const App = () => {
-  return (
-    <Toggle initial={true}>
-      {({ on, toggle }) => (
-        <React.Fragment>
-          {on ? (
-            <FirebaseDatabaseProvider firebase={firebase} {...config}>
-              <FirebaseDatabaseNodes
-                nodes={[
-                  {
-                    path: `user_bookmarks/a`,
-                    id: "user_bookmark"
-                  },
-                  {
-                    path: `user_bookmarks/`,
-                    id: "user_bookmarks",
-                    query: {
-                      limitToFirst: 2,
-                      keysOnly: true
-                    }
-                  }
-                ]}
-              >
-                {({ isLoading, value }) => {
-                  const { user_bookmark, user_bookmarks } = value;
-                  return (
-                    <div>
-                      <pre>
-                        {JSON.stringify(
-                          { isLoading, value, user_bookmark, user_bookmarks },
-                          null,
-                          2
-                        )}
-                      </pre>
-                    </div>
-                  );
-                }}
-              </FirebaseDatabaseNodes>
-              {/* <FirebaseDatabaseItem />
-              <TransactionExample />
-              <MutationExample />
-              <Toggle initial={true}>
-                {({ on, toggle }) => (
-                  <React.Fragment>
-                    <InfiniteList />
-                    {on && (
-                      <FirebaseDatabaseNode
-                        path="user_bookmarks/"
-                        limitToFirst={5}
-                        keysOnly
-                      >
-                        {d => {
-                          return <ReactJson src={d} />;
-                        }}
-                      </FirebaseDatabaseNode>
-                    )}
-                    <button onClick={toggle}>Toggle Node</button>
-                  </React.Fragment>
-                )}
-              </Toggle> */}
-            </FirebaseDatabaseProvider>
-          ) : (
-            <div> Nothing to se</div>
-          )}
-          <button onClick={toggle}>Toggle Provider</button>
-        </React.Fragment>
-      )}
-    </Toggle>
-  );
+  return <Preloader />;
 };

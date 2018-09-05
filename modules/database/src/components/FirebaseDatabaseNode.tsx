@@ -6,10 +6,19 @@ import { FirebaseQuery } from "../types";
 export { FirebaseDatabaseProvider } from "./FirebaseDatabaseProvider";
 import { FirebaseDatabaseContextConsumerLifeCycle } from "./FirebaseDatabaseNodeLifeCycle";
 
+export type ChildFunctionProps = {
+  value: any;
+  path: string;
+  isLoading: boolean;
+};
+
+type Renderable<T> =
+  | React.Component<T>
+  | React.StatelessComponent<T>
+  | React.ReactChild;
+
 export type FirebaseDatabaseNodeProps = {
-  children?: (
-    { value, path, isLoading }: { value: any; path: string; isLoading: boolean }
-  ) => React.ReactNode;
+  children?: Renderable<ChildFunctionProps>;
 } & FirebaseQuery;
 
 export class FirebaseDatabaseNode extends React.Component<
