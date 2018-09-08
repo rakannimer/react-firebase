@@ -10,3 +10,6 @@ export {
 export {
   FirebaseDatabaseTransaction
 } from "./components/FirebaseDatabaseTransaction";
+
+export { getFirebaseQuery } from "./get-firebase-query";
+export { initializeFirebaseApp } from "./initialize-firebase-app";
