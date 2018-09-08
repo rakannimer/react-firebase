@@ -62,12 +62,24 @@ export const actions = {
       });
     }
     return produce(state as any, newState => {
-      const list = get(newState, `dataTree.${componentID}.value`, []);
-      const formattedData = query.keysOnly ? key : { key, data };
-      list.push(formattedData);
-      set(newState, `dataTree.${componentID}`, {
-        value: list
-      });
+      const list = get(newState, `dataTree.${componentID}.value`, []) as {
+        key: string;
+        value: any;
+      }[];
+      const dataIndexInList = list.findIndex(el => el.key === key);
+      if (dataIndexInList === -1) {
+        const formattedData = query.keysOnly ? key : { key, data };
+        list.push(formattedData);
+        set(newState, `dataTree.${componentID}`, {
+          value: list
+        });
+      } else {
+        set(
+          newState,
+          `dataTree.${componentID}.value.${dataIndexInList}.data`,
+          data
+        );
+      }
       return newState;
     });
   },
