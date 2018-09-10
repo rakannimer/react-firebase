@@ -20,6 +20,38 @@ export class FirebaseDatabaseProvider extends React.Component<
   FirebaseDatabaseProviderState
 > {
   __isMounted = true;
+  onChildRemoved = (
+    d: FirebaseDatabaseNodeValueContainer,
+    {
+      unsub,
+      componentID,
+      query
+    }: {
+      unsub: Function;
+      componentID: any;
+      query: FirebaseQuery;
+    }
+  ) => {
+    const { path, isList } = query;
+    // @ts-ignore
+    const key = d.key;
+    this.setStateIfMounted(state =>
+      stateReducer(
+        state,
+        {
+          componentID,
+          path,
+          data: {
+            key
+          },
+          unsub,
+          isLoading: false,
+          query
+        },
+        "remove-from-list"
+      )
+    );
+  };
   onValue = (
     d: FirebaseDatabaseNodeValueContainer,
     {
@@ -111,9 +143,30 @@ export class FirebaseDatabaseProvider extends React.Component<
       });
 
       if (firebaseQuery.isList === true) {
-        ref.on("child_added", (d: FirebaseDatabaseNodeValueContainer) => {
-          this.onValue(d, { unsub, componentID, query: firebaseQuery });
-        });
+        const unsubChildRemoved = ref.on(
+          "child_removed",
+          (d: FirebaseDatabaseNodeValueContainer) => {
+            this.onChildRemoved(d, {
+              unsub: unsubChildRemoved,
+              componentID,
+              query: firebaseQuery
+            });
+          }
+        );
+        const unsub = ref.on(
+          "child_added",
+          (d: FirebaseDatabaseNodeValueContainer) => {
+            this.onValue(d, {
+              unsub: () => {
+                unsub();
+                unsubChildRemoved();
+              },
+              componentID,
+              query: firebaseQuery
+            });
+          }
+        );
+
         return;
       }
 

@@ -11,7 +11,7 @@ export type AddPathToDataArgs = {
   query: FirebaseQuery;
 };
 
-export type Operations = "add" | "delete" | "add-to-list";
+export type Operations = "add" | "delete" | "add-to-list" | "remove-from-list";
 
 export function stateReducer(
   state: FirebaseDatabaseProviderState,
@@ -28,6 +28,9 @@ export function stateReducer(
     case "add-to-list": {
       return actions.addToList(state, actionArgs as AddPathToDataArgs);
     }
+    case "remove-from-list": {
+      return actions.removeItemFromList(state, actionArgs as AddPathToDataArgs);
+    }
     default: {
       throw new Error(
         `Unsupported operation ${operation}. \n Supported state reducer operations are 'add' & 'delete'.`
@@ -37,6 +40,27 @@ export function stateReducer(
 }
 import get from "lodash.get";
 export const actions = {
+  removeItemFromList: (
+    state: FirebaseDatabaseProviderState,
+    { path, data, unsub, isLoading, componentID, query }: AddPathToDataArgs
+  ) => {
+    const list = get(state, `dataTree.${componentID}.value`, false) as
+      | false
+      | { key: string; value: any }[];
+    const { key } = data;
+    if (list === false) {
+      return null;
+    }
+    return produce(state as any, newState => {
+      const dataIndexInList = list.findIndex(el => el.key === key);
+      if (dataIndexInList === -1) {
+        return newState;
+      }
+      set(newState, `dataTree.${componentID}`, {
+        value: list.filter(el => el.key !== key)
+      });
+    });
+  },
   addToList: (
     state: FirebaseDatabaseProviderState,
     {
