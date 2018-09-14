@@ -1,7 +1,7 @@
 {
   "name": "@react-firebase/database",
   "description": "Efficiently Render & mutate Firebase Realtime Database data in your react(or react-native) app.",
-  "version": "0.2.30",
+  "version": "0.2.31",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",

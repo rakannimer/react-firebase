@@ -143,23 +143,20 @@ export class FirebaseDatabaseProvider extends React.Component<
       });
 
       if (firebaseQuery.isList === true) {
-        const unsubChildRemoved = ref.on(
-          "child_removed",
-          (d: FirebaseDatabaseNodeValueContainer) => {
-            this.onChildRemoved(d, {
-              unsub: unsubChildRemoved,
-              componentID,
-              query: firebaseQuery
-            });
-          }
-        );
+        ref.on("child_removed", (d: FirebaseDatabaseNodeValueContainer) => {
+          this.onChildRemoved(d, {
+            // NOT USED REMOVE
+            unsub: () => {},
+            componentID,
+            query: firebaseQuery
+          });
+        });
         const unsub = ref.on(
           "child_added",
           (d: FirebaseDatabaseNodeValueContainer) => {
             this.onValue(d, {
               unsub: () => {
                 unsub();
-                unsubChildRemoved();
               },
               componentID,
               query: firebaseQuery

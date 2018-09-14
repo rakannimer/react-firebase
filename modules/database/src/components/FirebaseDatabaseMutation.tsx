@@ -27,7 +27,7 @@ export type RunMutation = (
 
 export class FirebaseDatabaseMutationWithContext extends React.Component<
   FirebaseDatabaseMutationWithContextProps
-  > {
+> {
   createMutationRunner = () => {
     const { firebase, path, type } = this.props;
     const firebaseRef = firebase
@@ -96,7 +96,7 @@ export class FirebaseDatabaseMutationWithContext extends React.Component<
 
 export class FirebaseDatabaseMutation extends React.Component<
   FirebaseMutationProps
-  > {
+> {
   render() {
     const { children, type, path } = this.props;
     const { FirebaseDatabaseContextConsumer } = getContext();
