@@ -1,10 +1,7 @@
 import * as React from "react";
-import { FirebaseDatabaseProviderState, FirebaseQuery } from "./types";
+import { FirebaseDatabaseProviderState } from "./types";
 import memoize from "lodash.memoize";
 export const firebaseDatabaseDefaultContext = {
-  registerNode: ({ path }: FirebaseQuery) => {},
-  removeNode: (path: string) => {},
-  dataTree: {},
   firebase: {}
 } as FirebaseDatabaseProviderState;
 
