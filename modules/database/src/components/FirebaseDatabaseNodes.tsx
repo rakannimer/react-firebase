@@ -5,12 +5,18 @@ import produce from "immer";
 
 import { renderAndAddProps } from "render-and-add-props";
 import { FirebaseDatabaseNode } from "./FirebaseDatabaseNode";
-import { FirebaseQuery } from "../types";
+import { FirebaseDatabaseNodeProps } from "../types";
 export type FirebaseDatabaseNodesProps = {
   children?: (
     { value, path, isLoading }: { value: any; path: string; isLoading: boolean }
   ) => React.ReactNode;
-} & { nodes: { query?: Partial<FirebaseQuery>; path: string; id: string }[] };
+} & {
+  nodes: {
+    query?: Partial<FirebaseDatabaseNodeProps>;
+    path: string;
+    id: string;
+  }[];
+};
 
 export type FirebaseDatabaseNodesState = {
   isLoading: boolean;

@@ -19,15 +19,15 @@ const dataNodeProps = [
 ] as Array<keyof FirebaseDatabaseNodeProps>;
 
 export const getPropsOrNull = (props: FirebaseDatabaseNodeProps) => {
-  const state = {} as FirebaseDatabaseNodeState;
+  const cleanProps = {} as FirebaseDatabaseNodeProps;
   for (let propName of dataNodeProps) {
     if (props[propName]) {
-      state[propName] = props[propName];
+      cleanProps[propName] = props[propName];
     } else {
-      state[propName] = null;
+      cleanProps[propName] = null;
     }
   }
-  return state;
+  return cleanProps;
 };
 
 export const havePropsChanged = (
