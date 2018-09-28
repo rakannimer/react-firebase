@@ -1,0 +1,149 @@
+---
+name: Reading & Querying Data
+---
+
+import { Playground, PropsTable } from 'docz'
+
+import Component from "@reach/component-component";
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+
+import FirebaseDatabaseNode  from '../../src/components/FirebaseDatabaseNode'
+import FirebaseDatabaseProvider from '../../src/components/FirebaseDatabaseProvider'
+import {config} from '../demo/test-credentials.ts'
+import ReactJson from "react-json-view";
+
+
+
+## As Object
+
+<Playground>
+  <FirebaseDatabaseProvider firebase={firebase} {...config} >
+    <Component initialState={{ limit: 2 }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseNode
+            path="user_bookmarks/"
+            limitToFirst={state.limit}
+          >
+            {d => {
+              return (
+                <React.Fragment>
+                  <ReactJson src={d} name={false}/>
+                </React.Fragment>
+              );
+            }}
+          </FirebaseDatabaseNode>
+          <React.Fragment>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit + 1 });
+              }}
+            >
+              Load more
+            </button>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+              }}
+            >
+              Load less
+            </button>
+          </React.Fragment>
+        </React.Fragment>
+      )}
+    </Component>
+  </FirebaseDatabaseProvider>
+</Playground>
+
+
+## As array of key,data objects
+
+<Playground>
+  <FirebaseDatabaseProvider firebase={firebase} {...config} >
+    <Component initialState={{ limit: 2 }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseNode
+            path="user_bookmarks/"
+            limitToFirst={state.limit}
+            keysOnly={true}
+          >
+            {d => {
+              return (
+                <React.Fragment>
+                  <ReactJson src={d} name={false}/>
+                </React.Fragment>
+              );
+            }}
+          </FirebaseDatabaseNode>
+          <React.Fragment>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit + 1 });
+              }}
+            >
+              Load more
+            </button>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+              }}
+            >
+              Load less
+            </button>
+          </React.Fragment>
+        </React.Fragment>
+      )}
+    </Component>
+  </FirebaseDatabaseProvider>
+</Playground>
+
+
+## Only the keys
+
+<Playground>
+  <FirebaseDatabaseProvider firebase={firebase} {...config} >
+    <Component initialState={{ limit: 2 }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseNode
+            path="user_bookmarks/"
+            limitToFirst={state.limit}
+            orderByValue={"created_on"}
+            keysOnly
+          >
+            {d => {
+              return (
+                <React.Fragment>
+                  <ReactJson src={d} name={false}/>
+                </React.Fragment>
+              );
+            }}
+          </FirebaseDatabaseNode>
+          <React.Fragment>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit + 1 });
+              }}
+            >
+              Load more
+            </button>
+            <button
+              onClick={() => {
+                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+              }}
+            >
+              Load less
+            </button>
+          </React.Fragment>
+        </React.Fragment>
+      )}
+    </Component>
+  </FirebaseDatabaseProvider>
+</Playground>
+
+
+## API : 
+
+<PropsTable of={FirebaseDatabaseNode} />

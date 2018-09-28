@@ -23,10 +23,10 @@ describe("DatabaseNode", () => {
   let testPathValue = {
     ohHai: "Mark"
   };
-  let testListPathValues = Array.from({ length: 10 }, v => ({
-    a: Math.floor(Math.random() * 10)
+  let testListPathValues = Array.from({ length: 10 }, (v, i) => ({
+    TEST_VAL: i
   })).reduce((acc, cur) => {
-    acc[`KEY_${cur.a}`] = cur;
+    acc[`KEY_${cur.TEST_VAL}`] = cur;
     return acc;
   }, {});
   beforeAll(async () => {
@@ -41,6 +41,9 @@ describe("DatabaseNode", () => {
     await deleteValueAtPath(testListPath);
     // const val = await getValueAtPath(testPath);
     // expect(val).toBeNull();
+  });
+  beforeEach(async () => {
+    await cleanup();
   });
   afterEach(async () => {
     await cleanup();
@@ -72,7 +75,7 @@ describe("DatabaseNode", () => {
   });
 
   test("FirebaseDatabaseNode isList", async () => {
-    const { getByTestId } = render(
+    const { getByTestId, unmount } = render(
       <NodeExampleBasic path={testListPath} isList />
     );
     const [value, path, isLoading] = await Promise.all([
@@ -81,16 +84,63 @@ describe("DatabaseNode", () => {
       waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
     ]);
     const testKeys = Object.keys(testListPathValues);
-    const testValues = testKeys.map(key => testListPathValues[key].a);
+    const testValues = testKeys.map(key => testListPathValues[key].TEST_VAL);
     const receivedValues = p(value);
     expect(receivedValues.length).toEqual(testKeys.length);
     const receivedKeys = receivedValues.map(v => v.key);
-    const receivedData = receivedValues.map(v => v.data.a);
+    const receivedData = receivedValues.map(v => v.data.TEST_VAL);
     for (let key of testKeys) {
       expect(receivedKeys).toContain(key);
     }
     for (let val of testValues) {
       expect(receivedData).toContain(val);
     }
+    unmount();
+  });
+  test("FirebaseDatabaseNode with changing limitToFirst", async () => {
+    await cleanup();
+    const initialTest = async () => {
+      const firstRender = render(
+        <NodeExampleBasic
+          path={testListPath}
+          limitToFirst={2}
+          orderByChild={"TEST_VAL"}
+        />
+      );
+      const { getByTestId } = firstRender;
+      const [value, path, isLoading] = await Promise.all([
+        waitForElement(() => getByTestId("test-value")).then(getNodeText),
+        waitForElement(() => getByTestId("test-path")).then(getNodeText),
+        waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
+      ]);
+      const receivedValues = p(value);
+      expect(Object.keys(receivedValues)).toEqual(["KEY_0", "KEY_1"]);
+      return firstRender;
+    };
+    const changePropsTest = async firstRender => {
+      firstRender.rerender(
+        <NodeExampleBasic
+          path={testListPath}
+          limitToFirst={4}
+          orderByChild={"TEST_VAL"}
+        />
+      );
+      const { getByTestId } = firstRender;
+
+      const [value, path, isLoading] = await Promise.all([
+        waitForElement(() => getByTestId("test-value")).then(getNodeText),
+        waitForElement(() => getByTestId("test-path")).then(getNodeText),
+        waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
+      ]);
+      const receivedValues = p(value);
+      expect(Object.keys(receivedValues)).toEqual([
+        "KEY_0",
+        "KEY_1",
+        "KEY_2",
+        "KEY_3"
+      ]);
+    };
+    const rerender = await initialTest();
+    await changePropsTest(rerender);
   });
 });

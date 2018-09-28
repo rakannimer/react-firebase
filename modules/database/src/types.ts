@@ -30,15 +30,55 @@ export type FirebaseDatabaseNodeValue = {} | number | boolean | string | null;
 
 export type FirebaseDatabaseProviderState = {
   firebase: any;
-  dataTree: {
-    [path: string]: {
-      isLoading: boolean;
-      value: FirebaseDatabaseNodeValue;
-      unsub: () => void;
-    };
-  };
-  registerNode: (componentID: any, query: FirebaseQuery) => void;
-  removeNode: (componentID: any, path: string) => void;
+};
+
+export type OrNull<T> = T | null;
+export type FirebaseDatabaseNodeChildFunctionProps = {
+  value: any;
+  path: string;
+  isLoading: boolean;
+};
+
+type Renderable<T> =
+  | React.Component<T>
+  | React.StatelessComponent<T>
+  | React.ReactChild;
+
+export type FirebaseDatabaseNodeProps = {
+  firebase?: any;
+  path: string;
+  orderByChild?: string;
+  orderByKey?: any;
+  orderByValue?: any;
+  limitToFirst?: number;
+  limitToLast?: number;
+  startAt?: number;
+  endAt?: number;
+  equalTo?: any;
+  keysOnly?: boolean;
+  once?: boolean;
+  isList?: boolean;
+  unsub?: Function;
+  children?: Renderable<FirebaseDatabaseNodeChildFunctionProps>;
+};
+
+export type FirebaseDatabaseNodeState = {
+  firebase: OrNull<any>;
+  path: OrNull<string>;
+  orderByChild: OrNull<string>;
+  orderByKey: OrNull<any>;
+  orderByValue: OrNull<any>;
+  limitToFirst: OrNull<number>;
+  limitToLast: OrNull<number>;
+  startAt: OrNull<number>;
+  endAt: OrNull<number>;
+  equalTo: OrNull<any>;
+  keysOnly: OrNull<boolean>;
+  once: OrNull<boolean>;
+  isList: OrNull<boolean>;
+  unsub: OrNull<Function>;
+  value: OrNull<any>;
+  isLoading: OrNull<boolean>;
 };
 
 export type FirebaseDatabaseContextConsumerLifeCycleProps = {} & FirebaseDatabaseProviderState &

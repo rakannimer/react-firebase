@@ -7,3 +7,4 @@ coverage
 node_modules
 tmp-demo-dir
 src/demo/test-credentials.ts
+.docz

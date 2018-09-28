@@ -1,7 +1,7 @@
 {
   "name": "@react-firebase/database",
   "description": "Efficiently Render & mutate Firebase Realtime Database data in your react(or react-native) app.",
-  "version": "0.2.31",
+  "version": "0.3.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -9,6 +9,8 @@
   "types": "dist/index.d.ts",
   "license": "GPL-3.0-only",
   "scripts": {
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
     "dev": "parcel src/demo/index.html -d tmp-demo-dir",
     "build": "rollup -c",
     "prepublish": "yarn build && yarn test",
@@ -21,6 +23,7 @@
     "@types/lodash.memoize": "^4.1.4",
     "@types/lodash.set": "^4.3.4",
     "@types/react": "^16.4.10",
+    "docz": "0.10",
     "firebase": "^5.3.1",
     "jest": "^23.5.0",
     "parcel-bundler": "^1.9.7",

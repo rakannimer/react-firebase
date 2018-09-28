@@ -6,6 +6,7 @@ import { config } from "./demo/test-credentials";
 import { initializeFirebaseApp } from "./initialize-firebase-app";
 import { getFirebaseQuery } from "./get-firebase-query";
 import { DocumentReference } from "@google-cloud/firestore";
+import { renderAndAddProps } from "render-and-add-props";
 
 const testCollectionPath = "user_bookmarks";
 const testDocPath = `${testCollectionPath}/TEST_USER_ID`;
@@ -71,3 +72,6 @@ export const WithTestId = ({ id, children }: { id: string; children: any }) => {
 export const isBoolean = (val: any) => {
   return val === true || val === false;
 };
+
+export const IfDefined = ({ value, children }: { value: any; children: any }) =>
+  value ? renderAndAddProps(children, { value }) : null;
