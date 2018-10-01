@@ -77,20 +77,37 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     }
 
     let isFirstChildAdded = true;
+    const { keysOnly } = propsOrNull;
     const unsub1 = query.on("child_added", (v: any) => {
       if (!v) return;
       const value = v && v.val();
       if (isFirstChildAdded === true) {
+        isFirstChildAdded = false;
         this.ss()(reducers.setIsLoading(false));
         this.ss()(reducers.clearList());
       }
-      isFirstChildAdded = false;
-      this.ss()(reducers.addToList(value, v.key));
+      if (propsOrNull.limitToLast) {
+        this.ss()(
+          keysOnly
+            ? reducers.prependKeyToList(v.key)
+            : reducers.prependToList(value, v.key)
+        );
+      } else {
+        this.ss()(
+          keysOnly
+            ? reducers.addKeyToList(v.key)
+            : reducers.addToList(value, v.key)
+        );
+      }
     });
     const unsub2 = query.on("child_removed", (v: any) => {
       if (!v) return;
       const value = v && v.val();
-      this.ss()(reducers.removeFromList(value, v.key));
+      this.ss()(
+        keysOnly
+          ? reducers.removeKeyFromList(v.key)
+          : reducers.removeFromList(value, v.key)
+      );
     });
     this.unsub = () => {
       unsub1 && unsub1();

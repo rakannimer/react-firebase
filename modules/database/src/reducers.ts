@@ -70,6 +70,30 @@ export const reducers = {
     produce(state, draft => {
       draft.path = path;
     }),
+  addKeyToList: (key: string) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      if (!Array.isArray(draft.value)) {
+        draft.value = [key];
+        return;
+      }
+      draft.value = [...draft.value.filter(k => k !== key), key];
+    }),
+  prependKeyToList: (key: string) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      if (!Array.isArray(draft.value)) {
+        draft.value = [key];
+        return;
+      }
+      draft.value = [key, ...draft.value.filter(k => k !== key)];
+    }),
+  removeKeyFromList: (key: string) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      if (!Array.isArray(draft.value)) {
+        draft.value = [];
+        return;
+      }
+      draft.value = draft.value.filter(k => k !== key);
+    }),
   addToList: (value: any, key: string) => (state: FirebaseDatabaseNodeState) =>
     produce(state, draft => {
       if (!Array.isArray(draft.value)) {
@@ -79,6 +103,19 @@ export const reducers = {
       draft.value = [
         ...draft.value.filter(v => v.key !== key),
         { data: value, key }
+      ];
+    }),
+  prependToList: (value: any, key: string) => (
+    state: FirebaseDatabaseNodeState
+  ) =>
+    produce(state, draft => {
+      if (!Array.isArray(draft.value)) {
+        draft.value = [{ data: value, key }];
+        return;
+      }
+      draft.value = [
+        { data: value, key },
+        ...draft.value.filter(v => v.key !== key)
       ];
     }),
   clearList: () => (state: FirebaseDatabaseNodeState) =>
