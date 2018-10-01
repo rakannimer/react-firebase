@@ -81,6 +81,7 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
       if (!v) return;
       const value = v && v.val();
       if (isFirstChildAdded === true) {
+        this.ss()(reducers.setIsLoading(false));
         this.ss()(reducers.clearList());
       }
       isFirstChildAdded = false;
