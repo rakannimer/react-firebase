@@ -13,8 +13,6 @@ import FirebaseDatabaseProvider from '../../src/components/FirebaseDatabaseProvi
 import {config} from '../demo/test-credentials.ts'
 import ReactJson from "react-json-view";
 
-
-
 ## As Object
 
 <Playground>
@@ -26,30 +24,24 @@ import ReactJson from "react-json-view";
             path="user_bookmarks/"
             limitToFirst={state.limit}
           >
-            {d => {
-              return (
-                <React.Fragment>
-                  <ReactJson src={d} name={false}/>
-                </React.Fragment>
-              );
-            }}
+            {d => (
+              <ReactJson src={d} name={false}/> 
+            )}
           </FirebaseDatabaseNode>
-          <React.Fragment>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit + 1 });
-              }}
-            >
-              Load more
-            </button>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
-              }}
-            >
-              Load less
-            </button>
-          </React.Fragment>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit + 1 });
+            }}
+          >
+            Load more
+          </button>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+            }}
+          >
+            Load less
+          </button>
         </React.Fragment>
       )}
     </Component>
@@ -67,32 +59,28 @@ import ReactJson from "react-json-view";
           <FirebaseDatabaseNode
             path="user_bookmarks/"
             limitToFirst={state.limit}
-            keysOnly={true}
+            keysOnly
+            isList
           >
-            {d => {
-              return (
-                <React.Fragment>
-                  <ReactJson src={d} name={false}/>
-                </React.Fragment>
-              );
-            }}
+            {d => (
+              <ReactJson src={d} name={false}/> 
+            )}
           </FirebaseDatabaseNode>
-          <React.Fragment>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit + 1 });
-              }}
-            >
-              Load more
-            </button>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
-              }}
-            >
-              Load less
-            </button>
-          </React.Fragment>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit + 1 });
+            }}
+          >
+            Load more
+          </button>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+            }}
+          >
+            Load less
+          </button>
+
         </React.Fragment>
       )}
     </Component>
@@ -113,30 +101,24 @@ import ReactJson from "react-json-view";
             orderByValue={"created_on"}
             keysOnly
           >
-            {d => {
-              return (
-                <React.Fragment>
-                  <ReactJson src={d} name={false}/>
-                </React.Fragment>
-              );
-            }}
+            {d => (
+              <ReactJson src={d} name={false}/> 
+            )}
           </FirebaseDatabaseNode>
-          <React.Fragment>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit + 1 });
-              }}
-            >
-              Load more
-            </button>
-            <button
-              onClick={() => {
-                setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
-              }}
-            >
-              Load less
-            </button>
-          </React.Fragment>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit + 1 });
+            }}
+          >
+            Load more
+          </button>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+            }}
+          >
+            Load less
+          </button>
         </React.Fragment>
       )}
     </Component>
