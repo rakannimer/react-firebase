@@ -11,9 +11,9 @@ import {
   reducers,
   getPropsOrNull,
   havePropsChanged,
-  hasStateChanged
+  hasStateChanged,
+  whichPropsChanged
 } from "../reducers";
-
 const isObject = (value: any) => typeof value === "object" && value !== null;
 
 export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
@@ -46,26 +46,50 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     }
     return this.setState.bind(this);
   };
-  listenToRef = () => {
-    const propsOrNull = getPropsOrNull(this.props);
-    const { firebase, path } = propsOrNull;
-    if (firebase === null) {
-      return;
-    }
-    if (path === null) {
-      return;
-    }
-    this.ss()(reducers.setPath(path));
-    this.ss()(reducers.setIsLoading(true));
 
-    const query = getFirebaseQuery(propsOrNull as FirebaseQuery);
-    this.unsub && this.unsub();
-
-    if (propsOrNull.isList !== true) {
-      query.once("value", (v: any) => {
+  handleOnce = (
+    props: FirebaseDatabaseNodeProps,
+    prevProps: FirebaseDatabaseNodeProps | null,
+    ref: ReturnType<typeof getFirebaseQuery>
+  ) => {
+    if (props.isList) {
+      console.warn(
+        `Can't fetch list with once option. \n Remove isList and create the list from the firebase result yourself.`
+      );
+    }
+    ref.once("value", (v: any) => {
+      this.ss()(reducers.setIsLoading(false));
+      const value = v && v.val();
+      if (props.keysOnly) {
+        this.ss()(reducers.setValue(isObject(value) ? Object.keys(value) : []));
+      } else if (props.isList) {
+        this.ss()(
+          reducers.setValue(
+            isObject(value)
+              ? Object.keys(value).map(key => ({ key, data: value[key] }))
+              : []
+          )
+        );
+      } else {
+        this.ss()(reducers.setValue(value));
+      }
+    });
+  };
+  handleOn = (
+    props: FirebaseDatabaseNodeProps,
+    prevProps: FirebaseDatabaseNodeProps | null,
+    ref: ReturnType<typeof getFirebaseQuery>
+  ) => {
+    let childIndex = 0;
+    const { keysOnly } = props;
+    // if (props.limitToFirst < prevProps.limitToFirst)
+    if (!props.isList) {
+      this.ss()(reducers.setIsLoading(true));
+      ref.on("value", v => {
         this.ss()(reducers.setIsLoading(false));
         const value = v && v.val();
-        if (propsOrNull.keysOnly) {
+        this.ss()(reducers.setPath(props.path));
+        if (props.keysOnly) {
           this.ss()(
             reducers.setValue(isObject(value) ? Object.keys(value) : [])
           );
@@ -75,10 +99,37 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
       });
       return;
     }
-
-    let childIndex = 0;
-    const { keysOnly } = propsOrNull;
-    const unsub1 = query.on("child_added", (v: any) => {
+    const changedProps = whichPropsChanged(
+      props,
+      prevProps ? prevProps : props
+    );
+    const hasLimitChanged =
+      changedProps.length > 0 &&
+      (changedProps.includes("limitToFirst") ||
+        changedProps.includes("limitToLast"));
+    if (prevProps !== null && hasLimitChanged) {
+      if (changedProps.includes("limitToLast")) {
+        const previousLimitToLast =
+          parseInt(`${prevProps.limitToLast}`, 10) || 0;
+        const limitToLast = parseInt(`${props.limitToLast}`, 10) || 0;
+        if (previousLimitToLast > limitToLast) {
+          this.ss()(
+            reducers.removeFirstFromList(previousLimitToLast - limitToLast)
+          );
+        }
+      } else if (changedProps.includes("limitToFirst")) {
+        const previousLimitToFirst =
+          parseInt(`${prevProps.limitToFirst}`, 10) || 0;
+        const limitToFirst = parseInt(`${props.limitToFirst}`, 10) || 0;
+        if (previousLimitToFirst > limitToFirst) {
+          this.ss()(
+            reducers.removeLastFromList(previousLimitToFirst - limitToFirst)
+          );
+        }
+      }
+    }
+    this.unsub && this.unsub();
+    const unsub1 = ref.on("child_added", (v: any) => {
       if (!v) return;
       const value = v && v.val();
       if (childIndex === 0) {
@@ -86,21 +137,22 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
         // this.ss()(reducers.clearList());
       }
       childIndex += 1;
-      // if (propsOrNull.limitToLast) {
-      //   this.ss()(
-      //     keysOnly
-      //       ? reducers.prependKeyToList(v.key)
-      //       : reducers.prependToList(value, v.key)
-      //   );
-      // } else {
-      this.ss()(
-        keysOnly
-          ? reducers.addKeyToList(v.key)
-          : reducers.addToList(value, v.key)
-      );
-      // }
+
+      if (props.limitToLast) {
+        this.ss()(
+          keysOnly
+            ? reducers.addKeyToList(v.key)
+            : reducers.addToList(value, v.key)
+        );
+      } else {
+        this.ss()(
+          keysOnly
+            ? reducers.addKeyToList(v.key)
+            : reducers.addToList(value, v.key)
+        );
+      }
     });
-    const unsub2 = query.on("child_removed", (v: any) => {
+    const unsub2 = ref.on("child_removed", (v: any) => {
       if (!v) return;
       const value = v && v.val();
       this.ss()(
@@ -114,13 +166,37 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
       unsub2 && unsub2();
     };
   };
+
+  listenToRef = (
+    props: FirebaseDatabaseNodeProps,
+    prevProps: FirebaseDatabaseNodeProps | null
+  ) => {
+    const propsOrNull = getPropsOrNull(this.props);
+    const { firebase, path } = propsOrNull;
+    if (firebase === null) {
+      return;
+    }
+    if (path === null) {
+      return;
+    }
+    this.ss()(reducers.setPath(path));
+    this.ss()(reducers.setIsLoading(true));
+
+    const query = getFirebaseQuery(propsOrNull as FirebaseQuery);
+
+    if (propsOrNull.once) {
+      this.handleOnce(props, prevProps, query);
+    } else {
+      this.handleOn(props, prevProps, query);
+    }
+  };
   componentDidMount() {
     this.__isMounted = true;
-    this.listenToRef();
+    this.listenToRef(getPropsOrNull(this.props), null);
   }
   componentDidUpdate(prevProps: FirebaseDatabaseNodeProps) {
     if (havePropsChanged(this.props, prevProps)) {
-      this.listenToRef();
+      this.listenToRef(getPropsOrNull(this.props), getPropsOrNull(prevProps));
     }
   }
   componentWillUnmount() {

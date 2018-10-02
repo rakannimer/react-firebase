@@ -57,6 +57,19 @@ export const hasStateChanged = (
   return false;
 };
 
+export const whichPropsChanged = (
+  prevProps: FirebaseDatabaseNodeProps,
+  props: FirebaseDatabaseNodeProps
+) => {
+  let changedProps = [];
+  for (let propName of dataNodeProps) {
+    if (props[propName] !== prevProps[propName]) {
+      changedProps.push(propName);
+    }
+  }
+  return changedProps;
+};
+
 export const reducers = {
   setIsLoading: (isLoading: boolean) => (state: FirebaseDatabaseNodeState) =>
     produce(state, draft => {
@@ -78,14 +91,7 @@ export const reducers = {
       }
       draft.value = [...draft.value.filter(k => k !== key), key];
     }),
-  prependKeyToList: (key: string) => (state: FirebaseDatabaseNodeState) =>
-    produce(state, draft => {
-      if (!Array.isArray(draft.value)) {
-        draft.value = [key];
-        return;
-      }
-      draft.value = [key, ...draft.value.filter(k => k !== key)];
-    }),
+
   removeKeyFromList: (key: string) => (state: FirebaseDatabaseNodeState) =>
     produce(state, draft => {
       if (!Array.isArray(draft.value)) {
@@ -100,10 +106,51 @@ export const reducers = {
         draft.value = [{ data: value, key }];
         return;
       }
-      draft.value = [
+      let orderedList = [
         ...draft.value.filter(v => v.key !== key),
         { data: value, key }
       ];
+      draft.value = orderedList;
+    }),
+  removeFromList: (value: any, key: string) => (
+    state: FirebaseDatabaseNodeState
+  ) =>
+    produce(state, draft => {
+      console.warn("removing from list ", value);
+      if (!Array.isArray(draft.value)) {
+        draft.value = [];
+        return;
+      }
+      draft.value = draft.value.filter(v => v.key !== key);
+    }),
+  removeFirstFromList: (count: number) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      console.warn("removing last from list ", count);
+      if (!Array.isArray(draft.value)) {
+        draft.value = [];
+        return;
+      }
+      const arrayLength = draft.value.length;
+      draft.value = draft.value.slice(arrayLength - count, arrayLength - 1);
+      draft.value.map(console.warn);
+    }),
+  removeLastFromList: (count: number) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      console.warn("removing last from list ", count);
+      if (!Array.isArray(draft.value)) {
+        draft.value = [];
+        return;
+      }
+      const arrayLength = draft.value.length;
+      draft.value = draft.value.slice(0, arrayLength - count);
+    }),
+  prependKeyToList: (key: string) => (state: FirebaseDatabaseNodeState) =>
+    produce(state, draft => {
+      if (!Array.isArray(draft.value)) {
+        draft.value = [key];
+        return;
+      }
+      draft.value = [key, ...draft.value.filter(k => k !== key)];
     }),
   prependToList: (value: any, key: string) => (
     state: FirebaseDatabaseNodeState
@@ -117,23 +164,11 @@ export const reducers = {
         { data: value, key },
         ...draft.value.filter(v => v.key !== key)
       ];
-    }),
+    })
   // clearList: () => (state: FirebaseDatabaseNodeState) =>
   //   produce(state, draft => {
   //     draft.value = [];
   //   }),
-
-  removeFromList: (value: any, key: string) => (
-    state: FirebaseDatabaseNodeState
-  ) =>
-    produce(state, draft => {
-      console.warn("removing from list ", value);
-      if (!Array.isArray(draft.value)) {
-        draft.value = [];
-        return;
-      }
-      draft.value = draft.value.filter(v => v.key !== key);
-    })
 };
 export const isObject = (value: any) =>
   typeof value === "object" && value !== null;

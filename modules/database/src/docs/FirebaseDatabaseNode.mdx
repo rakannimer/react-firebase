@@ -14,6 +14,46 @@ import {config} from '../demo/test-credentials.ts'
 import ReactJson from "react-json-view";
 
 
+## As array of key,data objects
+
+<Playground>
+  <FirebaseDatabaseProvider firebase={firebase} {...config} >
+    <Component initialState={{ limit: 2 }}>
+      {({ state, setState }) => (
+        <React.Fragment>
+          <FirebaseDatabaseNode
+            path="ordered_list/"
+            orderByChild="order"
+            limitToLast={state.limit}
+            isList
+          >
+            {d => (
+              <ReactJson src={d} name={false}/> 
+            )}
+          </FirebaseDatabaseNode>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit + 1 });
+            }}
+          >
+            Load more
+          </button>
+          <button
+            onClick={() => {
+              setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
+            }}
+          >
+            Load less
+          </button>
+
+        </React.Fragment>
+      )}
+    </Component>
+  </FirebaseDatabaseProvider>
+</Playground>
+
+
+
 ## As Object
 
 <Playground>
@@ -46,45 +86,6 @@ import ReactJson from "react-json-view";
             Load less
           </button>
         </div>
-      )}
-    </Component>
-  </FirebaseDatabaseProvider>
-</Playground>
-
-
-## As array of key,data objects
-
-<Playground>
-  <FirebaseDatabaseProvider firebase={firebase} {...config} >
-    <Component initialState={{ limit: 2 }}>
-      {({ state, setState }) => (
-        <React.Fragment>
-          <FirebaseDatabaseNode
-            path="user_bookmarks/"
-            orderByChild="created_on"
-            limitToFirst={state.limit}
-            isList
-          >
-            {d => (
-              <ReactJson src={d} name={false}/> 
-            )}
-          </FirebaseDatabaseNode>
-          <button
-            onClick={() => {
-              setState({ limit: state.limit + 1 });
-            }}
-          >
-            Load more
-          </button>
-          <button
-            onClick={() => {
-              setState({ limit: state.limit > 1 ? state.limit - 1 : 1 });
-            }}
-          >
-            Load less
-          </button>
-
-        </React.Fragment>
       )}
     </Component>
   </FirebaseDatabaseProvider>
