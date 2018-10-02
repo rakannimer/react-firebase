@@ -1,7 +1,7 @@
 {
   "name": "@react-firebase/database",
   "description": "Efficiently Render & mutate Firebase Realtime Database data in your react(or react-native) app.",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -14,6 +14,7 @@
     "dev": "parcel src/demo/index.html -d tmp-demo-dir",
     "build": "rollup -c",
     "prepublish": "yarn build && yarn test",
+    "build:sandboxes": "./build-sandboxes.sh",
     "test": "yarn tsc && yarn jest --coverage"
   },
   "devDependencies": {
@@ -26,6 +27,9 @@
     "docz": "0.10",
     "firebase": "^5.3.1",
     "jest": "^23.5.0",
+    "kill-port": "^1.3.2",
+    "mobx": "^5.5.0",
+    "mobx-react": "^5.2.8",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
@@ -38,7 +42,8 @@
     "rollup": "^0.64.1",
     "rollup-plugin-typescript2": "^0.16.1",
     "ts-jest": "^23.1.4",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "wait-on": "^3.0.1"
   },
   "dependencies": {
     "immer": "^1.5.0",
@@ -71,6 +76,10 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
+    "testPathIgnorePatterns": [
+      "/cypress/",
+      "/node_modules/"
+    ],
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",

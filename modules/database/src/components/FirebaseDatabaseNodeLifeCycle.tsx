@@ -76,16 +76,16 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
       return;
     }
 
-    let isFirstChildAdded = true;
+    let childIndex = 0;
     const { keysOnly } = propsOrNull;
     const unsub1 = query.on("child_added", (v: any) => {
       if (!v) return;
       const value = v && v.val();
-      if (isFirstChildAdded === true) {
-        isFirstChildAdded = false;
+      if (childIndex === 0) {
         this.ss()(reducers.setIsLoading(false));
-        this.ss()(reducers.clearList());
+        // this.ss()(reducers.clearList());
       }
+      childIndex += 1;
       if (propsOrNull.limitToLast) {
         this.ss()(
           keysOnly

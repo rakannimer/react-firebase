@@ -118,10 +118,10 @@ export const reducers = {
         ...draft.value.filter(v => v.key !== key)
       ];
     }),
-  clearList: () => (state: FirebaseDatabaseNodeState) =>
-    produce(state, draft => {
-      draft.value = [];
-    }),
+  // clearList: () => (state: FirebaseDatabaseNodeState) =>
+  //   produce(state, draft => {
+  //     draft.value = [];
+  //   }),
 
   removeFromList: (value: any, key: string) => (
     state: FirebaseDatabaseNodeState
