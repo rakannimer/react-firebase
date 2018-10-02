@@ -85,7 +85,7 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     // if (props.limitToFirst < prevProps.limitToFirst)
     if (!props.isList) {
       this.ss()(reducers.setIsLoading(true));
-      ref.on("value", v => {
+      ref.on("value", (v: any) => {
         this.ss()(reducers.setIsLoading(false));
         const value = v && v.val();
         this.ss()(reducers.setPath(props.path));
