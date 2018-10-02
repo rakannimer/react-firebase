@@ -86,19 +86,19 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
         // this.ss()(reducers.clearList());
       }
       childIndex += 1;
-      if (propsOrNull.limitToLast) {
-        this.ss()(
-          keysOnly
-            ? reducers.prependKeyToList(v.key)
-            : reducers.prependToList(value, v.key)
-        );
-      } else {
-        this.ss()(
-          keysOnly
-            ? reducers.addKeyToList(v.key)
-            : reducers.addToList(value, v.key)
-        );
-      }
+      // if (propsOrNull.limitToLast) {
+      //   this.ss()(
+      //     keysOnly
+      //       ? reducers.prependKeyToList(v.key)
+      //       : reducers.prependToList(value, v.key)
+      //   );
+      // } else {
+      this.ss()(
+        keysOnly
+          ? reducers.addKeyToList(v.key)
+          : reducers.addToList(value, v.key)
+      );
+      // }
     });
     const unsub2 = query.on("child_removed", (v: any) => {
       if (!v) return;
