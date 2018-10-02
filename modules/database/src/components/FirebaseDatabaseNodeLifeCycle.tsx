@@ -52,11 +52,6 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     prevProps: FirebaseDatabaseNodeProps | null,
     ref: ReturnType<typeof getFirebaseQuery>
   ) => {
-    if (props.isList) {
-      console.warn(
-        `Can't fetch list with once option. \n Remove isList and create the list from the firebase result yourself.`
-      );
-    }
     ref.once("value", (v: any) => {
       this.ss()(reducers.setIsLoading(false));
       const value = v && v.val();
