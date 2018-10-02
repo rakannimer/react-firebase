@@ -6,7 +6,6 @@ import {
   cleanup
 } from "react-testing-library";
 import "firebase/database";
-
 import {
   getValueAtPath,
   setValueAtPath,
@@ -15,7 +14,13 @@ import {
   isBoolean
 } from "../src/test-utils";
 import { NodeExampleBasic } from "../src/test-cases/NodeExampleBasic";
-
+import { App as Demo, formState } from "../src/demo/App";
+export const getManyByTestId = (arr: any[], { getByTestId }) => {
+  return Promise.all(
+    arr.map(val => waitForElement(() => getByTestId(val)).then(getNodeText))
+  );
+};
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 describe("DatabaseNode", () => {
   let testBasePath = `/__tests__/user_bookmark/`;
   let testPath = `${testBasePath}testPath`;
@@ -48,13 +53,13 @@ describe("DatabaseNode", () => {
   afterEach(async () => {
     await cleanup();
   });
+
   test("FirebaseDatabaseNode", async () => {
     const { getByTestId } = render(<NodeExampleBasic path={testPath} />);
-    const [value, path, isLoading] = await Promise.all([
-      waitForElement(() => getByTestId("test-value")).then(getNodeText),
-      waitForElement(() => getByTestId("test-path")).then(getNodeText),
-      waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
-    ]);
+    const [value, path, isLoading] = await getManyByTestId(
+      ["test-value", "test-path", "test-is-loading"],
+      { getByTestId }
+    );
     expect(p(value)).toEqual(testPathValue);
     expect(p(path)).toEqual(testPath);
     expect(isBoolean(p(isLoading))).toEqual(true);
@@ -64,11 +69,10 @@ describe("DatabaseNode", () => {
     const { getByTestId } = render(
       <NodeExampleBasic path={testPath} keysOnly />
     );
-    const [value, path, isLoading] = await Promise.all([
-      waitForElement(() => getByTestId("test-value")).then(getNodeText),
-      waitForElement(() => getByTestId("test-path")).then(getNodeText),
-      waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
-    ]);
+    const [value, path, isLoading] = await getManyByTestId(
+      ["test-value", "test-path", "test-is-loading"],
+      { getByTestId }
+    );
     expect(p(value)).toEqual(Object.keys(testPathValue));
     expect(p(path)).toEqual(testPath);
     expect(isBoolean(p(isLoading))).toEqual(true);
@@ -78,11 +82,10 @@ describe("DatabaseNode", () => {
     const { getByTestId, unmount } = render(
       <NodeExampleBasic path={testListPath} isList />
     );
-    const [value, path, isLoading] = await Promise.all([
-      waitForElement(() => getByTestId("test-value")).then(getNodeText),
-      waitForElement(() => getByTestId("test-path")).then(getNodeText),
-      waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
-    ]);
+    const [value, path, isLoading] = await getManyByTestId(
+      ["test-value", "test-path", "test-is-loading"],
+      { getByTestId }
+    );
     const testKeys = Object.keys(testListPathValues);
     const testValues = testKeys.map(key => testListPathValues[key].TEST_VAL);
     const receivedValues = p(value);
@@ -108,11 +111,10 @@ describe("DatabaseNode", () => {
         />
       );
       const { getByTestId } = firstRender;
-      const [value, path, isLoading] = await Promise.all([
-        waitForElement(() => getByTestId("test-value")).then(getNodeText),
-        waitForElement(() => getByTestId("test-path")).then(getNodeText),
-        waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
-      ]);
+      const [value, path, isLoading] = await getManyByTestId(
+        ["test-value", "test-path", "test-is-loading"],
+        { getByTestId }
+      );
       const receivedValues = p(value);
       expect(Object.keys(receivedValues)).toEqual(["KEY_0", "KEY_1"]);
       return firstRender;
@@ -127,11 +129,10 @@ describe("DatabaseNode", () => {
       );
       const { getByTestId } = firstRender;
 
-      const [value, path, isLoading] = await Promise.all([
-        waitForElement(() => getByTestId("test-value")).then(getNodeText),
-        waitForElement(() => getByTestId("test-path")).then(getNodeText),
-        waitForElement(() => getByTestId("test-is-loading")).then(getNodeText)
-      ]);
+      const [value, path, isLoading] = await getManyByTestId(
+        ["test-value", "test-path", "test-is-loading"],
+        { getByTestId }
+      );
       const receivedValues = p(value);
       expect(Object.keys(receivedValues)).toEqual([
         "KEY_0",

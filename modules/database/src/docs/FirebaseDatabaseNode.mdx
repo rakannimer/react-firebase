@@ -13,19 +13,22 @@ import FirebaseDatabaseProvider from '../../src/components/FirebaseDatabaseProvi
 import {config} from '../demo/test-credentials.ts'
 import ReactJson from "react-json-view";
 
+
 ## As Object
 
 <Playground>
   <FirebaseDatabaseProvider firebase={firebase} {...config} >
     <Component initialState={{ limit: 2 }}>
       {({ state, setState }) => (
-        <React.Fragment>
+        <div style={{maxHeight:300}}>
           <FirebaseDatabaseNode
             path="user_bookmarks/"
             limitToFirst={state.limit}
           >
             {d => (
-              <ReactJson src={d} name={false}/> 
+              <pre data-testid="value">
+                {JSON.stringify(d, null, 2)}
+              </pre> 
             )}
           </FirebaseDatabaseNode>
           <button
@@ -42,7 +45,7 @@ import ReactJson from "react-json-view";
           >
             Load less
           </button>
-        </React.Fragment>
+        </div>
       )}
     </Component>
   </FirebaseDatabaseProvider>
@@ -58,8 +61,8 @@ import ReactJson from "react-json-view";
         <React.Fragment>
           <FirebaseDatabaseNode
             path="user_bookmarks/"
+            orderByChild="created_on"
             limitToFirst={state.limit}
-            keysOnly
             isList
           >
             {d => (
