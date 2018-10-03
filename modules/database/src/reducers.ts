@@ -116,7 +116,6 @@ export const reducers = {
     state: FirebaseDatabaseNodeState
   ) =>
     produce(state, draft => {
-      console.warn("removing from list ", value);
       if (!Array.isArray(draft.value)) {
         draft.value = [];
         return;
@@ -125,18 +124,15 @@ export const reducers = {
     }),
   removeFirstFromList: (count: number) => (state: FirebaseDatabaseNodeState) =>
     produce(state, draft => {
-      console.warn("removing last from list ", count);
       if (!Array.isArray(draft.value)) {
         draft.value = [];
         return;
       }
       const arrayLength = draft.value.length;
       draft.value = draft.value.slice(arrayLength - count, arrayLength - 1);
-      draft.value.map(console.warn);
     }),
   removeLastFromList: (count: number) => (state: FirebaseDatabaseNodeState) =>
     produce(state, draft => {
-      console.warn("removing last from list ", count);
       if (!Array.isArray(draft.value)) {
         draft.value = [];
         return;
