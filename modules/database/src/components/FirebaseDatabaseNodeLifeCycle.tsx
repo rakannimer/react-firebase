@@ -58,11 +58,10 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
       if (props.keysOnly) {
         this.ss()(reducers.setValue(isObject(value) ? Object.keys(value) : []));
       } else if (props.isList) {
+        const keys = Object.keys(value).sort();
         this.ss()(
           reducers.setValue(
-            isObject(value)
-              ? Object.keys(value).map(key => ({ key, data: value[key] }))
-              : []
+            isObject(value) ? keys.map(key => ({ key, data: value[key] })) : []
           )
         );
       } else {
@@ -137,13 +136,13 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
         this.ss()(
           keysOnly
             ? reducers.addKeyToList(v.key)
-            : reducers.addToList(value, v.key)
+            : reducers.addToList(value, v.key, childIndex)
         );
       } else {
         this.ss()(
           keysOnly
             ? reducers.addKeyToList(v.key)
-            : reducers.addToList(value, v.key)
+            : reducers.addToList(value, v.key, childIndex)
         );
       }
     });

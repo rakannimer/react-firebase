@@ -100,17 +100,19 @@ export const reducers = {
       }
       draft.value = draft.value.filter(k => k !== key);
     }),
-  addToList: (value: any, key: string) => (state: FirebaseDatabaseNodeState) =>
+  addToList: (value: any, key: string, order: number) => (
+    state: FirebaseDatabaseNodeState
+  ) =>
     produce(state, draft => {
       if (!Array.isArray(draft.value)) {
-        draft.value = [{ data: value, key }];
+        draft.value = [{ data: value, key, order }];
         return;
       }
       let orderedList = [
         ...draft.value.filter(v => v.key !== key),
-        { data: value, key }
+        { data: value, key, order }
       ];
-      draft.value = orderedList;
+      draft.value = orderedList.sort((a, b) => a.order - b.order);
     }),
   removeFromList: (value: any, key: string) => (
     state: FirebaseDatabaseNodeState

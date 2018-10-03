@@ -18,18 +18,19 @@ import ReactJson from "react-json-view";
 
 <Playground>
   <FirebaseDatabaseProvider firebase={firebase} {...config} >
-    <Component initialState={{ limit: 2 }}>
+    <Component initialState={{ limit: 5 }}>
       {({ state, setState }) => (
         <React.Fragment>
           <FirebaseDatabaseNode
-            path="ordered_list/"
-            orderByChild="order"
-            limitToLast={state.limit}
+            path="fa/f/"
+            limitToFirst={state.limit}
+            orderByChild={"createdOn"}
             isList
           >
-            {d => (
-              <ReactJson src={d} name={false}/> 
-            )}
+            {d => {
+              console.warn(d && d.value && d.value.map(({key})=>key));
+              return <ReactJson src={d} name={false}/> 
+            }}
           </FirebaseDatabaseNode>
           <button
             onClick={() => {
