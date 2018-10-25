@@ -1,6 +1,6 @@
 import flatten from "flat";
 import faker from "faker";
-import set from "lodash.set";
+import set from "lodash/set";
 import { chunkAndParallelize } from "chunk-and-parallelize";
 export type StringNode = {
   depth: number;

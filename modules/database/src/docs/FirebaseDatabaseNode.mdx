@@ -22,14 +22,22 @@ import ReactJson from "react-json-view";
       {({ state, setState }) => (
         <React.Fragment>
           <FirebaseDatabaseNode
-            path="fa/f/"
-            limitToFirst={state.limit}
-            orderByChild={"createdOn"}
+            path="ordered_list"
+            limitToLast={state.limit}
+            orderByChild={"order"}
             isList
           >
             {d => {
-              console.warn(d && d.value && d.value.map(({key})=>key));
-              return <ReactJson src={d} name={false}/> 
+              
+              if (d.value !== null) {
+                const reversedArray = Array.from({length: d.value.length}, (v, i) => {
+                  return d.value[d.value.length - i - 1]
+                });
+                
+                return <pre>{JSON.stringify(d.value, null, 2)}</pre>
+                return <ReactJson src={{normal: d.value, reverse: reversedArray}} name={false}/> 
+              } return null
+              
             }}
           </FirebaseDatabaseNode>
           <button

@@ -5,8 +5,8 @@ import {
   CollectionReference
 } from "@google-cloud/firestore";
 import produce from "immer";
-import set from "lodash.set";
-import get from "lodash.get";
+import set from "lodash/set";
+import get from "lodash/get";
 
 export type Operations = "add" | "delete";
 

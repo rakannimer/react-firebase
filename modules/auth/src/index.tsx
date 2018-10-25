@@ -1,6 +1,6 @@
 import * as React from "react";
 import { renderAndAddProps } from "render-and-add-props";
-import get from "lodash.get";
+import get from "lodash/get";
 import { initializeFirebaseApp } from "./initialize-firebase-app";
 import {
   AuthEmission,

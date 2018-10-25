@@ -4,11 +4,6 @@ export default {
   input: "src/index.tsx",
   output: [
     {
-      file: "dist/index.umd.js",
-      format: "umd",
-      name: "ReactFirebaseDatabase"
-    },
-    {
       file: "dist/index.esm.js",
       format: "esm"
     },

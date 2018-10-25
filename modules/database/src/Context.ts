@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FirebaseDatabaseProviderState } from "./types";
-import memoize from "lodash.memoize";
+import memoize from "lodash/memoize";
 export const firebaseDatabaseDefaultContext = {
   firebase: {}
 } as FirebaseDatabaseProviderState;

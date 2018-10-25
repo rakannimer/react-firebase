@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
-import memoize from "lodash.memoize";
+import memoize from "lodash/memoize";
 import * as React from "react";
 import { config } from "./demo/test-credentials";
 import { initializeFirebaseApp } from "./initialize-firebase-app";
