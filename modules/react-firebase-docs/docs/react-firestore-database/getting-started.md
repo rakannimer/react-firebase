@@ -26,7 +26,7 @@ If you haven't, install the [firebase](https://www.npmjs.com/package/firebase) J
 
 ```bash
 yarn add firebase
-# Or 
+# Or
 npm i firebase
 ```
 
@@ -36,13 +36,11 @@ Install `@react-firebase/firestore`
 yarn add @react-firebase/firestore # or npm i @react-firebase/auth
 ```
 
-
-
-Change `PROJECT_NAME` to your project name and grab your firebase config here : 
+Change `PROJECT_NAME` to your project name and grab your firebase config here :
 
 `https://console.firebase.google.com/project/PROJECT_NAME/settings/general/`
 
-Your config file should look something like this : 
+Your config file should look something like this :
 
 ```javascript
 // Firebase Config
@@ -61,35 +59,31 @@ const config = {
 
 ## Components
 
-* FirestoreProvider
-* FirestoreCollection
-* FirestoreDocument
-* FirestoreMutation
-* FirestoreBatchedWrite
+- FirestoreProvider
+- FirestoreCollection
+- FirestoreDocument
+- FirestoreMutation
+- FirestoreBatchedWrite
 
 ## Firestore Provider
 
-Place a `FirestoreProvider` component at the top level of your app. 
+Place a `FirestoreProvider` component at the top level of your app.
 
 ```javascript
-import { FirestoreProvider } from '@react-firebase/firestore'
+import { FirestoreProvider } from "@react-firebase/firestore";
 // Before
 const App = () => {
-    return <div>
-        This is my app
-    </div>
-}
+  return <div>This is my app</div>;
+};
 
 // After
 const App = () => {
-    return (
-        <FirestoreProvider {...config} firebase={firebase}>
-            <div>
-                This is my app
-            </div>
-        </FirestoreProvider>
-    )
-}
+  return (
+    <FirestoreProvider {...config} firebase={firebase}>
+      <div>This is my app</div>
+    </FirestoreProvider>
+  );
+};
 ```
 
 If you need to authenticate to access your data, check out [`@react-firebase/auth`](../react-firebase-auth/)\`\`
@@ -111,7 +105,7 @@ If you need to authenticate to access your data, check out [`@react-firebase/aut
   {d => {
     return d.isLoading ? "Loading" : <pre>{d.value}</pre>;
   }}
-</FirestoreDocument>;
+</FirestoreDocument>
 ```
 
 ## Firestore Mutation
@@ -120,14 +114,15 @@ The `FirestoreMutation` allows you to render components that run Firebase mutati
 
 A `setMutation` function that returns a promise is provided to the children function.
 
-FirebaseDatabaseMutation needs 3 props : 
+FirebaseDatabaseMutation needs 3 props :
 
-* **path**: `string`
-* **operation**: `"update" | "set" | "add"` 
-* **children:** 
+- **path**: `string`
+- **operation**: `"update" | "set" | "add"`
+- **children:**
 
-  | \(   {     runMutation: \(value:any, options?:any\) =&gt; Promise&lt;{key?:string}&gt;   } \) =&gt; ReactNode |
-  | :--- |
+  | \( { runMutation: \(value:any, options?:any\) =&gt; Promise&lt;{key?:string}&gt; } \) =&gt; ReactNode |
+  | :---------------------------------------------------------------------------------------------------- |
+
 
 ## Upsert \(update or insert\) data to Firestore example
 
@@ -154,7 +149,6 @@ FirebaseDatabaseMutation needs 3 props :
   }}
 </FirestoreMutation>
 ```
-
 
 ## Batched Writes
 
@@ -191,17 +185,14 @@ Schedule a mutation with `addMutationToBatch`, and commit your changes with `com
       </div>
     );
   }}
-</FirestoreBatchedWrite>;
-
+</FirestoreBatchedWrite>
 ```
 
 ## Sandboxes
 
-
 #### Infinite List
 
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
 
 #### Mutation
 
@@ -210,4 +201,3 @@ Schedule a mutation with `addMutationToBatch`, and commit your changes with `com
 #### Transaction
 
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-

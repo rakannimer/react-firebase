@@ -16,11 +16,11 @@ title: Sandbox for every use-case
     - [Batched Write](#batched-write)
     - [Collection](#collection)
     - [Infinite List](#infinite-list)
-    - [Mutation](#mutation)
-    - [Transaction](#transaction)
+    - [Mutation](#mutation-1)
+    - [Transaction](#transaction-1)
     - [Auth And Realtime Database](#auth-and-realtime-database)
 
-## Sandboxes 
+## Sandboxes
 
 ### Auth
 
@@ -31,10 +31,10 @@ title: Sandbox for every use-case
   <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-auth" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
 
-
 ### Realtime Database
 
 #### Infinite List Web
+
 <details>
  <summary>Sandbox</summary>
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
@@ -47,14 +47,12 @@ title: Sandbox for every use-case
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-flatlist-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
 
-
 #### Mutation
 
 <details>
  <summary>Sandbox</summary>
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-mutation" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
-
 
 #### Transaction
 
@@ -72,14 +70,12 @@ title: Sandbox for every use-case
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
 
-
 #### Batched Write
 
 <details>
  <summary>Sandbox</summary>
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
-
 
 #### Collection
 
@@ -88,14 +84,12 @@ title: Sandbox for every use-case
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
 
-
 #### Infinite List
 
 <details>
  <summary>Sandbox</summary>
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </details>
-
 
 #### Mutation
 

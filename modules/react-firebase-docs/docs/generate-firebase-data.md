@@ -7,9 +7,9 @@ This module is meant to run on node NOT on the browser or react-native.
 Use this in your node server or on cli tools.
 
 - [Setup](#setup)
-    - [Installation](#installation)
-      - [API](#api)
-      - [CLI](#cli)
+    - [Installation](#installation-1)
+      - [API](#api-1)
+      - [CLI](#cli-1)
 - [Usage](#usage)
     - [Programmatic Usage](#programmatic-usage)
     - [Cli Usage](#cli-usage)
@@ -65,9 +65,6 @@ npm i -g generate-firebase-data
 generate-firebase-data <schemaFilePath> <credentialsFilePath>
 ```
 
-
-
-
 # Usage
 
 ### Programmatic Usage
@@ -102,9 +99,8 @@ const firebase = require("firebase-admin");
       databaseURL
     }
   );
-  // Done 👍 
-})()
-
+  // Done 👍
+})();
 ```
 
 >
@@ -119,8 +115,8 @@ Requires 2 files to exist `schema.js` and `credentials.js`
 module.exports = {
   databaseURL: "<DATABASE_URL>",
   credential: {
-  // JSON data from firebase-key.json
-  // service account key downloaded from firebase
+    // JSON data from firebase-key.json
+    // service account key downloaded from firebase
   }
 };
 ```
@@ -160,7 +156,7 @@ const schema = {
         },
         // Can be async function !
         vote_counts: async (faker, key) => {
-          const result = await doSomethingAsync()
+          const result = await doSomethingAsync();
           return result;
         },
         author_id: "{userID}",
@@ -185,6 +181,4 @@ module.exports = {
   keyReducers,
   count
 };
-
 ```
-

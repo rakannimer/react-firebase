@@ -8,7 +8,7 @@ sidebar_label: API
 - [FirestoreCollection](#firestorecollection)
 - [Firestore Query Reference](#firestore-query-reference)
 - [FirestoreDocument](#firestoredocument)
-- [Firestore Query Reference](#firestore-query-reference)
+- [Firestore Query Reference](#firestore-query-reference-1)
 - [FirestoreMutation Props​ {#firebasedatabasemutation-props}](#firestoremutation-props%E2%80%8B-firebasedatabasemutation-props)
 - [​Firestore Write Data Reference​ {#firebase-write-data-reference}](#%E2%80%8Bfirestore-write-data-reference%E2%80%8B-firebase-write-data-reference)
 

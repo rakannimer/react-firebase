@@ -5,10 +5,11 @@ title: Generate Firestore Data
 
 This module is meant to run on node NOT on the browser or react-native.  
 Use this in your node server or in cli tools.
+
 - [Setup](#setup)
-    - [Installation](#installation)
-      - [API](#api)
-      - [CLI](#cli)
+    - [Installation](#installation-1)
+      - [API](#api-1)
+      - [CLI](#cli-1)
 - [Usage](#usage)
     - [Programmatic Usage](#programmatic-usage)
     - [Cli Usage](#cli-usage)
@@ -37,7 +38,6 @@ Use this in your node server or in cli tools.
   generate-firestore-data <schemaFilePath> <credentialsFilePath>
 ```
 
-
 # Setup
 
 1. First you need a Private Key from firebase for privileged environments, find out how to get it here: [`https://firebase.google.com/docs/admin/setup`](https://firebase.google.com/docs/admin/setup) \(or replace `YOUR_PROJECT_NAME_HERE` with your project name here : `https://console.firebase.google.com/project/YOUR_PROJECT_NAME_HERE/settings/serviceaccounts/adminsdk`
@@ -64,8 +64,6 @@ yarn generate-firestore-data <schemaFilePath> <credentialsFilePath>
 npm i -g generate-firestore-data
 generate-firestore-data <schemaFilePath> <credentialsFilePath>
 ```
-
-
 
 # Usage
 
@@ -101,9 +99,8 @@ const firebase = require("firebase-admin");
       databaseURL
     }
   );
-  // Done 👍 
-})()
-
+  // Done 👍
+})();
 ```
 
 >
@@ -118,8 +115,8 @@ Requires 2 files to exist `schema.js` and `credentials.js`
 module.exports = {
   databaseURL: "<DATABASE_URL>",
   credential: {
-  // JSON data from firebase-key.json
-  // service account key downloaded from firebase
+    // JSON data from firebase-key.json
+    // service account key downloaded from firebase
   }
 };
 ```
@@ -159,7 +156,7 @@ const schema = {
         },
         // Can be async function !
         vote_counts: async (faker, key) => {
-          const result = await doSomethingAsync()
+          const result = await doSomethingAsync();
           return result;
         },
         author_id: "{userID}",
@@ -184,7 +181,4 @@ module.exports = {
   keyReducers,
   count
 };
-
 ```
-
-

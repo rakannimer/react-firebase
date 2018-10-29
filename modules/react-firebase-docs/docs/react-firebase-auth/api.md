@@ -8,13 +8,13 @@ sidebar_label: API
 - [FirebaseAuthConsumer](#firebaseauthconsumer)
 - [authState](#authstate)
 - [IfFirebaseAuthed](#iffirebaseauthed)
-  - [authState](#authstate)
+  - [authState](#authstate-1)
 - [IfFirebaseAuthedAnd](#iffirebaseauthedand)
-  - [authState](#authstate)
+  - [authState](#authstate-2)
 - [IfFirebaseAuthedOr](#iffirebaseauthedor)
-  - [authState](#authstate)
+  - [authState](#authstate-3)
 - [IfFirebaseUnAuthed](#iffirebaseunauthed)
-  - [authState](#authstate)
+  - [authState](#authstate-4)
 
 ## FirebaseAuthProvider Props
 

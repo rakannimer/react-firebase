@@ -1,5 +1,3 @@
-
-
 # Setup
 
 Installation
@@ -24,6 +22,3 @@ npx generate-json <schemaFilePath>
 npm i -g generate-json
 generate-json <schemaFilePath>
 ```
-
-
-

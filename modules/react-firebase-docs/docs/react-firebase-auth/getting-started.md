@@ -17,12 +17,11 @@ React Firebase Auth provides the following components :
 
 ## Components
 
-* `FirebaseAuthProvider` 
-* `FirebaseAuthConsumer` 
-* `IfFirebaseAuthed` 
-* `IfFirebaseAuthedAnd` 
-* `IfFirebaseUnAuthed`
-
+- `FirebaseAuthProvider`
+- `FirebaseAuthConsumer`
+- `IfFirebaseAuthed`
+- `IfFirebaseAuthedAnd`
+- `IfFirebaseUnAuthed`
 
 # Setup
 
@@ -32,7 +31,7 @@ If you haven't, install the [firebase](https://www.npmjs.com/package/firebase) J
 
 ```bash
 yarn add firebase
-# Or 
+# Or
 npm i firebase
 ```
 
@@ -44,11 +43,11 @@ yarn add @react-firebase/auth # or npm i @react-firebase/auth
 
 ## Get your Firebase config
 
-Change `PROJECT_NAME` to your project name and grab your firebase config here : 
+Change `PROJECT_NAME` to your project name and grab your firebase config here :
 
 `https://console.firebase.google.com/project/PROJECT_NAME/settings/general/`
 
-Your config file should look something like this : 
+Your config file should look something like this :
 
 ```javascript
 // Firebase Config
@@ -63,7 +62,6 @@ const config = {
 };
 ```
 
-
 # Usage
 
 ## Import firebase and firebase/auth
@@ -73,7 +71,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 ```
 
-Place a `FirebaseAuthProvider` component at the top level of your app. ( anywhere as long as it's above the other Auth components ). 
+Place a `FirebaseAuthProvider` component at the top level of your app. ( anywhere as long as it's above the other Auth components ).
 Then use any of the other components anywhere in your component tree.
 
 ## Just show me some code

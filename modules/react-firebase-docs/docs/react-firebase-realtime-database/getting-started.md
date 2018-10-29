@@ -5,7 +5,6 @@ sidebar_label: Getting Started
 
 Easily Render Firebase Realtime Database in your react(-native) app.
 
-
 - [Setup](#setup)
     - [Setup @react-firebase/database](#setup-react-firebasedatabase)
 - [Usage](#usage)
@@ -17,13 +16,13 @@ Easily Render Firebase Realtime Database in your react(-native) app.
 
 # Setup
 
-## Setup @react-firebase/database 
+## Setup @react-firebase/database
 
 If you haven't, install the [firebase](https://www.npmjs.com/package/firebase) JS client.
 
 ```bash
 yarn add firebase
-# Or 
+# Or
 npm i firebase
 ```
 
@@ -33,12 +32,11 @@ Install `@react-firebase/database`
 yarn add @react-firebase/database # or npm i @react-firebase/database
 ```
 
-
-Change `PROJECT_NAME` to your project name and grab your firebase config here : 
+Change `PROJECT_NAME` to your project name and grab your firebase config here :
 
 `https://console.firebase.google.com/project/PROJECT_NAME/settings/general/`
 
-Your config file should look something like this : 
+Your config file should look something like this :
 
 ```javascript
 // Firebase Config
@@ -57,32 +55,28 @@ const config = {
 
 ## Components
 
-* FirebaseDatabaseProvider
-* FirebaseDatabaseNode
-* FirebaseDatabaseMutation
-* FirebaseDatabaseTransaction
+- FirebaseDatabaseProvider
+- FirebaseDatabaseNode
+- FirebaseDatabaseMutation
+- FirebaseDatabaseTransaction
 
-Place a `FirebaseDatabaseProvider` component at the top level of your app (anywhere as long as it's above the other Realtime Database components). 
+Place a `FirebaseDatabaseProvider` component at the top level of your app (anywhere as long as it's above the other Realtime Database components).
 
 ```javascript
-import { FirebaseDatabaseProvider } from '@react-firebase/database'
+import { FirebaseDatabaseProvider } from "@react-firebase/database";
 // Before
 const App = () => {
-    return <div>
-        This is my app
-    </div>
-}
+  return <div>This is my app</div>;
+};
 
 // After
 const App = () => {
-    return (
-        <FirebaseDatabaseProvider>
-            <div>
-                This is my app
-            </div>
-        </FirebaseDatabaseProvider>
-    )
-}
+  return (
+    <FirebaseDatabaseProvider>
+      <div>This is my app</div>
+    </FirebaseDatabaseProvider>
+  );
+};
 ```
 
 If you need to authenticate to access your data, check out `@react-firebase/auth`
@@ -101,14 +95,15 @@ The `FirebaseDatabaseMutation` allows you to render components that run Firebase
 
 A `setMutation` function that returns a promise is provided to the children function.
 
-FirebaseDatabaseMutation needs 3 props : 
+FirebaseDatabaseMutation needs 3 props :
 
-* **path**: `string`
-* **operation**: `"update" | "set" | "push"` 
-* **children:** 
+- **path**: `string`
+- **operation**: `"update" | "set" | "push"`
+- **children:**
 
-  | (   {     runMutation: (value:any) => Promise<{key?:string}>   } ) => ReactNode |
-  | :--- |
+  | ( { runMutation: (value:any) => Promise<{key?:string}> } ) => ReactNode |
+  | :---------------------------------------------------------------------- |
+
 
 <iframe src="https://codesandbox.io/embed/5v2w2n5r9p" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -116,15 +111,13 @@ FirebaseDatabaseMutation needs 3 props :
 
 Suppose you have a shared counter that many can increment. To avoid race conditions, use transactions.
 
-FirebaseDatabaseTransaction needs 2 props: 
+FirebaseDatabaseTransaction needs 2 props:
 
-* **path**: `string`
-* **children:** 
+- **path**: `string`
+- **children:**
 
-  | (   {     runTransaction: ({ reducer: (value:any)=>any }) => Promise<{key?:string}>   } ) => ReactNode |
-  | :--- |
+  | ( { runTransaction: ({ reducer: (value:any)=>any }) => Promise<{key?:string}> } ) => ReactNode |
+  | :--------------------------------------------------------------------------------------------- |
 
 
 <iframe src="https://codesandbox.io/embed/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
- 
-
