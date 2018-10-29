@@ -14,6 +14,8 @@ Easily Render Firebase Realtime Database in your React or React Native app.
     - [Sample Code](#sample-code)
     - [Sandbox](#sandbox)
   - [Firebase Database Mutation](#firebase-database-mutation)
+    - [Sample Code](#sample-code-1)
+    - [Sandbox](#sandbox-1)
   - [Firebase Database Transaction](#firebase-database-transaction)
 
 # Setup
@@ -160,6 +162,8 @@ FirebaseDatabaseMutation needs 3 props :
   | :---------------------------------------------------------------------- |
 
 
+### Sample Code
+
 ```jsx
 class MutationExample extends React.Component {
   state = {
@@ -216,6 +220,8 @@ class MutationExample extends React.Component {
   }
 }
 ```
+
+### Sandbox
 
 <iframe src="https://codesandbox.io/embed/5v2w2n5r9p" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
