@@ -15,7 +15,8 @@
   "related": [
     "firebase/firebase-js-sdk",
     "firebase/firebase-admin-node",
-    "invertase/react-native-firebase"
+    "invertase/react-native-firebase",
+    "prescottprue/react-redux-firebase"
   ],
   "tabs": [
     {
