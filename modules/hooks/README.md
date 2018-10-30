@@ -3,24 +3,27 @@
 ## Install
 
 ```sh
-  yarn add library
+  yarn add @react-firebase/hooks
 ```
 
 ## Usage
 
-```typescript
-import { sum } from "sum";
+```jsx
+import { FirebaseProvider, useFirebaseRealtimeDatabase } from "sum";
 
-sum(1, 2); // 3
+function UserBookmarks() {
+  const { isLoading, value, ref } = useFirebase({
+    path: "user_bookmarks/",
+    limitToFirst: 2
+  });
+  return <pre>{JSON.stringify({ isLoading, value }, null, 2)}</pre>;
+}
+
+function App() {
+  return (
+    <FirebaseProvider firebase={firebase} {...config}>
+      <UserBookmarks />
+    </FirebaseProvider>
+  );
+}
 ```
-
-## API
-
-### Input :
-
-- a: number (required)
-- b: number (required)
-
-### Output :
-
-c : number
