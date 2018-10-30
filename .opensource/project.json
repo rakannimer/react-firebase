@@ -1,7 +1,7 @@
 {
   "name": "React Firebase",
   "type": "library",
-  "platforms": ["Web"],
+  "platforms": ["Web", "ReactNative"],
   "content": "README.md",
   "pages": {
     "modules/react-firebase-docs/docs/react-firebase-realtime-database/getting-started.md": "Getting Started with React Firebase Realtime Database",
