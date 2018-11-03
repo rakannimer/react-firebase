@@ -50,7 +50,7 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
     if (!v) return;
     if (v.val() === null) return;
     const value = v.val();
-    const { keysOnly, isList, orderByChild } = props;
+    const { keysOnly, isList, orderByChild, orderByKey, orderByValue } = props;
     // console.warn({ value });
     if (!keysOnly && !isList) {
       this.ss()(reducers.setValue(value));
@@ -62,7 +62,11 @@ export class FirebaseDatabaseContextConsumerLifeCycle extends React.Component<
           unsortedKeys,
           key => value[key][orderByChild as string]
         ) as string[])
-      : unsortedKeys;
+      : orderByKey
+        ? (sortBy(unsortedKeys, key => key) as string[])
+        : orderByValue
+          ? (sortBy(unsortedKeys, key => value[key]) as string[])
+          : unsortedKeys;
     if (keysOnly) {
       this.ss()(reducers.setValue(sortedKeys));
       return;
