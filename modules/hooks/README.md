@@ -1,5 +1,7 @@
 ## React hooks for interacting with your Firebase database
 
+React Firebase Hooks for React & React Native
+
 ## Install
 
 ```sh
@@ -9,10 +11,10 @@
 ## Usage
 
 ```jsx
-import { FirebaseProvider, useFirebaseRealtimeDatabase } from "sum";
+import { FirebaseProvider, useDatabase } from "@react-firebase/hooks";
 
 function UserBookmarks() {
-  const { isLoading, value, ref } = useFirebase({
+  const { isLoading, value, ref } = useDatabase({
     path: "user_bookmarks/",
     limitToFirst: 2
   });
