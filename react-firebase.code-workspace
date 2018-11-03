@@ -1,41 +1,44 @@
 {
-	"folders": [
-		{
-			"path": "modules/sandboxes"
-		},
-		{
-			"path": "modules/database"
-		},
-		{
-			"path": "modules/react-firebase-docs"
-		},
-		{
-			"path": "modules/firestore"
-		},
-		{
-			"path": "modules/auth"
-		},
-		{
-			"path": "modules/generate-json"
-		},
-		{
-			"path": "modules/generate-firestore-data"
-		},
-		{
-			"path": "modules/generate-firebase-data"
-		},
-		{
-			"path": "modules/tutorial-bookmarking-app"
-		},
-		{
-			"path": "react-native-examples/react-native-firebase-starter/"
-		},
-		{
-			"path": "react-native-examples/react-native-expo-firebase-example/"
-		},
-		{
-			"path": "./"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "modules/sandboxes"
+    },
+    {
+      "path": "modules/database"
+    },
+    {
+      "path": "modules/react-firebase-docs"
+    },
+    {
+      "path": "modules/firestore"
+    },
+    {
+      "path": "modules/auth"
+    },
+    {
+      "path": "modules/hooks"
+    },
+    {
+      "path": "modules/generate-json"
+    },
+    {
+      "path": "modules/generate-firestore-data"
+    },
+    {
+      "path": "modules/generate-firebase-data"
+    },
+    {
+      "path": "modules/tutorial-bookmarking-app"
+    },
+    {
+      "path": "react-native-examples/react-native-firebase-starter/"
+    },
+    {
+      "path": "react-native-examples/react-native-expo-firebase-example/"
+    },
+    {
+      "path": "./"
+    }
+  ],
+  "settings": {}
 }
