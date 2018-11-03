@@ -2,3 +2,6 @@
 .cache
 dist
 node_modules
+build/
+coverage/
+.rpt2_cache
