@@ -116,6 +116,30 @@ export const IfFirebaseAuthed: React.StatelessComponent<{
   );
 };
 
+export const IfFirebaseAuthedWithSpecificDomain: React.StatelessComponent<{
+  children: RenderableChildren;
+  domainName: string;
+  elseRender: RenderableChildren;
+}> = props => {
+  const { domainName, children, elseRender } = props;
+  return (
+    <FirebaseAuthContextConsumer>
+      {(authState: AuthEmission) => {
+        const userEmail = get(authState, "user.email", "") as string;
+        const isInternalUser = userEmail.indexOf(domainName) > -1;
+        if (authState.isSignedIn === true && isInternalUser) {
+          return renderAndAddProps(children, authState);
+        } else if (authState.isSignedIn === true) {
+          console.log(
+            `not internal email, please sign in using your ${domainName} email`
+          );
+          return elseRender(authState);
+        } else return null;
+      }}
+    </FirebaseAuthContextConsumer>
+  );
+};
+
 export type FilterAuthFunction = (authState: AuthEmission) => boolean;
 
 export const IfFirebaseAuthedAnd: React.StatelessComponent<{
