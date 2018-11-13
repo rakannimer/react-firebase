@@ -104,14 +104,14 @@ Then use any of the other components anywhere in your component tree.
 
 ```jsx
 <IfFirebaseAuthedAnd
- filter={({ providerId, user }) => {
-   const email = get(user, "email", "");
-   return (
-     providerId !== "anonymous" &&
-     email.indexOf("@companyname.com") > -1
-   );
- }}
->
+  filter={({ providerId, user }) => {
+    if(!user.email){return false;}
+    return (
+      providerId !== "anonymous" &&
+      user.email.indexOf("@companyname.com") > -1
+    );
+  }}
+  >
  {({ isSignedIn, user, providerId }) => {
    return (
    //some jsx code
