@@ -40,14 +40,7 @@ export function stateReducer(
   }
 }
 
-export type AddPathToDataArgs = {
-  path: string;
-  value: any;
-  unsub: () => void;
-  documentOrCollection: "document" | "collection";
-  isLoading?: boolean;
-  snapshot?: DocumentSnapshot | QuerySnapshot | CollectionReference;
-};
+export type AddPathToDataArgs = any;
 export const actions = {
   addPathToData: (
     state: FirestoreProviderState,
@@ -73,11 +66,8 @@ export const actions = {
         });
       } else {
         // collection
-        const values = get(state, `dataTree.${path}.value`, []).filter(
-          (el: any) => el && el.__id !== snapshotID
-        );
         set(newState, `dataTree.${path}`, {
-          value: [...values, newData],
+          value: newData,
           unsub,
           isLoading
         });

@@ -53,21 +53,22 @@ export class FirestoreProvider extends React.Component<
         });
       } else {
         let collectionSnapshot = snapshot as FirebaseFirestore.QuerySnapshot;
-        collectionSnapshot.docs.forEach(docSnapshot => {
-          this.setState(state => {
-            return stateReducer(
-              state,
-              {
-                path: `${path}`,
-                value: docSnapshot.exists ? docSnapshot.data() : null,
-                documentOrCollection,
-                snapshot: docSnapshot,
-                unsub,
-                isLoading: false
-              },
-              "add"
-            );
-          });
+        const docs = collectionSnapshot.docs.map(docSnapshot => {
+          return docSnapshot.exists ? docSnapshot.data() : null;
+        });
+        this.setState(state => {
+          return stateReducer(
+            state,
+            {
+              path: `${path}`,
+              value: docs,
+              isLoading: false,
+              documentOrCollection,
+              unsub,
+              snapshot: collectionSnapshot
+            },
+            "add"
+          );
         });
         return;
       }
