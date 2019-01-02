@@ -6,10 +6,8 @@
   "pages": {
     "modules/react-firebase-docs/docs/react-firebase-realtime-database/getting-started.md": "Getting Started with React Firebase Realtime Database",
     "modules/react-firebase-docs/docs/react-firebase-auth/getting-started.md": "Getting Started with React Firebase Auth",
-    "modules/react-firebase-docs/docs/react-firestore-database/getting-started.md": "Getting Started with React Firebase Firestore",
     "modules/react-firebase-docs/docs/react-firebase-realtime-database/api.md": "React Firebase Realtime Database API",
     "modules/react-firebase-docs/docs/react-firebase-auth/api.md": "React Firebase Auth API",
-    "modules/react-firebase-docs/docs/react-firestore-database/api.md": "React Firebase Firestore API",
     "modules/react-firebase-docs/docs/README.md": "Reference Docs"
   },
   "related": [

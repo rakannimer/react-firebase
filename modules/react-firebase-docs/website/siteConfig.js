@@ -44,7 +44,7 @@ const siteConfig = {
       doc: "react-firebase-realtime-database/getting-started",
       label: "Database"
     },
-    { doc: "react-firestore-database/getting-started", label: "Firestore" },
+    // { doc: "react-firestore-database/getting-started", label: "Firestore" },
     { blog: true, label: "Blog" }
   ],
 

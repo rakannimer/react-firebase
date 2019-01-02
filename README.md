@@ -13,27 +13,17 @@ Check the complete docs 👉 [Here](https://react-firebase-js.com)
       - [Infinite List](#infinite-list)
       - [Mutation](#mutation)
       - [Transaction](#transaction)
-    - [Firestore](#firestore)
-      - [Add To Collection](#add-to-collection)
-      - [Batched Write](#batched-write)
-      - [Collection](#collection)
-      - [Infinite List](#infinite-list-1)
-      - [Mutation](#mutation-1)
-      - [Transaction](#transaction-1)
     - [Auth & Database Bookmarking App Example](#auth--database-bookmarking-app-example)
     - [Server Rendered Firebase Data with NextJS Auth & Database with queries](#server-rendered-firebase-data-with-nextjs-auth--database-with-queries)
   - [Installation](#installation)
     - [Web](#web)
       - [Firebase Auth](#firebase-auth)
       - [Firebase Realtime Database](#firebase-realtime-database)
-      - [Firebase Firestore Database](#firebase-firestore-database)
 
 ## Modules
 
 - Firebase Realtime Database : [`@react-firebase/database`](https://react-firebase-js.com/docs/react-firebase-realtime-database/getting-started)
-- Firestore Database : [`@react-firebase/firestore`](https://react-firebase-js.com/docs/react-firestore-database/getting-started)
 - Firebase Auth : [`@react-firebase/auth`](https://react-firebase-js.com/docs/react-firebase-auth/getting-started)
-- Firebase Hooks (WIP) : [`@react-firebase/hooks`](/modules/hooks)
 - Firebase Data Generator: [`generate-firebase-data`](https://react-firebase-js.com/docs/generate-firebase-data)
 - Firestore Data Generator: [`generate-firestore-data`](https://react-firebase-js.com/docs/generate-firestore-data)
 - Linked JSON Data Generator: [`generate-data`](https://react-firebase-js.com/docs/generate-json-data)
@@ -63,38 +53,6 @@ Check the complete docs 👉 [Here](https://react-firebase-js.com)
 
 - [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction)
 - [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firebase-database-transaction)
-
-### Firestore
-
-#### Add To Collection
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-add-to-collection)
-
-#### Batched Write
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-batched-write)
-
-#### Collection
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-collection-example)
-
-#### Infinite List
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-infinite-list)
-
-#### Mutation
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-mutation-example)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-mutation-example)
-
-#### Transaction
-
-- [Sandbox](https://codesandbox.io/s/github/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-transaction)
-- [Code](https://www.github.com/rakannimer/react-firebase/tree/master/modules/sandboxes/firestore-transaction)
 
 ### Auth & Database Bookmarking App Example
 
@@ -128,10 +86,4 @@ yarn add @react-firebase/auth
 
 ```bash
 yarn add @react-firebase/database
-```
-
-#### Firebase Firestore Database
-
-```bash
-yarn add @react-firebase/firestore
 ```
