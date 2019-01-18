@@ -13,6 +13,7 @@ export class FirestoreCollection extends React.Component<
       }: {
         path: string;
         value: any;
+        ids: string[];
         isLoading: boolean;
       }
     ) => React.ReactNode;
@@ -37,6 +38,7 @@ export class FirestoreCollection extends React.Component<
               {renderAndAddProps(children, {
                 path,
                 value: get(context, `dataTree[${path}].value`, null),
+                ids: get(context, `dataTree[${path}].ids`, null),
                 isLoading: get(context, `dataTree[${path}].isLoading`, true)
               })}
             </React.Fragment>

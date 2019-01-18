@@ -1,9 +1,4 @@
 import { FirestoreProviderState } from "./types";
-import {
-  DocumentSnapshot,
-  QuerySnapshot,
-  CollectionReference
-} from "@google-cloud/firestore";
 import produce from "immer";
 import set from "lodash/set";
 import get from "lodash/get";
@@ -47,6 +42,7 @@ export const actions = {
     {
       path,
       value: newData,
+      ids,
       unsub,
       isLoading,
       documentOrCollection,
@@ -61,6 +57,7 @@ export const actions = {
       if (documentOrCollection === "document") {
         set(newState, `dataTree.${path}`, {
           value: newData,
+          id: snapshotID,
           unsub,
           isLoading
         });
@@ -68,6 +65,7 @@ export const actions = {
         // collection
         set(newState, `dataTree.${path}`, {
           value: newData,
+          ids,
           unsub,
           isLoading
         });

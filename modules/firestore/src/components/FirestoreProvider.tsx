@@ -56,12 +56,16 @@ export class FirestoreProvider extends React.Component<
         const docs = collectionSnapshot.docs.map(docSnapshot => {
           return docSnapshot.exists ? docSnapshot.data() : null;
         });
+        const ids = collectionSnapshot.docs.map(docSnapshot => {
+          return docSnapshot.exists ? docSnapshot.id : null;
+        });
         this.setState(state => {
           return stateReducer(
             state,
             {
               path: `${path}`,
               value: docs,
+              ids,
               isLoading: false,
               documentOrCollection,
               unsub,
