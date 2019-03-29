@@ -59,7 +59,7 @@ export const generateFirebaseData = async (
     `Adding Data to ${project_id}. You can watch here : ${databaseBrowserURL}`
   );
   const CHUNK_SIZE = 50;
-  const { keys, values } = generateJson({ schema, keyReducers, count });
+  const { keys, values } = await generateJson({ schema, keyReducers, count });
   const paths = keys.map(key => key.split(".").join("/"));
   const chunkedPaths = chunk(paths, CHUNK_SIZE);
   const chunkedValues = chunk(values, CHUNK_SIZE);

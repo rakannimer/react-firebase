@@ -1,6 +1,6 @@
 {
   "name": "generate-firebase-data",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -23,7 +23,7 @@
   "dependencies": {
     "chunk-and-parallelize": "^0.1.1",
     "firebase-admin": "^6.0.0",
-    "generate-json": "^0.1.1",
+    "generate-json": "^0.2.2",
     "lodash.chunk": "^4.2.0"
   },
   "files": [
