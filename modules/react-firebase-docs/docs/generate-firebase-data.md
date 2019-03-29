@@ -126,8 +126,7 @@ module.exports = {
 ```javascript
 const keyReducers = {
   "{env}": fakerjs => {
-    return fakerjs.random.arrayElement(["staging"]);
-    return fakerjs.random.arrayElement(["prod", "staging"]);
+    return fakerjs.random.arrayElement(["a", "b"]);
   },
   "{userID}": fakerjs => {
     return fakerjs.random.alphaNumeric(5);
