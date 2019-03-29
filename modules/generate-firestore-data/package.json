@@ -1,6 +1,6 @@
 {
   "name": "generate-firestore-data",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "jsnext:main": "dist/index.esm.js",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "firebase-admin": "^6.0.0",
-    "generate-json": "^0.2.0"
+    "generate-json": "^0.2.2"
   },
   "files": [
     "dist/"
