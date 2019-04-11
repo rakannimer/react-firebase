@@ -111,8 +111,6 @@ export class FirestoreProvider extends React.Component<
       initializeFirebaseApp(props);
     }
     const firestore = props.firebase.firestore();
-    const settings = { timestampsInSnapshots: true };
-    firestore.settings(settings);
     this.state = {
       firebase: props.firebase,
       firestore: props.firebase.app().firestore(),
