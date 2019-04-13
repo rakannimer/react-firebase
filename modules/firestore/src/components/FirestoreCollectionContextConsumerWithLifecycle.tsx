@@ -27,7 +27,8 @@ export class FirestoreCollectionContextConsumerLifeCycle extends React.Component
       "startAfter",
       "startAt",
       "endAt",
-      "endBefore"
+      "endBefore",
+      "where"
     ];
     for (let propName of propsThatCanChange) {
       //@ts-ignore
