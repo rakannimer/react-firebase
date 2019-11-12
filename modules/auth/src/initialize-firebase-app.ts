@@ -6,7 +6,9 @@ export const initializeFirebaseApp = ({
   projectId,
   storageBucket,
   messagingSenderId,
-  apiKey
+  apiKey,
+  appId,
+  measurementId
 }: InitializeAppArgs) => {
   try {
     firebase.initializeApp({
@@ -15,7 +17,9 @@ export const initializeFirebaseApp = ({
       databaseURL,
       projectId,
       storageBucket,
-      messagingSenderId
+      messagingSenderId,
+      appId,
+      measurementId
     });
   } catch (err) {
     if (err.code !== "app/duplicate-app") {
