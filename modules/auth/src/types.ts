@@ -6,6 +6,8 @@ export interface InitializeAppArgs {
   projectId: string;
   messagingSenderId?: string;
   storageBucket?: string;
+  appId?: string;
+  measurementId?: string;
 }
 export type FirebaseAuthProviderProps = InitializeAppArgs;
 export type AuthEmission = {

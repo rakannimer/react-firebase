@@ -52,6 +52,8 @@ export interface InitializeAppArgs {
   projectId: string;
   messagingSenderId?: string;
   storageBucket?: string;
+  appId?: string;
+  measurementId?: string;
 }
 
 export type FirestoreProviderProps = InitializeAppArgs;
