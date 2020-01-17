@@ -3,13 +3,15 @@ export type OrNull<T> = T | null;
 
 export type PrimitiveType = number | boolean | string;
 
+export type WhereType = {
+  field: string;
+  operator: "<" | "<=" | "==" | ">" | ">=" | "array-contains";
+  value: any;
+};
+
 export type FirestoreQuery = {
   path: OrNull<string>;
-  where?: OrNull<{
-    field: string;
-    operator: "<" | "<=" | "==" | ">" | ">=" | "array-contains";
-    value: any;
-  }>;
+  where?: OrNull<WhereType | WhereType[]>;
   orderBy?: OrNull<{ field: string; type?: "desc" | "asc" }[]>;
   limit?: OrNull<number>;
   startAt?: OrNull<PrimitiveType | PrimitiveType[] | DocumentSnapshot>;

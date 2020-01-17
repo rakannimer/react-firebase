@@ -55,7 +55,13 @@ export const getFirestoreQuery = ({
   });
 
   if (where !== null) {
-    ref = ref.where(where.field, where.operator, where.value);
+    if (Array.isArray(where)) {
+      for (let whereClause of where) {
+        ref = ref.where(whereClause.field, whereClause.operator, whereClause.value);
+      }
+    } else {
+      ref = ref.where(where.field, where.operator, where.value);
+    }
   }
   if (orderBy !== null) {
     for (let currentOrderBy of orderBy) {
