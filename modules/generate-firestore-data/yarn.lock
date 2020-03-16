@@ -235,8 +235,8 @@ acorn-es7-plugin@^1.0.12:
   resolved "https://registry.npmjs.org/acorn-es7-plugin/-/acorn-es7-plugin-1.1.7.tgz#f2ee1f3228a90eead1245f9ab1922eb2e71d336b"
 
 acorn@^5.0.0:
-  version "5.7.1"
-  resolved "https://registry.npmjs.org/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
 
 ajv@^5.3.0:
   version "5.5.2"
@@ -1025,9 +1025,9 @@ gcs-resumable-upload@^0.10.2:
     request "^2.85.0"
     stream-events "^1.0.3"
 
-generate-json@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/generate-json/-/generate-json-0.2.0.tgz#50d26a9834b3b4de4228ee58b6d8315a2aee6ac9"
+generate-json@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/generate-json/-/generate-json-0.2.2.tgz#6e95d709c6aa3d058cf2db260c14ab6ce706e1f8"
   dependencies:
     chunk-and-parallelize "^0.1.1"
     faker "^4.1.0"
