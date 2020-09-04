@@ -494,7 +494,7 @@ chownr@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
 
-chunk-and-parallelize@0.1.1, chunk-and-parallelize@^0.1.1:
+chunk-and-parallelize@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/chunk-and-parallelize/-/chunk-and-parallelize-0.1.1.tgz#da1e15bdda23048d8b2f5a58515c8a0a35d15584"
   dependencies:
@@ -1031,11 +1031,11 @@ gcs-resumable-upload@^0.10.2:
     request "^2.85.0"
     stream-events "^1.0.3"
 
-generate-json@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/generate-json/-/generate-json-0.1.1.tgz#f4ad8edc3fe5b1c1d53e8e580ef4dfadf63f92b1"
+generate-json@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/generate-json/-/generate-json-0.2.2.tgz#6e95d709c6aa3d058cf2db260c14ab6ce706e1f8"
   dependencies:
-    chunk-and-parallelize "0.1.1"
+    chunk-and-parallelize "^0.1.1"
     faker "^4.1.0"
     flat "^4.1.0"
     lodash.set "^4.3.2"
@@ -1605,8 +1605,8 @@ lodash.isstring@^4.0.1:
   resolved "https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
 
 lodash.merge@^4.6.1:
-  version "4.6.1"
-  resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
 
 lodash.once@^4.0.0:
   version "4.1.1"
