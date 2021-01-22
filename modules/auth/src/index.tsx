@@ -63,9 +63,9 @@ export class FirebaseAuthProvider extends React.PureComponent<
       });
   };
   state = {
-    isSignedIn: false,
+    isSignedIn: !!this.props.firebase.auth().currentUser,
     providerId: null,
-    user: null,
+    user: this.props.firebase.auth().currentUser,
     firebase: {}
   };
   constructor(props: FirebaseAuthProviderProps) {
