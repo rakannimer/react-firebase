@@ -27,12 +27,12 @@ class App extends React.Component<any, AppState> {
       <div style={styles}>
         <FirebaseDatabaseProvider firebase={firebase} {...config}>
           <FirebaseDatabaseNode
-            path="user_bookmarks/"
+            path="/"
             limitToFirst={this.state.limit}
             orderByKey
             // orderByValue={"created_on"}
           >
-            {d => {
+            {(d) => {
               return (
                 <React.Fragment>
                   <pre>Path {d.path}</pre>
@@ -41,7 +41,7 @@ class App extends React.Component<any, AppState> {
                   </pre>
                   <button
                     onClick={() => {
-                      this.setState(state => ({ limit: state.limit + 2 }));
+                      this.setState((state) => ({ limit: state.limit + 2 }));
                     }}
                   >
                     Load more
