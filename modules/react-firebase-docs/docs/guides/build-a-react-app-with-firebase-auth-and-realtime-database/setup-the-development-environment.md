@@ -61,9 +61,8 @@ mkdir src
 
 ```typescript
 const concept = "world";
-document.getElementById("root").innerHTML = `
-    Hello ${concept} !
-`;
+const element = document.getElementById("root")!;
+element.innerHTML = `Hello ${concept} `
 ```
 
 8- Add a `dev` script to your package.json that runs parcel with hot-reloading
