@@ -89,6 +89,12 @@ document.getElementById("root").innerHTML = `
 ```bash
 yarn dev # or npm run dev
 ```
+10- If not try this.
+
+```bash
+yarn add -D parcel-bundler@1.12.3  
+```
+
 
 Our development environment is now ready on `localhost:1234`  🎉
 
