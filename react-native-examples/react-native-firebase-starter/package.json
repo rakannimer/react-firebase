@@ -27,7 +27,7 @@
     "@react-firebase/firestore": "^0.3.0",
     "fbjs": "^0.8.17",
     "react": "^16.3.2",
-    "react-native": "^0.55.3",
+    "react-native": "^0.70.2",
     "react-native-firebase": "^4.3.6"
   }
 }
