@@ -19,7 +19,7 @@
   "dependencies": {
     "chunk-and-parallelize": "^0.1.1",
     "faker": "^4.1.0",
-    "flat": "^4.1.0",
+    "flat": "^5.0.1",
     "lodash.set": "^4.3.2",
     "mkdirp": "^0.5.1",
     "mri": "^1.1.1"
